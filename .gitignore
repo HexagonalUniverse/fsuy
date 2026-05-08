@@ -1,0 +1,41 @@
+#
+#   .gitignore at root
+#
+
+
+# IDEs & dev. enviroments
+.venv/
+.idea/
+.vscode/
+.vs/
+sketch/
+
+
+# Caching & DB
+*/__pycache__/*
+*.pyc
+
+*.sqlite3
+
+
+# Extensions
+*.auto
+*.log
+
+*.out
+*.exe
+
+*.dll
+*.so
+
+*.lib
+*.a
+
+*.o
+*.obj
+
+
+# Migrations
+
+
+

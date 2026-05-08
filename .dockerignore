@@ -1,0 +1,55 @@
+#
+#   .dockerignore at root
+#
+
+
+#   Version control
+.git/
+.gitignore
+
+
+#   IDEs & dev. environments
+.idea/
+.vscode/
+.vs/
+sketch/
+
+
+#   Python virtual environment
+.venv/
+
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+
+#   Database files
+*.sqlite3
+*.db
+
+
+#   Logs & temporary files
+*.log
+*.auto
+*.out
+
+
+#   Compiled binaries
+*.exe
+*.dll
+*.so
+*.lib
+*.a
+*.o
+*.obj
+
+
+#   Documentation
+README.md
+LICENSE
+
+
+#   Docker files
+Dockerfile
+.dockerignore
