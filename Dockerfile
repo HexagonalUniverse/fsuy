@@ -39,5 +39,6 @@ COPY "." "/fsuy/"
 EXPOSE 4817
 
 
+RUN printenv
 CMD ["python3", "-m", "uvicorn", "--host", "0.0.0.0", "main:app", "--app-dir", "src/backend", "--port", "4817"]
 
