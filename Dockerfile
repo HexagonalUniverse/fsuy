@@ -39,5 +39,5 @@ COPY "." "/fsuy/"
 EXPOSE 4817
 
 
-CMD ["python3", "-m", "uvicorn", "--host", "0.0.0.0", "main:app", "--app-dir", "src", "--port", "4817"]
+CMD ["python3", "-m", "uvicorn", "--host", "0.0.0.0", "main:app", "--app-dir", "src/backend", "--port", "4817"]
 

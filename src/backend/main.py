@@ -18,7 +18,7 @@ from django.core.handlers.asgi import ASGIHandler
 
 os.environ.setdefault(
     "DJANGO_SETTINGS_MODULE",
-    "src.fsuy_django.settings"
+    "src.backend.fsuy_django.settings"
 )
 
 
