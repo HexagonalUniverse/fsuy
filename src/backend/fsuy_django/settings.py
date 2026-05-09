@@ -25,7 +25,14 @@ SECRET_KEY = 'django-insecure-2c1hu9=ov)9n!0axt2-0q3c^a!(62!gqtrzs6cns78@)wy1p7*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+
+import os
+print(os.environ)
+
+
+ALLOWED_HOSTS = [
+    "fsuy-server-u68qf.ondigitalocean.app"
+]
 
 
 # Application definition
