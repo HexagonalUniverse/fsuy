@@ -31,7 +31,9 @@ print(os.environ)
 
 
 ALLOWED_HOSTS = [
-    "fsuy-server-u68qf.ondigitalocean.app"
+    "fsuy-server-u68qf.ondigitalocean.app",
+    "127.0.0.1",
+    "localhost",
 ]
 
 
@@ -45,6 +47,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
+    "corsheaders",      # Cross Origin Resource Sharing
+    'rest_framework',   # Django REST Framework
+
     "fsuy_site"
 ]
 
@@ -56,6 +61,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    "corsheaders.middleware.CorsMiddleware"
 ]
 
 ROOT_URLCONF = 'fsuy_django.urls'
@@ -126,3 +133,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+
+
+#   Cross-Origin Resource Sharing
+#   -----------------------------
+
+# CORS_ALLOW_ALL_ORIGINS: bool = True
+CORS_ALLOWED_ORIGINS: list[str] = [
+    "http://localhost:5173", # vite's react server (for development)
+]
