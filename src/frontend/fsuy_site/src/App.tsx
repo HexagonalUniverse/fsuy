@@ -1,6 +1,6 @@
 import { useState, useEffect, type ReactElement } from "react"
 
-import { MarkdownInputField } from "./MarkdownInputField.tsx"
+import { MarkdownInputField } from "./components/MarkdownInputField.tsx"
 
 // import reactLogo from "./assets/react.svg"
 import "./styles/App.css"

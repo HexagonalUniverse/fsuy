@@ -142,4 +142,5 @@ STATIC_URL = 'static/'
 # CORS_ALLOW_ALL_ORIGINS: bool = True
 CORS_ALLOWED_ORIGINS: list[str] = [
     "http://localhost:5173", # vite's react server (for development)
+    "http://localhost:3000", # next.js's react server (for development)
 ]

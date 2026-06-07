@@ -1,31 +1,33 @@
 .md_field {
-    border: 1px red;
+    /* border: 1px solid red; */
     width: 60rem;
     height: 20rem;
+
+    padding: 0.5rem;
 }
 
 .md_field button {
     height: 10%;
     width: 4rem;
     outline: none;
-    border: 3px solid #f0f8ff;
-    background-color: #757575;
+    border: 3px solid var(--secondary-b);
+    background-color: var(--secondary);
     color: #f0f8ff;
 }
 .md_field button:disabled {
-    background-color: #363636;
+    background-color: var(--secondary-a);
     color: #9ba0a5;
 }
 
 #btn_edit {
-    margin: 0rem 0rem 0rem 0.5rem;
-    border-right: 0.1px solid #f0f8ff;
+    margin: 0rem 0rem 0.5rem 0rem;
+    border-right: 0.1px solid var(--secondary-b);
     border-radius: 5px 0px 0px 5px;
 }
 
 #btn_preview {
-    margin: 0rem 0.5rem 0rem 0rem;
-    border-left: 0.1px solid #f0f8ff;
+    margin: 0rem 0rem 0.5rem 0rem;
+    border-left: 0.1px solid var(--secondary-b);
     border-radius: 0px 5px 5px 0px;
 }
 
@@ -35,25 +37,25 @@
     height: 90%;
     max-height: 100%;
 
-    margin: 0.5rem;
     padding: 1rem;
     font-size: 1rem;
 
-    border: 3px solid #f0f8ff;
+    border: 3px solid var(--secondary-a);
     resize: none;
     outline: none;
     
     border-radius: 10px;
-    background-color: #1e1e1e;
+    background-color: var(--secondary);
+
+    color: #f0f8ff;
 }
 
 .md_field textarea {
-    color: #f0f8ff;
     overflow: auto;
 }
 
 .md_field textarea:focus {
-    border-color: aquamarine;
+    border-color: var(--accent);
 }
 
 .md_field #preview {
@@ -68,19 +70,19 @@
 
 .md_field #preview::-webkit-scrollbar-track,
 .md_field textarea::-webkit-scrollbar-track {
-    background: #242424;
+    background: var(--secondary-a);
     border-radius: 20px;
 }
 
 .md_field #preview::-webkit-scrollbar-thumb,
 .md_field textarea::-webkit-scrollbar-thumb {
-    background-color: #727272a8;
+    background-color: var(--secondary-b);
     border-radius: 20px;
 }
 
 .md_field #preview::-webkit-scrollbar-thumb:hover,
 .md_field textarea::-webkit-scrollbar-thumb:hover {
-    background-color: #727272;
+    background-color: var(--secondary-c);
     cursor: grab;
 }
 

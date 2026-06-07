@@ -9,10 +9,11 @@ from django.urls.resolvers import URLPattern, URLResolver
 from . import views
 
 from rest_framework.routers import DefaultRouter
-from .views import TestModelViewSet
+from .views import TestModelViewSet, GameModelViewSet
 
 router: DefaultRouter = DefaultRouter()
 router.register("test_objects", TestModelViewSet)
+router.register("games", GameModelViewSet)
 
 urlpatterns: list[URLPattern | URLResolver] = [
     #   Frontend
