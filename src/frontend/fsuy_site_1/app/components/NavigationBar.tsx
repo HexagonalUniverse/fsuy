@@ -10,7 +10,7 @@ export function NavigationBar(): ReactElement {
                 <li> <a href="/"> Home </a> </li>
                 <li> <a href="/"> Perfil </a> </li>
                 <li> <a href="/game/413"> Jogos </a> </li>
-                <li> <a href="/"> Notícias </a> </li>
+                <li> <a href="/news"> Notícias </a> </li>
             </ul>
         </nav>
     );

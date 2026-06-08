@@ -1,21 +1,46 @@
 .navigation_bar {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
     align-items: center;
+    /* justify-content: space-around; */
     max-width: 100%;
     height: 40px;
     background-color: whitesmoke;
     color: black;
+    gap: 5rem;
+}
+
+.navigation_bar h1{
+
 }
 
 .navigation_bar ul{
     display: flex;
     gap: 4rem;
+    padding: 0;
 }
 
 .navigation_bar li{
+    display: flex;
+    align-items: center;
+    
     list-style: none;
+}
+
+/* Pseudo-element for separtion bars */
+.navigation_bar ul li::after {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 1rem;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0.3;
+  margin-left: 4rem;  /* should match the ul gap */
+}
+
+/* remove bar after the last item */
+.navigation_bar ul li:last-child::after {
+  display: none;
 }
 
 .navigation_bar a{
