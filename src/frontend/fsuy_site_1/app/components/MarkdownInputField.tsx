@@ -71,5 +71,5 @@ export function MarkdownInputField(): ReactElement {
                 <textarea value={md_content} onChange={(imputed_text) => set_md_content(imputed_text.target.value)}/>
             }
         </div>
-    )
+    );
 }

@@ -1,5 +1,6 @@
 :root {
 	--text: #000000;
+	--text-2: #F0EFF4;
 	--bg: #F0EFF4;
 	--border: #e5e4e7;
 	--accent: #aa3bff;
@@ -28,4 +29,9 @@ a {
 
 a:hover {
 	color: var(--secondary-a);
+}
+
+main {
+    display: flex;
+    flex-direction: column;
 }
