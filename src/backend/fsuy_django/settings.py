@@ -59,12 +59,17 @@ ALLOWED_HOSTS: list[str] = []
 if URL_HOSTNAME is not None:
     ALLOWED_HOSTS.append(URL_HOSTNAME)
 
+ALLOWED_HOSTS = [
+    "fsuy-server-u68qf.ondigitalocean.app",
+    "127.0.0.1",
+    "localhost",
+]
 
-if not ALLOWED_HOSTS:
-    ALLOWED_HOSTS: list[str] = [
-        "localhost",
-        "127.0.0.1",
-    ]
+# if not ALLOWED_HOSTS:
+#     ALLOWED_HOSTS: list[str] = [
+#         "localhost",
+#         "127.0.0.1",
+#     ]
 
 
 #
@@ -81,21 +86,25 @@ INSTALLED_APPS: list[str] = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
+    "corsheaders",      # Cross Origin Resource Sharing
+    'rest_framework',   # Django REST Framework
+
     "fsuy_site"
 ]
 
-MIDDLEWARE: list[str] = [
-    "django.middleware.security.SecurityMiddleware",
-    "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
-    "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.messages.middleware.MessageMiddleware",
-    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-
-    # MW s.t. static files can be served in production...
+      # MW s.t. static files can be served in production...
     "whitenoise.middleware.WhiteNoiseMiddleware",
+  
+    "corsheaders.middleware.CorsMiddleware",
 ]
 
 
@@ -195,6 +204,18 @@ SESSION_COOKIE_SECURE: bool = True
 
 X_FRAME_OPTIONS: str = "DENY"
 
+
+STATIC_URL = 'static/'
+
+
+#   Cross-Origin Resource Sharing
+#   -----------------------------
+
+# CORS_ALLOW_ALL_ORIGINS: bool = True
+CORS_ALLOWED_ORIGINS: list[str] = [
+    "http://localhost:5173", # vite's react server (for development)
+    "http://localhost:3000", # next.js's react server (for development)
+]
 
 # 'cause without the proxy may terminate the TLS and redirect http to django.
 # therefore it makes "request.is_secure()" assertable.

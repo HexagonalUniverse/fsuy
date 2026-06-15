@@ -1,4 +1,0 @@
-uvicorn
-django
-fastapi
-whitenoise

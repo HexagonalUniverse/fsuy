@@ -1,0 +1,50 @@
+:root {
+	--text: #000000;
+	--text-2: #F0EFF4;
+	--text-3: #ff0000ad;
+	--bg: #F0EFF4;
+	--border: #e5e4e7;
+	--accent: #aa3bff;
+	--links: #4ee9fd;
+	--links-hover: #00d8f5;
+
+
+	--secondary: #04534A;
+	--secondary-a: #033B34;
+	--secondary-b: #076A5E;
+	--secondary-c: #087c6f;
+
+	--font-text: "Quicksand", sans-serif;
+	--font-title: "Castoro Titling", serif;
+	--font-subtitle: "Stack Sans Text", sans-serif;
+
+	--navbar-ul-gap: 2rem;
+
+	color: var(--text);
+	background: var(--bg);
+	font-size: 18px;
+	font-family: var(--font-text);
+}
+
+* {
+  box-sizing: border-box; /* ensuring that an element's specified width and height include its padding and borders. */
+  /* outline: 1px solid red; */
+}
+
+
+h1, h2, h3 {
+	font-family: var(--font-subtitle);
+}
+
+a {
+	color: var(--secondary);
+}
+
+a:hover {
+	color: var(--secondary-a);
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+}
