@@ -43,6 +43,7 @@ class FrontendView(object):
         if request.user.is_authenticated:
             ...
 
-        return render(request,
-                      "index.html")
+        # assert request.is_secure(), "N'é seguro coisa nenhuma!"
+
+        return render(request, "index.html")
 
