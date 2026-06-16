@@ -12,6 +12,9 @@ from . import views
 urlpatterns: list[URLPattern | URLResolver] = [
     #   Frontend
     path("", views.FrontendView.serve_frontend, name="main"),
+
+    #   Login
+    path("register/", views.FrontendView.register, name="register"),
+    path("login/", views.FrontendView.login, name="login"),
+    path("logout/", views.FrontendView.logout, name="logout"),
 ]
-
-
