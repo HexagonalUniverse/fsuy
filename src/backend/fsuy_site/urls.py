@@ -6,6 +6,7 @@
 
 from django.urls import path
 from django.urls.resolvers import URLPattern, URLResolver
+from django.contrib import admin
 from . import views
 
 
@@ -17,4 +18,10 @@ urlpatterns: list[URLPattern | URLResolver] = [
     path("register/", views.FrontendView.register, name="register"),
     path("login/", views.FrontendView.login, name="login"),
     path("logout/", views.FrontendView.logout, name="logout"),
+
+    #   Admin
+    path(
+        "admin/",
+        admin.site.urls
+    )
 ]
