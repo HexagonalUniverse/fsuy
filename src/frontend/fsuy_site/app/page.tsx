@@ -15,10 +15,10 @@ import "./styles/App.css"
 
 export default async function Home(): Promise<ReactElement> {
 
-	const res = await fetch(`${base_url}/api/test_objects`, {next: {revalidate: 60}});
-	const test_models: TestModel[] = await res.json(); // parsing the response from json
+	// const res = await fetch(`${base_url}/api/test_objects`, {next: {revalidate: 60}});
+	// const test_models: TestModel[] = await res.json(); // parsing the response from json
 	
-	console.log(test_models);
+	// console.log(test_models);
 
 	return (
 	<main>
