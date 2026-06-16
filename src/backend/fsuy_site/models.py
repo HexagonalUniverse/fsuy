@@ -6,41 +6,7 @@
 
 from django.db import models
 from django.db.models import Field
-from django.contrib.auth.models import AbstractUser
-
-
-class User(AbstractUser):
-    uid: Field = models.BigIntegerField(
-        primary_key=True
-    )
-
-    socials: Field = models.CharField(
-        max_length=255,
-        blank=True
-    )
-
-    steam: Field = models.CharField(
-        max_length=255,
-        blank=True
-    )
-
-    discord: Field = models.CharField(
-        max_length=255,
-        blank=True
-    )
-
-    last_login: Field = models.DateTimeField(
-        null=True,
-        blank=True
-    )
-
-    date: Field = models.DateTimeField(
-        auto_now_add=True
-    )
-
-    is_admin: Field = models.BooleanField(
-        default=False
-    )
+from .models import *
 
 
 class TesteTestado(models.Model):
