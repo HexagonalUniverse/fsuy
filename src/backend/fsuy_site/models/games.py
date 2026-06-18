@@ -22,6 +22,7 @@ class Game(models.Model):
     # Game's name.
     name: Field = models.CharField(
         max_length=255,
+        unique=True,
     )
 
     #
@@ -35,12 +36,16 @@ class Game(models.Model):
     )
 
     #
-    launch_date: Field = models.DateField()
+    launch_date: Field = models.DateField(
+        blank=True,
+        null=True,
+    )
 
     #
     picture: Field = models.ImageField(
         upload_to="games/",
-        default="game-images/default.png",)
+        default="game-images/default.png",
+    )
 
     def __str__(self) -> str:
         """The game's representation is its name."""
@@ -67,7 +72,8 @@ class GameImage(models.Model):
     #
     image: Field = models.ImageField(
         upload_to="game-images/",
-        default="game-images/default.png")
+        default="game-images/default.png",
+    )
 
     #
     #class Meta:

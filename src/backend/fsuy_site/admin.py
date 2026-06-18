@@ -12,7 +12,13 @@ from .models import *
 
 
 for model in [
-    User, Review, News, Comment, Reaction, Tag, Game,
+    User,
+    Review,
+    News,
+    Comment,
+    Reaction,
+    Tag,
+    Game,
 ]:
     admin.site.register(model)
 

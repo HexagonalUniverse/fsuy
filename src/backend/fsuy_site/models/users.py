@@ -14,37 +14,66 @@ class User(AbstractUser):
         Main site's user.
     """
 
+    #
     uid: Field = models.BigAutoField(
         primary_key=True,
     )
 
+    #
+    public_name: Field = models.CharField(
+        max_length=255,
+        unique=True,
+        null=True,
+        blank=False,
+    )
+
+    #
     socials: Field = models.CharField(
         max_length=255,
-        blank=True
+        blank=True,
     )
 
+    #
     steam: Field = models.CharField(
         max_length=255,
-        blank=True
+        blank=True,
     )
 
+    #
     discord: Field = models.CharField(
         max_length=255,
-        blank=True
+        blank=True,
     )
 
+    #
     last_login: Field = models.DateTimeField(
+        blank=True,
         null=True,
-        blank=True
     )
 
-    date: Field = models.DateTimeField(
-        auto_now_add=True
+    #
+    creation_date: Field = models.DateTimeField(
+        auto_now_add=True,
     )
 
+    # forgot
     is_admin: Field = models.BooleanField(
-        default=False
+        default=False,
     )
+
+    def user_picture_path(self, filename: str) -> str:
+        return f"users/{self.uid}/pictures/{filename}"
+
+    picture: Field = models.ImageField(
+        upload_to=user_picture_path,
+        default="users/pictures/default.png",
+    )
+
+    def save(self, * args, ** kwargs) -> None:
+        if not self.public_name:
+            self.public_name: str = str(self.uid)
+
+        return super().save(* args, ** kwargs)
 
 
 class Reaction(models.Model):
@@ -52,7 +81,7 @@ class Reaction(models.Model):
         User's reaction to post.
     """
 
-    LIKE = "like"
+    LIKE: str = "like"
 
     TYPE_CHOICES: list[tuple[str, str]] = [
         (LIKE, "Like")
@@ -78,4 +107,3 @@ class Reaction(models.Model):
     created_at: Field = models.DateTimeField(
         auto_now_add=True,
     )
-

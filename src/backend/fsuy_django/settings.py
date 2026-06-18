@@ -100,7 +100,7 @@ STORAGES: dict[str, dict] = {
     },
 
     "staticfiles": {
-        "BACKEND": "storages.contrib.staticfiles.storage.StaticFilesStorage",
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
 }
 
