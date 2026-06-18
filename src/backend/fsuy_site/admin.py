@@ -1,5 +1,5 @@
-"""
-@file       backend/fsuy_site/adming.py
+"""         ---------------------------
+@file       backend/fsuy_site/admin.py
 @brief      ...
 @date       06-2026
 """
@@ -15,5 +15,4 @@ for model in [
     User, Review, News, Comment, Reaction, Tag, Game,
 ]:
     admin.site.register(model)
-
 

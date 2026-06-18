@@ -1,4 +1,4 @@
-"""
+"""         ---------------------------------
 @file       backend/fsuy_site/models/posts.py
 @brief      ...
 @date       06-2026

@@ -80,9 +80,30 @@ INSTALLED_APPS: list[str] = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
+    "storages",
+    
     "fsuy_site"
 ]
+
+STORAGES: dict[str, dict] = {
+    "default": {
+        "BACKEND": "storages.backends.s3.S3Storage",
+        "OPTIONS": {
+            "access_key":           os.environ["DATABASE_STORAGE_ACCESS"],
+            "secret_key":           os.environ["DATABASE_STORAGE_SECRET"],
+            "bucket_name":          "assets",
+
+            "region_name":          os.environ["DATABASE_STORAGE_REGION"],
+            "endpoint_url":         f"https://{os.environ['DATABASE_STORAGE_REF']}.supabase.co/storage/v1/s3",
+            "signature_version":    "s3v4",
+        },
+    },
+
+    "staticfiles": {
+        "BACKEND": "storages.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}
+
 
 MIDDLEWARE: list[str] = [
     "django.middleware.security.SecurityMiddleware",
@@ -122,6 +143,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "fsuy_django.wsgi.application"
 
+
+REST_FRAMEWORK: dict[str, list[str]] = {
+    "DEFAULT_RENDERER_CLASSES": [
+        "rest_framework.renderers.JSONRenderer",
+    ]
+}
 
 
 #
@@ -200,10 +227,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE: str = "en-us"
 
-TIME_ZONE: str = "UTC"
+# TIME_ZONE: str = "UTC"
+TIME_ZONE: str = "America/Sao_Paulo"
 
 USE_I18N: bool = True
-
 USE_TZ: bool = True
 
 

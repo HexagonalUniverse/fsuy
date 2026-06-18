@@ -22,14 +22,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 
-def hello(request):
-    return HttpResponse("Hello, world.")
-
-
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    # path("", hello),
-
     path("", include("fsuy_site.urls")),
     # static(settings.STATIC_URL, document_root=settings.STATIC_ROOT),
 ]

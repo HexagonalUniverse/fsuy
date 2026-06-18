@@ -13,7 +13,6 @@ class TesteTestado(models.Model):
     coisa_legal: Field = models.CharField(max_length=255)
 
 
-
 print(
     [
         x.coisa_legal for x in TesteTestado.objects.all()

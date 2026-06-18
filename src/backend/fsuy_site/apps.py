@@ -2,4 +2,11 @@ from django.apps import AppConfig
 
 
 class FsuySiteConfig(AppConfig):
-    name = 'fsuy_site'
+    name: str = "fsuy_site"
+
+    async def ready(self) -> None:
+        from .models.games import Game
+
+        print("GAME:")
+        for game in Game.objects.all():
+            print(game.gid, game.name)

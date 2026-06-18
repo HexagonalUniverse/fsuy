@@ -3,3 +3,6 @@ django
 fastapi
 whitenoise
 psycopg[binary]
+Pillow
+django-storages
+boto3

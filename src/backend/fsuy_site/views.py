@@ -1,4 +1,4 @@
-"""
+"""         --------------------------
 @file       backend/fsuy_site/views.py
 @brief      ...
 @date       05-2026
@@ -14,10 +14,9 @@ from django.views.decorators.csrf import csrf_exempt
 User = auth.get_user_model()
 
 
-
 class FrontendView(object):
     """
-    ...
+        ...
     """
 
     @staticmethod
@@ -65,7 +64,6 @@ class FrontendView(object):
 
         # Ok.
         return redirect("/")
-
 
     @staticmethod
     def login(request: http.HttpRequest) -> http.HttpResponse:
