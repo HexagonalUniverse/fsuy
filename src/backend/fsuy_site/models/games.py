@@ -40,7 +40,7 @@ class Game(models.Model):
     #
     picture: Field = models.ImageField(
         upload_to="games/",
-        default="assets/default.png",)
+        default="game-images/default.png",)
 
     def __str__(self) -> str:
         """The game's representation is its name."""
@@ -66,8 +66,8 @@ class GameImage(models.Model):
 
     #
     image: Field = models.ImageField(
-        upload_to="assets/game-images/",
-        default="assets/default.png")
+        upload_to="game-images/",
+        default="game-images/default.png")
 
     #
     #class Meta:
