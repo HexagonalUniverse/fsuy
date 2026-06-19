@@ -1,0 +1,22 @@
+.user_preview a{
+	height: 2.5rem;
+	
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.user_preview a:hover{
+	cursor: pointer;
+}
+
+.user_preview img{
+    height: 80%;
+    aspect-ratio: 1 / 1;
+}
+
+.user_preview span{
+	font-size: 1rem;
+	font-weight: 500;
+}
