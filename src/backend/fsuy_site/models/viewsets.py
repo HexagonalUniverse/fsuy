@@ -11,7 +11,7 @@ import rest_framework.serializers
 from django.db import models
 from .users import User
 from .games import Game
-from .posts import Review, News, Comment
+from .posts import Review, News, Comment, Tag
 
 
 #
@@ -27,7 +27,7 @@ PAGE_SIZE: int = 16
 #
 #
 
-class GameSerializer(rest_framework.serializers.ModelSerializer):
+class GameFullSerializer(rest_framework.serializers.ModelSerializer):
     """Serializes the Game Model, entirely."""
 
     class Meta:
@@ -44,6 +44,37 @@ class GameSerializer(rest_framework.serializers.ModelSerializer):
         ]
 
 
+class GameRefSerializer(rest_framework.serializers.ModelSerializer):
+    """..."""
+
+    class Meta:
+        model: models.Model = Game
+
+        fields: list[str] = [
+            "name",
+            "picture",
+        ]
+
+
+class TagSerializer(rest_framework.serializers.ModelSerializer):
+    class Meta:
+        model: models.Model = Tag
+        fields = [
+            "name",
+            "description",
+            "color",
+        ]
+
+
+class AuthorSerializer(rest_framework.serializers.ModelSerializer):
+    class Meta:
+        model: models.Model = User
+        fields = [
+            "public_name",
+            "picture",
+        ]
+
+
 class ReviewSerializer(rest_framework.serializers.ModelSerializer):
     """..."""
 
@@ -52,6 +83,10 @@ class ReviewSerializer(rest_framework.serializers.ModelSerializer):
 
     # def get_public_id(self, obj: Review) -> str:
     #   return obj.public_id
+
+    # tags = TagSerializer(many=True, read_only=True)
+    author = AuthorSerializer(read_only=True)
+    game = GameRefSerializer(read_only=True)
 
     class Meta:
         model: models.Model = Review
@@ -69,6 +104,9 @@ class ReviewSerializer(rest_framework.serializers.ModelSerializer):
 
 class NewsSerializer(rest_framework.serializers.ModelSerializer):
     """..."""
+
+    tags = TagSerializer(many=True, read_only=True)
+    author = AuthorSerializer(read_only=True)
 
     class Meta:
         model: models.Model = News
@@ -90,6 +128,8 @@ class NewsSerializer(rest_framework.serializers.ModelSerializer):
 
 class CommentSerializer(rest_framework.serializers.ModelSerializer):
     """..."""
+
+    author = AuthorSerializer(read_only=True)
 
     class Meta:
         model: models.Model = Comment
@@ -188,7 +228,7 @@ class API_Viewset_Game(rest_framework.viewsets.ModelViewSet):
     """Viewset for the game API."""
 
     queryset = Game.objects.all()
-    serializer_class: rest_framework.serializers.ModelSerializer = GameSerializer
+    serializer_class: rest_framework.serializers.ModelSerializer = GameFullSerializer
     pagination_class = GlancePagination     # @TODO
 
     lookup_field: str = "gid"
