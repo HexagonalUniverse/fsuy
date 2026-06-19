@@ -1,16 +1,23 @@
+/**            -----------------------------------
+ * @file       frontend/fsuy_site/app/(pages)/news/page.tsx
+ * @brief      React component for the news' home page.
+ * @date       06-2026
+ */
+
+
 import { type ReactElement } from "react"
 
-import { NavigationBar } from "../../components/NavigationBar"
-import { NewsPreview } from "../../components/NewsPreview"
+import { NavigationBar } from "@/app/components/NavigationBar"
+import { NewsPreview } from "@/app/components/NewsPreview"
 
-import "../../styles/news.css"
+import "@/app/styles/news_home.css"
 
 const placeholder_text: string = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc porta mauris sed dolor scelerisque, a fermentum metus auctor. Aenean vulputate pharetra nibh. Duis ut semper justo. Nullam massa ex, vulputate id bibendum eget, elementum non nunc. Vestibulum id finibus leo. Proin rhoncus, nisl id commodo porttitor, mi nisi efficitur lorem, vitae lacinia dolor magna id metus. Suspendisse lacinia finibus velit, at luctus quam. Sed magna ligula, tincidunt id aliquam at, ultricies commodo justo. Morbi scelerisque nisi non tellus dapibus, sed venenatis libero fermentum. Vivamus vitae sapien odio. Donec eu sem dapibus, feugiat mi non, vehicula dolor. Curabitur vulputate turpis purus, at imperdiet purus semper sed. Vivamus sollicitudin lectus vel lacus auctor varius. Morbi eu ultrices erat, ac sagittis magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vivamus sit amet libero luctus, ultricies mauris ullamcorper, interdum odio. Pellentesque ac lectus ullamcorper, aliquam nisi auctor, facilisis enim. Pellentesque elit risus, congue nec aliquam vehicula, iaculis nec leo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse potenti. Aliquam a diam tortor. Ut tempus urna vitae aliquet tincidunt."
 
-export default function NewsPage() {
+export default function NewsHomePage(): ReactElement {
     return (
         <main>
-            <NavigationBar />
+            <NavigationBar uid={413} name="Victor"/>
 
             <h2 id="news_upper_title"> Úlitmas Notícias </h2>
 

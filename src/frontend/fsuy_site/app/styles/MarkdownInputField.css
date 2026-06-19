@@ -1,69 +1,133 @@
 .md_field {
     /* border: 1px solid red; */
-    width: 60rem;
-    height: 20rem;
+    width: 100%;
+    height: auto;
 
-    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
 }
 
 .md_field button {
-    height: 10%;
-    width: 4rem;
     outline: none;
-    border: 3px solid var(--secondary-b);
-    background-color: var(--secondary);
-    color: #f0f8ff;
-}
-.md_field button:disabled {
-    background-color: var(--secondary-a);
-    color: #9ba0a5;
 }
 
-#btn_edit {
-    margin: 0rem 0rem 0.5rem 0rem;
+/* === Buttons === */
+
+.md_field #btn_edit,
+.md_field #btn_preview {
+    height: 2rem;
+    width: 4rem;
+    border: 3px solid var(--secondary-b);
+    background-color: var(--secondary);
+    color: var(--text-2);
+    cursor: pointer;
+}
+
+.md_field #btn_edit:disabled,
+.md_field #btn_preview:disabled {
+    background-color: var(--secondary-a);
+    color: rgb(from var(--text-2) r g b / 0.5);
+}
+
+.md_field #btn_edit {
     border-right: 0.1px solid var(--secondary-b);
     border-radius: 5px 0px 0px 5px;
 }
 
-#btn_preview {
-    margin: 0rem 0rem 0.5rem 0rem;
+.md_field #btn_preview {
     border-left: 0.1px solid var(--secondary-b);
     border-radius: 0px 5px 5px 0px;
 }
 
+
+.md_field .send_cancel {
+    display: none;
+    flex-direction: row;
+    gap: 1rem;
+
+    margin-left: auto;
+}
+
+.send_cancel #send,
+.send_cancel #cancel{
+    border: none;
+    border-radius: 1.25rem;
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+
+.send_cancel #send{
+    background-color: var(--secondary-c);
+}
+
+.send_cancel #send:hover {
+    background-color: color-mix(in srgb, var(--secondary-c) 80%, #ffffff);
+    outline: 2px solid var(--outline);
+    outline-offset: 2px;
+}
+
+.send_cancel #cancel{
+    background-color: var(--bg);
+}
+
+.send_cancel #cancel:hover{
+    background-color: color-mix(in srgb, var(--bg) 80%, #000000);
+    outline: 2px solid var(--outline);
+    outline-offset: 2px;
+}
+
+
+
+/* === TextArea / Preview === */
+
 .md_field #preview,
 .md_field textarea {
     width: 100%;
-    height: 90%;
+    height: auto;
     max-height: 100%;
 
     padding: 1rem;
-    font-size: 0.8rem;
+    margin: 0.5rem 0rem 0.5rem 0rem;
 
-    border: 3px solid var(--secondary-a);
+    border: 0;
+    border-bottom: 3px solid var(--secondary-a);
     resize: none;
     outline: none;
     
-    border-radius: 10px;
-    background-color: var(--secondary);
+    border-radius: 5px;
+    background-color: color-mix(in srgb, var(--secondary) 95%, var(--bg));
 
-    color: #f0f8ff;
+    color: var(--text-2);
 }
 
 .md_field textarea {
-    overflow: auto;
+    overflow: hidden;
+}
+
+.md_field textarea::placeholder {
+    color: color-mix(in srgb, var(--text-2) 80%, #000000);
 }
 
 .md_field textarea:focus {
-    border-color: var(--accent);
+    outline: 2px solid var(--outline);
+    outline-offset: 2px;
+}
+
+.md_field textarea:focus + .send_cancel {
+    display: flex;
 }
 
 .md_field #preview {
+    --heading-scale: 0.8;
     overflow-y: auto;
 }
 
 
-.md_field #preview::-webkit-scrollbar,
+/* scrollbar styling if needed... */
+
+/* .md_field #preview::-webkit-scrollbar,
 .md_field textarea::-webkit-scrollbar {
     width: 0.6rem;
 }
@@ -89,4 +153,4 @@
 .md_field #preview::-webkit-scrollbar-thumb:active,
 .md_field textarea::-webkit-scrollbar-thumb:active {
     cursor: grabbing;
-}
+} */

@@ -16,6 +16,7 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     position: relative;
     overflow: hidden;
+    cursor: pointer;
 }
 
 .news_preview::after {
@@ -57,7 +58,7 @@
     z-index: 1;
 }
 
-.news_preview p {
+.news_preview a p {
     /* width: 100%; */
     max-height: 6rem;
     margin: 0rem;

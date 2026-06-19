@@ -1,0 +1,43 @@
+.comment {
+    height: fit-content;
+
+    background-color: var(--comment-bg);
+
+    padding: 1rem;
+    margin-left: calc(var(--level, 0) * 1rem);
+    
+    border-radius: 10px 0 0 10px;
+    
+    clip-path: polygon(0% 0%, 100% 0%, 90% 100%, 0% 100%);
+    
+    color: var(--text-2);
+}
+
+/*
+.comment .comment {
+    position: relative;
+    margin-left: 1.5rem;
+}
+
+.comment .comment::before {
+    content: "";
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 10px;
+    background-color: #000000;
+    position: absolute;
+}
+*/
+
+.comment p {
+    width: 90%;
+}
+
+.comment .user_preview {
+    
+}
+
+.write_comment {
+    width: 100%;
+}

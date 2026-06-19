@@ -1,0 +1,15 @@
+.news_display{
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    max-width: 100%;
+    padding: 1rem;
+}
+
+#news_upper_title{
+    align-self: center;
+    color: var(--text-3);
+}
