@@ -1,43 +1,148 @@
+:root {
+    --thread_curve_height: 2rem;
+}
+
+.comment_thread {
+    position: relative;
+    padding-left: 1rem;
+    
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* The vertical thread line */
+.comment_thread::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--primary-dark);
+}
+
+/* to stop the line at the last child's curve */
+.comment_thread:last-of-type::before {
+    bottom: auto;
+    height: 1.2rem;
+}
+
+/* The curve into the reply */
+.comment_thread::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1rem;
+    height: var(--thread_curve_height);
+    border-left: 2px solid var(--primary-dark);
+    border-bottom: 2px solid var(--primary-dark);
+    border-radius: 0 0 0 1rem;
+}
+
 .comment {
     height: fit-content;
 
     background-color: var(--comment-bg);
 
     padding: 1rem;
-    margin-left: calc(var(--level, 0) * 1rem);
+    margin: 0 0 0.5rem 0;
+    /* margin-left: calc(var(--level, 0) * 1rem); */
     
-    border-radius: 10px 0 0 10px;
+    border-width: 3px 3px 3px 5px;
+    border-style: solid;
+    border-color: var(--primary-light);
+    border-radius: 0px 10px 10px 0;
     
-    clip-path: polygon(0% 0%, 100% 0%, 90% 100%, 0% 100%);
+    /* clip-path: polygon(0% 0%, 100% 0%, 90% 100%, 0% 100%); */
     
-    color: var(--text-2);
+    color: var(--text-light);
+
+    display: flex;
+    flex-direction: column;
 }
 
-/*
-.comment .comment {
-    position: relative;
-    margin-left: 1.5rem;
-}
-
-.comment .comment::before {
-    content: "";
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 10px;
-    background-color: #000000;
-    position: absolute;
-}
-*/
-
-.comment p {
+.comment .content {
+    --heading-scale: var(--review-heading-scale);
     width: 90%;
+    margin: 1rem 0;
 }
 
-.comment .user_preview {
-    
+.comment .content p {
+    margin: 0;
+}
+
+.comment .interactions {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    height: 1rem;
+}
+
+.comment .interactions #like,
+.comment .interactions #dislike,
+.comment .interactions #reply {
+    height: 2rem;
+    background-color: transparent;
+    color: var(--text-light);
+    font-weight: 600;
+
+    padding: 5px;
+    border: none;
+    border-radius: 1.25rem;
+
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.comment .interactions #like:hover,
+.comment .interactions #dislike:hover,
+.comment .interactions #reply:hover {
+    background-color: color-mix(in srgb, var(--comment-bg) 80%, #000000);
+}
+
+.comment .interactions #like img,
+.comment .interactions #dislike img {
+    height: 100%;
+    aspect-ratio: 1;
 }
 
 .write_comment {
     width: 100%;
+}
+
+.children {
+    display: flex;
+    flex-direction: column;
+}
+
+.children #display_comments {
+    border: none;
+    margin: 0.5rem 0;
+    width: fit-content;
+    height: 2rem;
+    border-radius: 1.25rem;
+
+    background-color: transparent;
+    color: var(--text-light);
+}
+
+.children #display_comments:hover {
+    background-color: color-mix(in srgb, var(--primary-half) 80%, #000000);
+    outline: 2px solid var(--outline);
+    outline-offset: 2px;
+}
+
+/* Markdown genereted html definitios */
+
+table {
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid var(--text-light);
+    padding: 4px 8px;
 }

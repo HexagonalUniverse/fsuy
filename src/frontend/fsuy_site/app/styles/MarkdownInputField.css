@@ -5,6 +5,9 @@
 
     display: flex;
     flex-direction: column;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--primary-dark);
+    margin-bottom: 1rem;
 }
 
 .md_field button {
@@ -17,31 +20,31 @@
 .md_field #btn_preview {
     height: 2rem;
     width: 4rem;
-    border: 3px solid var(--secondary-b);
-    background-color: var(--secondary);
-    color: var(--text-2);
+    border: 3px solid var(--primary-light);
+    background-color: var(--primary);
+    color: var(--text-light);
     cursor: pointer;
 }
 
 .md_field #btn_edit:disabled,
 .md_field #btn_preview:disabled {
-    background-color: var(--secondary-a);
-    color: rgb(from var(--text-2) r g b / 0.5);
+    background-color: var(--primary-dark);
+    color: rgb(from var(--text-light) r g b / 0.5);
 }
 
 .md_field #btn_edit {
-    border-right: 0.1px solid var(--secondary-b);
+    border-right: 0.1px solid var(--primary-light);
     border-radius: 5px 0px 0px 5px;
 }
 
 .md_field #btn_preview {
-    border-left: 0.1px solid var(--secondary-b);
+    border-left: 0.1px solid var(--primary-light);
     border-radius: 0px 5px 5px 0px;
 }
 
 
 .md_field .send_cancel {
-    display: none;
+    display: flex;
     flex-direction: row;
     gap: 1rem;
 
@@ -59,16 +62,18 @@
 
 
 .send_cancel #send{
-    background-color: var(--secondary-c);
+    color: var(--text-light);
+    background-color: var(--primary-half);
 }
 
 .send_cancel #send:hover {
-    background-color: color-mix(in srgb, var(--secondary-c) 80%, #ffffff);
+    background-color: color-mix(in srgb, var(--primary-half) 80%, #ffffff);
     outline: 2px solid var(--outline);
     outline-offset: 2px;
 }
 
 .send_cancel #cancel{
+    color: var(--text-dark);
     background-color: var(--bg);
 }
 
@@ -91,23 +96,21 @@
     padding: 1rem;
     margin: 0.5rem 0rem 0.5rem 0rem;
 
-    border: 0;
-    border-bottom: 3px solid var(--secondary-a);
+    border: 2px solid var(--primary-dark);
+    border-radius: 5px;
     resize: none;
     outline: none;
-    
-    border-radius: 5px;
-    background-color: color-mix(in srgb, var(--secondary) 95%, var(--bg));
 
-    color: var(--text-2);
+    color: var(--text-light);
 }
 
 .md_field textarea {
     overflow: hidden;
+    background-color: color-mix(in srgb, var(--primary-half) 90%, var(--bg));
 }
 
 .md_field textarea::placeholder {
-    color: color-mix(in srgb, var(--text-2) 80%, #000000);
+    color: color-mix(in srgb, var(--text-light) 80%, #000000);
 }
 
 .md_field textarea:focus {
@@ -122,6 +125,7 @@
 .md_field #preview {
     --heading-scale: 0.8;
     overflow-y: auto;
+    background-color: var(--comment-bg);
 }
 
 
@@ -134,19 +138,19 @@
 
 .md_field #preview::-webkit-scrollbar-track,
 .md_field textarea::-webkit-scrollbar-track {
-    background: var(--secondary-a);
+    background: var(--primary-dark);
     border-radius: 20px;
 }
 
 .md_field #preview::-webkit-scrollbar-thumb,
 .md_field textarea::-webkit-scrollbar-thumb {
-    background-color: var(--secondary-b);
+    background-color: var(--primary-light);
     border-radius: 20px;
 }
 
 .md_field #preview::-webkit-scrollbar-thumb:hover,
 .md_field textarea::-webkit-scrollbar-thumb:hover {
-    background-color: var(--secondary-c);
+    background-color: var(--primary-light);
     cursor: grab;
 }
 

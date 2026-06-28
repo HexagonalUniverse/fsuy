@@ -1,9 +1,13 @@
+/**            -----------------------------------
+ * @file       frontend/fsuy_site/app/components/MarkdownInput.tsx
+ * @brief      React component for a input area that supports markdown with edit and preview modes.
+ * @date       06-2026
+ */
+
 "use client";
 
-import { useState, type ReactElement } from "react"
-
-import DOMPurify from "dompurify";
-import { marked } from "marked"
+import React, { useState, useRef, type ReactElement, useEffect } from "react";
+import { parse_markdown } from "@/app/commons";
 
 import "../styles/MarkdownInputField.css"
 
@@ -32,26 +36,25 @@ alert("hack");
 `;
 
 
-function parse_markdown(md_string: string): string {
-    const unsafe_html: string = marked.parse(md_string, {async: false});
-
-    return DOMPurify.sanitize(
-        unsafe_html,
-        {
-            USE_PROFILES: {
-                html: true
-            }
-        }
-    );
+interface MarkdownInputFieldParams {
+    placeholder: string;
 }
 
-
-export function MarkdownInputField(): ReactElement {
-    const [md_content, set_md_content]      = useState<string>(md);
+export function MarkdownInputField({placeholder}: MarkdownInputFieldParams): ReactElement {
+    const [md_content, set_md_content]      = useState<string>("");
     const [preview_mode, set_preview_mode]  = useState<boolean>(false);
+    const [is_writing, set_is_writing]      = useState<boolean>(false);
     const [safe_html, set_safe_html]        = useState<string>("");
     
-    function handleClick_preview(): void {
+    const textarea_ref = useRef<HTMLTextAreaElement>(null);
+
+    const adjust_textarea_height: () => void = () => {
+        const textarea: HTMLTextAreaElement = textarea_ref.current !;
+        textarea.style.height = 'auto';
+        textarea.style.height = textarea.scrollHeight + 'px';
+    };
+    
+    function handle_edit_preview(): void {
         if(!preview_mode){
             set_safe_html(parse_markdown(md_content));
         }
@@ -59,16 +62,56 @@ export function MarkdownInputField(): ReactElement {
         set_preview_mode(!preview_mode);
     }
 
+    function handle_writing(imputed_text: React.ChangeEvent<HTMLTextAreaElement>): void {
+        set_md_content(imputed_text.target.value); 
+        set_is_writing(imputed_text.target.value != "");
+        adjust_textarea_height();
+    }
+
+    function cancel_writing(): void {
+        set_md_content("");
+        set_is_writing(false);
+    }
+
+    // Adjusting the textarea_height back when changing from preview to edit.
+    useEffect(() => {
+        if(!preview_mode) 
+            adjust_textarea_height();
+    }, [preview_mode]);
+
+
     return (
         <div className="md_field">
-            <button id="btn_edit" onClick={handleClick_preview} disabled={!preview_mode}> Edit </button>
-            <button id="btn_preview" onClick={handleClick_preview} disabled={preview_mode}> Preview </button>
+
+            {
+                is_writing ? 
+                <div className="edit_preview">
+                    <button id="btn_edit" onClick={handle_edit_preview} disabled={!preview_mode}> Edit </button>
+                    <button id="btn_preview" onClick={handle_edit_preview} disabled={preview_mode}> Preview </button>
+                </div>
+                : null
+            }
 
             {
                 preview_mode ? 
                 <div id="preview" dangerouslySetInnerHTML={{ __html: safe_html }} />
                 :
-                <textarea value={md_content} onChange={(imputed_text) => set_md_content(imputed_text.target.value)}/>
+                <textarea 
+                    ref={textarea_ref}
+                    value={md_content}
+                    onChange={handle_writing}
+                    onFocus={() => {set_is_writing(true)}}
+                    onBlur={handle_writing}
+                    placeholder={placeholder}
+                />
+            }
+
+            { is_writing?
+                <div className="send_cancel">
+                    <button id="cancel" onMouseDown={cancel_writing}> Cancelar </button>
+                    <button id="send"> Enviar </button>
+                </div>
+                : null
             }
         </div>
     );

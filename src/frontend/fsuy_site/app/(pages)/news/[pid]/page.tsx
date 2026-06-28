@@ -11,9 +11,11 @@ import { APIError, api_get_entity, DynamicEntityPageParams } from "@/app/commons
 import { NavigationBar } from "@/app/components/NavigationBar";
 import { UserPreview } from "@/app/components/UserPreview";
 import { Comment } from "@/app/components/Comment";
+import { Tag } from "@/app/components/Tag";
 import { MarkdownInputField } from "@/app/components/MarkdownInputField";
 
 import "@/app/styles/news.css"
+import { EntityTag } from "@/app/entity_interfaces";
 
 export default async function NewsPage({params}: DynamicEntityPageParams): Promise<ReactElement> {
     
@@ -21,30 +23,41 @@ export default async function NewsPage({params}: DynamicEntityPageParams): Promi
     
     // api_get_entity<News>("news", pid);
 
+
+    const news_tags: EntityTag[] = [
+        { tid: 11, title: "Notícia" },
+        { tid: 12, title: "Bacana" }
+    ]
+
     const comments = [
-        {   author: "Victor",
+        {   author: { uid: 413, name: "Victor" },
             content: "Eu gosto de jogar minecraft e o HexagonDark é muito ruim. Olha como eu escrevo textos e como o négócio fica maior conforme o mundão gira.",
             tags: [],
+            likes: 25, dislikes: 2,
             children: [
-                {   author: "Camilo Borges",
+                {   author: { uid: 413, name: "Camilo Borges" },
                     content: "Negócios legais, mas nem tanto.",
                     tags: [],
+                    likes: 25, dislikes: 2,
                     children: [
-                        {   author: "Doido",
+                        {   author: { uid: 413, name: "Doido" },
                             content: "Negócios legais, mas nem tanto.",
                             tags: [],
+                            likes: 25, dislikes: 2,
                             children: []
                         }
                     ]
                 },
 
-                {   author: "Camilo Borges",
+                {   author: { uid: 413, name: "Camilo Borges" },
                     content: "Negócios legais, mas nem tanto.",
                     tags: [],
+                    likes: 25, dislikes: 2,
                     children: [
-                        {   author: "AAAAAAAAAAAAAA",
+                        {   author: { uid: 413, name: "AAAAAAAA" },
                             content: "# Negócios legais \n mas nem tanto.",
                             tags: [],
+                            likes: 25, dislikes: 2,
                             children: []
                         }
                     ]
@@ -52,15 +65,17 @@ export default async function NewsPage({params}: DynamicEntityPageParams): Promi
             ]
         },
         
-        {   author: "HollowKnight",
+        {   author: { uid: 413, name: "HollowKnight" },
             content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis temporibus aliquam dolor minus dolore, perspiciatis ipsum odit expedita qui, delectus aperiam alias commodi. Eos, quis temporibus porro iusto facilis molestiae? Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis temporibus aliquam dolor minus dolore, perspiciatis ipsum odit expedita qui, delectus aperiam alias commodi. Eos, quis temporibus porro iusto facilis molestiae? Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis temporibus aliquam dolor minus dolore, perspiciatis ipsum odit expedita qui, delectus aperiam alias commodi. Eos, quis temporibus porro iusto facilis molestiae? Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis temporibus aliquam dolor minus dolore, perspiciatis ipsum odit expedita qui, delectus aperiam alias commodi. Eos, quis temporibus porro iusto facilis molestiae?",
             tags: [],
+            likes: 25, dislikes: 2,
             children: []
         },
         
-        {   author: "Camilo Borges",
+        {   author: { uid: 413, name: "Camilo Borges" },
             content: "Negócios legais, mas nem tanto.",
             tags: [],
+            likes: 25, dislikes: 2,
             children: []
         },
     ];
@@ -77,7 +92,11 @@ export default async function NewsPage({params}: DynamicEntityPageParams): Promi
 
                     <h2 id="description"> Uma Descrisão melhor ainda. </h2>
                     
-                    <ul className="tags"> <li> Notícia </li> <li> Bacana </li> </ul>
+                    <ul className="tags"> 
+                        {news_tags.map( (tag) => (
+                            <li key={tag.tid}> <Tag tag={tag} /> </li>
+                        ))}
+                    </ul>
 
                     <UserPreview uid={25} name="Autor" />
 

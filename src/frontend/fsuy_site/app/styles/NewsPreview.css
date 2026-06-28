@@ -1,8 +1,8 @@
 .news_preview {
-    background: var(--secondary);
+    background: var(--primary);
     border-radius: 20px 0 20px 0px;
     box-shadow: 3px 3px 10px 0px rgb(75, 75, 75);
-    color: var(--text-2);
+    color: var(--text-light);
 
     width: 18rem;
     min-width: 18rem;
@@ -27,7 +27,7 @@
     bottom: 0;
     left: 0;
     border-radius: 20px 0 20px 0px;
-    background: linear-gradient(transparent, var(--secondary));
+    background: linear-gradient(transparent, var(--primary-dark));
 }
 
 .news_preview:hover {

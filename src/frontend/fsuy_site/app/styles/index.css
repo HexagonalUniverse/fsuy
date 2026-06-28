@@ -1,25 +1,33 @@
 :root {
 	--heading-scale: 1;
-
-	--text: #000000;
-	--text-2: #F0EFF4;
-	--text-3: #ff0000ad;
+	--review-heading-scale: 0.7;
 
 	--bg: #F0EFF4;
 
+	--primary: #04534A;
+	--primary-dark: #033B34;
+	--primary-half: #086b60;
+	--primary-light: #087c6f;
+
+	--secondary: #C6F135;
+
 	--outline: #009baf;
-	--accent: #aa3bff;
 
 	--links: #4ee9fd;
 	--links-hover: #00d8f5;
 
+	/* #185FA5 */
+	--tag-bg: var(--text-highlight);
+	--tag-text: #D4E6F5;
 
-	--secondary: #04534A;
-	--secondary-a: #033B34;
-	--secondary-b: #076A5E;
-	--secondary-c: #087c6f;
+	--text-dark: #1A1A2E;
+	--text-light: #F0EFF4;
+	--text-highlight: #FA4D4E;
+	
+	/*#eb4528*/
 
-	--comment-bg: var(--secondary);
+	--review-bg: var(--primary-half);
+	--comment-bg: var(--primary);
 
 	--font-text: "Quicksand", sans-serif;
 	--font-title: "Castoro Titling", serif;

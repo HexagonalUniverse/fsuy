@@ -1,0 +1,18 @@
+.tag {
+    width: fit-content;
+    padding: 2px 4px;
+
+    font-weight: bold;
+    text-transform: uppercase;
+
+    color: var(--tag-text);
+    border: 2px solid var(--tag-bg);
+    border-radius: 1.25rem;
+    background-color: var(--tag-bg);
+}
+
+.tag:hover {
+    color: var(--tag-bg);
+    background-color: transparent;
+    cursor: pointer;
+}

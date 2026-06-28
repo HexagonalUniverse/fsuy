@@ -1,3 +1,10 @@
+/**            -----------------------------------
+ * @file       frontend/fsuy_site/app/components/GamePreview.tsx
+ * @brief      Game preview's components.
+ * @date       06-2026
+ */
+
+
 import { type ReactElement } from "react"
 
 import "../styles/GamePreview.css"

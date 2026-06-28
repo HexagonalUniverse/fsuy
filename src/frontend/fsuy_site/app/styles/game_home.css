@@ -1,4 +1,4 @@
-.news_display{
+.games_display{
     align-self: center;
     display: flex;
     flex-direction: row;
@@ -9,7 +9,7 @@
     padding: 1rem;
 }
 
-#news_upper_title{
+#games_upper_title{
     align-self: center;
     color: var(--text-highlight);
 }
