@@ -18,6 +18,7 @@ BASE_DIR: Path = Path(__file__).resolve().parent.parent
 DEBUG: bool = True
 LOCAL_DB: bool = False
 
+
 #
 #
 #   Loading variables from the environment
@@ -81,7 +82,8 @@ INSTALLED_APPS: list[str] = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "storages",
-    
+    "django_extensions",
+
     "fsuy_site"
 ]
 
@@ -179,12 +181,15 @@ def choose_database(local_db: bool = True) -> dict[str, Any]:
     port: str       = os.environ["DATABASE_PORT"]
     user: str       = os.environ["DATABASE_USER"]
 
-    print(host, password, port, user)
+    print(f"Database INFO.: {host}, {password}, {port}, {user}")
+
+    import socket
+    print(f"Database connecting to address: {socket.getaddrinfo(host, port)[-1][-1][0]}")
 
     return {
         "default": {
             "ENGINE":       "django.db.backends.postgresql",
-            "NAME":         user,
+            "NAME":         "postgres",
             "USER":         user,
             "PASSWORD":     password,
             "HOST":         host,
