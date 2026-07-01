@@ -42,3 +42,6 @@ src/backend/staticfiles/
 
 scripts/env.ps1
 node_modules/
+
+# Others
+*.bkp

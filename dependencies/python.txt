@@ -1,8 +1,10 @@
 uvicorn
 django
+django-extensions
+djangorestframework
+django-storages
 fastapi
 whitenoise
 psycopg[binary]
 Pillow
-django-storages
 boto3

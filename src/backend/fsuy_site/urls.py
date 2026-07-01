@@ -9,6 +9,12 @@ from django.urls.resolvers import URLPattern, URLResolver
 from django.contrib import admin
 from . import views
 
+from rest_framework.routers import DefaultRouter
+from .views import TestModelViewSet, GameModelViewSet
+
+router: DefaultRouter = DefaultRouter()
+router.register("test_objects", TestModelViewSet)
+router.register("games", GameModelViewSet)
 
 #
 #   API URLs
