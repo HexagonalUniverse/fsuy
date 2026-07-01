@@ -4,10 +4,6 @@
 @date       05-2026
 """
 
-#
-#   Testing
-#
-
 import django
 import os
 
@@ -15,6 +11,19 @@ from fastapi import FastAPI
 from django.core.asgi import get_asgi_application
 from django.core.handlers.asgi import ASGIHandler
 
+
+#
+#   Parameters
+#
+
+# DJANGO_ENDPOINT_BASE: str = "/django"
+DJANGO_ENDPOINT_BASE: str = "/"
+
+
+
+#
+#   Config
+#
 
 os.environ.setdefault(
     "DJANGO_SETTINGS_MODULE",
@@ -27,23 +36,17 @@ django_asgi_application: ASGIHandler = get_asgi_application()
 
 
 app = FastAPI()
-app.mount("/django", django_asgi_application)
+app.mount(DJANGO_ENDPOINT_BASE, django_asgi_application)
 
 
-@app.get("/")
-def nothing():
-    return {
-        "hello": "world"
-    }
-
-
-#
 #
 #   Executing
 #
-#
 
-def main():
+def main() -> None:
+
+    ...
+
     return None
 
 

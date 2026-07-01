@@ -1,7 +1,24 @@
+"""         ---------------------------
+@file       backend/fsuy_site/admin.py
+@brief      ...
+@date       06-2026
+"""
+
+from django.contrib.auth.admin import UserAdmin
 from django.contrib import admin
 
-# Register your models here.
-from .models import TestModel, Game
 
-admin.site.register(TestModel)
-admin.site.register(Game)
+from .models import *
+
+
+for model in [
+    User,
+    Review,
+    News,
+    Comment,
+    Reaction,
+    Tag,
+    Game,
+]:
+    admin.site.register(model)
+
