@@ -23,7 +23,7 @@ export class APIError extends Error {
 
     constructor(_message: string) {
         super(_message);
-        this.message = _message;
+        this.message = "APIError: " + _message;
     }
 }
 
@@ -32,24 +32,26 @@ export class ParsingError extends Error {
 
     constructor(_message: string = "") {
         super(_message);
-        this.message = _message;
+        this.message = "ParsingError: " + _message;
     }
 }
 
 /*  Utilities
     ========= */
 
-export async function api_get_entity<Entity>(entity_endponit: string, id: string): Promise<Entity> {
-    const res: Response = await fetch(`${base_url}/api/${entity_endponit}/${id}`);
+export async function api_get_entity<Entity>(entity_endponit: string, id:string): Promise<Entity> {
+    const res: Response = await fetch(`https://fsuy-server-u68qf.ondigitalocean.app/api/${entity_endponit}/${id}/`);
+    
+    const entity: Entity = await res.json();
 
     if (!res.ok) 
         throw new APIError("Couldn't fetch entity.");
     
-    const entity: Entity = await res.json();
     
     if (!entity)
-        throw new ParsingError();
+        throw new ParsingError(`response: ${res}`);
 
+    // console.log(entity);
     return entity;
 }
 

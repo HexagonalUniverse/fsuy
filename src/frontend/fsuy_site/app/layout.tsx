@@ -34,7 +34,7 @@ return (
 		<link href="https://fonts.googleapis.com/css2?family=Castoro+Titling&family=Quicksand:wght@300..700&family=Stack+Sans+Text:wght@200..700&display=swap" rel="stylesheet"></link>
 	</head>
 	{/* <body className="min-h-full flex flex-col">{children}</body> */}
-	<body>{children}</body>
+	<body suppressHydrationWarning>{children}</body>
 	</html>
 );
 }
