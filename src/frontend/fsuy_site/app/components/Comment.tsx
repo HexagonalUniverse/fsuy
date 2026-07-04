@@ -11,9 +11,10 @@ import { type ReactElement, RefObject, useRef, useState } from "react";
 
 import { EntityComment } from "@/app/entity_interfaces";
 
-import "@/app/styles/Comment.css";
 import { UserPreview } from "@/app/components/UserPreview";
-import { parse_markdown } from "@/app/commons"
+import { parse_markdown } from "@/app/commons";
+
+import "@/app/styles/components/Comment.css";
 
 interface CommentParams {
     comment: EntityComment;

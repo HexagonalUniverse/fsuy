@@ -7,7 +7,7 @@
 import { type ReactElement } from "react"
 import Image from 'next/image'
 
-import "@/app/styles/NavigationBar.css"
+import "@/app/styles/components/NavigationBar.css"
 
 import { type EntityUser } from "@/app/entity_interfaces"
 import { UserPreview } from "./UserPreview";

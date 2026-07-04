@@ -15,8 +15,8 @@ import { Comment } from "@/app/components/Comment";
 import { Tag } from "@/app/components/Tag";
 import { parse_markdown } from "@/app/commons"
 
-import "@/app/styles/Review.css";
-import "@/app/styles/Comment.css";
+import "@/app/styles/components/Review.css";
+import "@/app/styles/components/Comment.css";
 
 
 interface ReviewParams {

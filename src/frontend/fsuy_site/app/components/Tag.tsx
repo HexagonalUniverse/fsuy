@@ -9,7 +9,7 @@ import { type ReactElement } from "react";
 
 import { EntityTag } from "@/app/entity_interfaces";
 
-import "@/app/styles/Tag.css";
+import "@/app/styles/components/Tag.css";
 
 
 interface TagParams {

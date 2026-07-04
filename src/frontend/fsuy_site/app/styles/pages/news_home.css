@@ -1,4 +1,8 @@
-.games_display{
+main {
+    padding: 0 4rem;
+}
+
+.news_display{
     align-self: center;
     display: flex;
     flex-direction: row;
@@ -6,10 +10,10 @@
     justify-content: center;
     gap: 2rem;
     max-width: 100%;
-    padding: 1rem;
+    margin: 1rem 0;
 }
 
-#games_upper_title{
+#news_upper_title{
     align-self: center;
     color: var(--text-highlight);
 }

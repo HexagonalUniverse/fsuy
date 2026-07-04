@@ -9,10 +9,11 @@
 
 .user_preview a:hover{
 	cursor: pointer;
+	text-decoration: underline;
 }
 
 .user_preview img{
-    height: 80%;
+    height: 70%;
     aspect-ratio: 1 / 1;
 }
 

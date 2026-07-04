@@ -4,16 +4,14 @@
  * @date       06-2026
  */
 
-import { type ReactElement } from "react"
+import { type ReactElement } from "react";
 
-import { base_url } from "@/app/commons"
-
-import { MarkdownInputField } from "@/app/components/MarkdownInputField"
-import { NavigationBar } from "@/app/components/NavigationBar"
+import { MarkdownInputField } from "@/app/components/MarkdownInputField";
+import { NavigationBar } from "@/app/components/NavigationBar";
 
 
 // import reactLogo from "./assets/react.svg"
-import "@/app/styles/App.css"
+import "@/app/styles/pages/home.css";
 
 
 export default async function Home(): Promise<ReactElement> {

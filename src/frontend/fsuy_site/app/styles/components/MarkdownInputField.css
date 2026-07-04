@@ -1,0 +1,171 @@
+:root {
+    --md_input_field_bg: var(--primary-half);
+}
+
+.md_input_field {
+    /* border: 1px solid red; */
+    width: 100%;
+    height: auto;
+
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--primary-dark);
+    margin-bottom: 1rem;
+}
+
+.edit_box {
+    border-radius: 5px;
+}
+
+.md_input_field button {
+    outline: none;
+}
+
+/* === Buttons === */
+
+.md_input_field #btn_edit,
+.md_input_field #btn_preview {
+    height: 1.8rem;
+    width: 4rem;
+
+    border: 2px solid var(--primary-dark);
+    border-bottom: 0;
+    background-color: var(--md_input_field_bg);
+    color: var(--text-light);
+    cursor: pointer;
+}
+
+.md_input_field #btn_edit:disabled,
+.md_input_field #btn_preview:disabled {
+    background-color: var(--primary);
+    color: rgb(from var(--text-light) r g b / 0.5);
+}
+
+.md_input_field #btn_edit {
+    border-right: 0.1px solid var(--primary-dark);
+    border-radius: 5px 0px 0px 0px;
+}
+
+.md_input_field #btn_preview {
+    border-left: 0.1px solid var(--primary-dark);
+    border-radius: 0px 5px 0px 0px;
+}
+
+
+.md_input_field .send_cancel {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+
+    padding-top: 0.5rem;
+    margin-left: auto;
+}
+
+.send_cancel #send,
+.send_cancel #cancel{
+    border: none;
+    border-radius: 1.25rem;
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+
+.send_cancel #send{
+    color: var(--text-light);
+    background-color: var(--primary-half);
+}
+
+.send_cancel #send:hover {
+    background-color: color-mix(in srgb, var(--primary-half) 80%, #ffffff);
+    outline: 2px solid var(--outline);
+    outline-offset: 2px;
+}
+
+.send_cancel #cancel{
+    color: var(--text-dark);
+    background-color: var(--bg);
+}
+
+.send_cancel #cancel:hover{
+    background-color: color-mix(in srgb, var(--bg) 80%, #000000);
+    outline: 2px solid var(--outline);
+    outline-offset: 2px;
+}
+
+
+
+/* === TextArea / Preview === */
+
+.md_input_field #preview,
+.md_input_field #edit_textarea {
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+
+    padding: 1rem;
+
+    border: 3px solid var(--primary-dark);
+    border-radius: 0 5px 5px 5px;
+    resize: none;
+    outline: none;
+}
+
+.md_input_field #edit_textarea {
+    overflow: hidden;
+    /* background-color: color-mix(in srgb, var(--md_input_field_bg) 90%, var(--bg)); */
+    background-color: color-mix(in srgb, var(--bg) 90%, #000000);
+}
+
+.md_input_field #edit_textarea:focus {
+    border-color: var(--outline);
+}
+
+.md_input_field #edit_textarea::placeholder {
+    /* color: color-mix(in srgb, var(--text-light) 80%, #000000); */
+    color: #757575;
+}
+
+.md_input_field #edit_textarea:focus + .send_cancel {
+    display: flex;
+}
+
+.md_input_field #preview {
+    color: var(--text-light);
+    --heading-scale: var(--review-heading-scale);
+
+    overflow-y: auto;
+    background-color: var(--review-bg);
+}
+
+
+/* scrollbar styling if needed... */
+
+/* .md_input_field #preview::-webkit-scrollbar,
+.md_input_field #edit_textarea::-webkit-scrollbar {
+    width: 0.6rem;
+}
+
+.md_input_field #preview::-webkit-scrollbar-track,
+.md_input_field #edit_textarea::-webkit-scrollbar-track {
+    background: var(--primary-dark);
+    border-radius: 20px;
+}
+
+.md_input_field #preview::-webkit-scrollbar-thumb,
+.md_input_field #edit_textarea::-webkit-scrollbar-thumb {
+    background-color: var(--primary-light);
+    border-radius: 20px;
+}
+
+.md_input_field #preview::-webkit-scrollbar-thumb:hover,
+.md_input_field #edit_textarea::-webkit-scrollbar-thumb:hover {
+    background-color: var(--primary-light);
+    cursor: grab;
+}
+
+.md_input_field #preview::-webkit-scrollbar-thumb:active,
+.md_input_field #edit_textarea::-webkit-scrollbar-thumb:active {
+    cursor: grabbing;
+} */

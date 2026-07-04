@@ -12,6 +12,7 @@
 	--secondary: #C6F135;
 
 	--outline: #009baf;
+	/* --outline: linear-gradient(#009baf, #48c4d4); */
 
 	--links: #4ee9fd;
 	--links-hover: #00d8f5;
@@ -58,19 +59,19 @@ h1, h2, h3, h4 {
 }
 
 h1 {
-  font-size: calc(2rem * var(--heading-scale));
+	font-size: calc(2rem * var(--heading-scale));
 }
 
 h2 {
-  font-size: calc(1.75rem * var(--heading-scale));
+	font-size: calc(1.75rem * var(--heading-scale));
 }
 
 h3 {
-  font-size: calc(1.5rem * var(--heading-scale));
+	font-size: calc(1.5rem * var(--heading-scale));
 }
 
 h4 {
-  font-size: calc(1.25rem * var(--heading-scale));
+	font-size: calc(1.25rem * var(--heading-scale));
 }
 
 

@@ -13,12 +13,27 @@ import { NavigationBar } from "@/app/components/NavigationBar";
 import { Review } from "@/app/components/Review";
 import { MarkdownInputField } from "@/app/components/MarkdownInputField";
 
-import "@/app/styles/game.css";
-import { title } from "process";
+import "@/app/styles/pages/games.css";
 
 
 
 export default async function GamePage({params}: DynamicEntityPageParams): Promise<ReactElement> {
+
+    const {id} = await params;
+    // console.log(`${id}`);
+    
+    let game: EntityGame;
+    
+    try {
+        game = await api_get_entity<EntityGame>("game", id);
+        
+    } catch(error){
+        if(error instanceof APIError)
+            notFound();
+
+        throw error;
+    }
+
 
     const reviews = [
         {   author: { uid: 413, name: "Victor" },
@@ -76,9 +91,7 @@ export default async function GamePage({params}: DynamicEntityPageParams): Promi
         }
     ]
 
-    // const {id} = await params;
-
-    let game: EntityGame = {
+    let game_mock = {
         gid: 413,
         name: "Hollow Knight",
         description: "Forje seu caminho em Hollow Knight! Uma aventura de ação épica em um vasto reino arruinado de insetos e heróis. Explore cavernas serpenteantes, lute contra criaturas malignas e alie-se a insetos bizarros num estilo clássico 2D desenhado à mão.",
@@ -90,63 +103,56 @@ export default async function GamePage({params}: DynamicEntityPageParams): Promi
         steam_id: 367520
     };
 
-    // try {
-    //     game = await api_get_entity<EntityGame>("games", id.toString());
-
-    // } catch(error){
-    //     if (error instanceof APIError){
-    //         notFound();
-    //     }
-
-    //     throw error;
-    // }
-
     return (
-        <>
-        <NavigationBar uid={413} name="Victor" />
-        <main>
-            <aside>
-                <img id="game_cover" src="https://cdn.cloudflare.steamstatic.com/steam/apps/367520/library_600x900_2x.jpg" alt="game_cover" />
+        <div className="page_body">
+            <NavigationBar uid={413} name="Victor" />
+            <main>
+                <aside>
+                    <img id="game_portrait" src={game.portrait} alt="game_cover" />
 
-                <div id="info">
-                    <span> <strong> Gêneros: </strong> {game.genres} </span>
-                    <span> <strong> Developer: </strong> {game.developer} </span>
-                    <span> <strong> Publisher: </strong> {game.publisher} </span>
-                    <span> <strong> Lançamento: </strong> {game.launch_date} </span>
-                    <span> <strong> Plataformas: </strong> {game.plataforms} </span>
-                </div>
-            </aside>
+                    <div id="info">
+                        <span> <strong> Gêneros: </strong> {game.genres.map((genre) => (genre.name) ).join(", ")} </span>
+                        <span> <strong> Developer: </strong> {game.developer} </span>
+                        <span> <strong> Publisher: </strong> {game.publisher} </span>
+                        <span> <strong> Lançamento: </strong> {game.launch_date} </span>
+                        <span> <strong> Plataformas: </strong> {game.platforms.map((plataform) => (plataform.name) ).join(", ")} </span>
+                    </div>
+                </aside>
 
-            <article>
-                <div className="heading">
-                    <img id="horizontal_cover" src="https://cdn.cloudflare.steamstatic.com/steam/apps/367520/library_hero.jpg" alt="horizontal_cover" />
-                    <img id="logo" src="https://cdn.cloudflare.steamstatic.com/steam/apps/367520/logo.png" alt="game_logo" />
-                </div>
+                <article>
+                    <div className="heading">
+                        <img id="game_cover" src="https://cdn.cloudflare.steamstatic.com/steam/apps/367520/library_hero.jpg" alt="horizontal_cover" />
+                        <img id="game_logo" src="https://cdn.cloudflare.steamstatic.com/steam/apps/367520/logo.png" alt="game_logo" />
+                    </div>
 
-                <h1>{game.name}</h1>
+                    <h1>{game.name}</h1>
 
-                <div className="description"> {game.description} </div>
+                    <div className="description"> {game.description} </div>
 
-                <div className="steam_widget">
-                    <iframe src={`https://store.steampowered.com/widget/${game.steam_id}/`}
-                            width="100%" height="190px">
-                    </iframe>
-                </div>
+                    {
+                    game.steam_id !== undefined?
+                        <div className="steam_widget">
+                            <iframe src={`https://store.steampowered.com/widget/${game.steam_id}/`}
+                                    width="100%" height="190px">
+                            </iframe>
+                        </div>
+                    : null
+                    }
 
-                <hr />
+                    <hr />
 
-                <div className="reviews">
-                    <h2> Reviews </h2>
+                    <div className="reviews">
+                        <h2> Reviews </h2>
 
-                    <MarkdownInputField placeholder="Escreva uma review..." />
+                        <MarkdownInputField placeholder="Escreva uma review..." />
 
-                    {reviews.map( (review, index) => (
-                        <Review key={index} review={review} />
-                    ))}
-                </div>
+                        {reviews.map( (review, index) => (
+                            <Review key={index} review={review} />
+                        ))}
+                    </div>
 
-            </article>
-        </main>
-        </>
+                </article>
+            </main>
+        </div>
     );
 }

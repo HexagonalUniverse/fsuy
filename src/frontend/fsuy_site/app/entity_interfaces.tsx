@@ -8,13 +8,45 @@ export interface EntityGame {
 	gid: number;
 	name: string;
 	description: string;
-	genres: string;
 	developer: string;
 	publisher: string;
-	plataforms: string;
+	platforms: EntityPlataform[];
+	genres: EntityGenre[];
 	launch_date: string;
+	portrait: string;
+	cover: string;
+	logo: string;
 	steam_id: number;
 }
+
+interface EntityGenre {
+	name: string;
+}
+
+interface EntityPlataform {
+	name: string;
+}
+
+
+export interface EntityNews {
+	pid: number;
+	title: string;
+	subtitle: string;
+	cover: string;
+	timestamp: string;
+	author: UserPreview;
+	content: string;
+	tags: EntityTag[];
+}
+
+export interface EntityNewsPreview {
+	pid: number;
+	title: string;
+	cover: string;
+	timestamp: string;
+	content_preview: string;
+}
+
 
 export interface EntityComment {
 	author: EntityUser;
@@ -24,6 +56,7 @@ export interface EntityComment {
 	children: EntityComment[];
 }
 
+
 export interface EntityReview {
 	author: EntityUser;
 	content: string;
@@ -31,12 +64,20 @@ export interface EntityReview {
 	children: EntityComment[];
 }
 
+
 export interface EntityTag {
 	tid: number;
 	title: string;
 }
 
+
 export interface EntityUser {
 	uid: number;
 	name: string;
 }
+
+interface UserPreview {
+	uid: number;
+	name: string;
+}
+

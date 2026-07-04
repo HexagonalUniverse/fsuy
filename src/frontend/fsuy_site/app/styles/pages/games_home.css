@@ -1,15 +1,15 @@
-.news_display{
+.games_display{
     align-self: center;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 2rem;
+    gap: 1.5rem;
     max-width: 100%;
-    padding: 1rem;
+    padding: 1.5rem;
 }
 
-#news_upper_title{
+#games_upper_title{
     align-self: center;
     color: var(--text-highlight);
 }

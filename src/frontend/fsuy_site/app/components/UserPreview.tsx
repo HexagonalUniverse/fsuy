@@ -4,11 +4,11 @@
  * @date       06-2026
  */
 
-import { type ReactElement } from "react"
+import { type ReactElement } from "react";
 
-import "@/app/styles/UserPreview.css"
+import { EntityUser } from "@/app/entity_interfaces";
 
-import { EntityUser } from "@/app/entity_interfaces"
+import "@/app/styles/components/UserPreview.css";
 
 
 export function UserPreview({uid, name}: EntityUser): ReactElement {

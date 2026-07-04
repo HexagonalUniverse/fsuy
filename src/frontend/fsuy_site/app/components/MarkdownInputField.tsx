@@ -9,7 +9,7 @@
 import React, { useState, useRef, type ReactElement, useEffect } from "react";
 import { parse_markdown } from "@/app/commons";
 
-import "../styles/MarkdownInputField.css"
+import "@/app/styles/components/MarkdownInputField.css"
 
 // const DOMPurify = createDOMPurify(window);
 
@@ -81,8 +81,9 @@ export function MarkdownInputField({placeholder}: MarkdownInputFieldParams): Rea
 
 
     return (
-        <div className="md_field">
+        <div className="md_input_field">
 
+            <div className="edit_box">
             {
                 is_writing ? 
                 <div className="edit_preview">
@@ -94,17 +95,18 @@ export function MarkdownInputField({placeholder}: MarkdownInputFieldParams): Rea
 
             {
                 preview_mode ? 
-                <div id="preview" dangerouslySetInnerHTML={{ __html: safe_html }} />
+                <div id="preview" dangerouslySetInnerHTML={{ __html: (safe_html != "")? safe_html : "Nenhum conteúdo para previzualizar" }} />
                 :
                 <textarea 
+                    id="edit_textarea"
                     ref={textarea_ref}
                     value={md_content}
                     onChange={handle_writing}
                     onFocus={() => {set_is_writing(true)}}
-                    onBlur={handle_writing}
                     placeholder={placeholder}
                 />
             }
+            </div>
 
             { is_writing?
                 <div className="send_cancel">

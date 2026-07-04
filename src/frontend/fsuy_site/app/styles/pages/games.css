@@ -21,7 +21,7 @@ article {
     /* padding: 0 1rem 0 1rem; */
 }
 
-aside #game_cover {
+aside #game_portrait {
     width: 100%;
     align-self: center;
     border-radius: 25px 0 25px 0;
@@ -45,14 +45,14 @@ article .heading {
     aspect-ratio:  3 / 1;
 }
 
-article .heading #horizontal_cover {
+article .heading #game_cover {
     width: 100%;
     object-fit: cover;
     object-position: top;
 }
 
-article .heading #logo {
-    height: 15rem;
+article .heading #game_logo {
+    width: 35%;
 
     position: absolute;
     bottom: 0;

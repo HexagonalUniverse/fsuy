@@ -1,0 +1,115 @@
+:root {
+    --carousel_slider_height: 27rem;
+    --carousel_slider_gap: 1rem;
+    --carousel_image_width: 70%;
+    --carousel_image_height: 80%;
+}
+
+.carousel {
+    width: 100%;
+    margin: 1rem 0;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+}
+
+.carousel_slider_wrapper {
+    width: 100%;
+    height: var(--carousel_slider_height);
+    position: relative;
+}
+
+.carousel_slider {
+    height: 100%;
+    margin-bottom: 1rem;
+
+    display: flex;
+    flex-direction: row;
+    gap: var(--carousel_slider_gap);
+
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel_slider a {
+    height: 100%;
+    flex: 0 0 var(--carousel_image_width); /* 0 flex gorw, 0 flex shrink and 70% flex basis */
+}
+
+.frame {
+    height: 100%;
+    width: 100%;
+}
+
+.frame img {
+    object-fit: cover;
+    height: var(--carousel_image_height);
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.frame h3 {
+    margin: 0.5rem 0;
+}
+
+.frame span {
+    margin: 0.5rem 0;
+}
+
+.carousel_prev,
+.carousel_next {
+    position: absolute;
+    top: 0;
+
+    padding: 0;
+    width: 3rem;
+    height: var(--carousel_image_height);
+
+    border: none;
+    color: var(--bg);
+    font-size: 3rem;
+
+    transition: transform 0.5s ease;
+}
+
+.carousel_prev {
+    background: linear-gradient(-90deg, transparent, #0000005d);
+    left: 0;
+}
+
+.carousel_next {
+    background: linear-gradient(90deg, transparent, #0000005d);
+    right: 0;
+}
+
+.carousel_prev:hover,
+.carousel_next:hover {
+    cursor: pointer;
+    color: color-mix(in srgb, var(--bg) 90%, #000000);
+}
+
+.carousel_progress {
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.carousel_progress .tab {
+    height: 1rem;
+    width: 100%;
+    
+    border: 0;
+    background-color: color-mix(in srgb, var(--primary-light) 60%, #ffffff);
+    border-radius: 25px;
+
+    cursor: pointer;
+}
+
+.carousel_progress .tab.active {
+    background-color: var(--primary-light);
+}

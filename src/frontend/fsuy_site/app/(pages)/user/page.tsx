@@ -10,6 +10,8 @@ import { type ReactElement } from "react";
 export default function UserHomePage(): ReactElement {
 
     return(
-        <div><p>AAAAAAAAAAA</p></div>
+        <div className="page_body">
+            
+        </div>
     );
 }
