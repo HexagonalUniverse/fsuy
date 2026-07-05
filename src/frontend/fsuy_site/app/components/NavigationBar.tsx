@@ -4,15 +4,18 @@
  * @date       06-2026
  */
 
-import { type ReactElement } from "react"
-import Image from 'next/image'
+import { type ReactElement } from "react";
 
-import "@/app/styles/components/NavigationBar.css"
+import "@/app/styles/components/NavigationBar.css";
 
-import { type EntityUser } from "@/app/entity_interfaces"
+import { type EntityUser } from "@/app/entity_interfaces";
 import { UserPreview } from "./UserPreview";
 
-export function NavigationBar({uid, name}: EntityUser): ReactElement {
+interface NaviagtionBarParams {
+    user: EntityUser;
+}
+
+export function NavigationBar({user}: NaviagtionBarParams): ReactElement {
     return (
         <nav className="navigation_bar">
             <a href="/"> <h1> FSUY </h1> </a>
@@ -32,13 +35,13 @@ export function NavigationBar({uid, name}: EntityUser): ReactElement {
                     <span> Notícias </span>
                 </a> </li>
 
-                <li> <a href={`/user/${uid}`}> 
+                <li> <a href={`/user/${user.uid}`}> 
                     <div className="outer_circle"> <img src="/assets/icon_profile_circle.svg" alt="" /> </div>
                     <span> Perfil </span>
                 </a> </li>
             </ul>
 
-            <UserPreview uid={uid} name={name}/>
+            <UserPreview user={user}/>
 
             {/* <div id="profile"> 
                 <div id="picture">  </div>

@@ -24,6 +24,7 @@ export function NewsCarousel({carousel_news, frame_interval} : NewsCarouselParam
         set_index((i + carousel_news.length) % carousel_news.length);
     }
 
+    /* setting the auto-play effect */
     useEffect(() => {
         const interval_id = setInterval(() => goto(index + 1), frame_interval);
         return () => clearInterval(interval_id);
@@ -67,8 +68,9 @@ export function NewsCarousel({carousel_news, frame_interval} : NewsCarouselParam
                 <button
                     key={i}
                     className={`tab ${i === index ? "active" : ""}`}
+                    style={{"--frame-interval-ms": `${frame_interval}ms`} as React.CSSProperties}
                     onClick={() => (goto(i))}
-                >  </button>
+                />
             ))
         }
         </div>

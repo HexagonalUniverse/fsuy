@@ -10,6 +10,7 @@ import { APIError, api_get_entity, DynamicEntityPageParams } from "@/app/commons
 
 import { EntityTag } from "@/app/entity_interfaces";
 import { NavigationBar } from "@/app/components/NavigationBar";
+import { FsuyFooter } from "@/app/components/FsuyFooter";
 import { UserPreview } from "@/app/components/UserPreview";
 import { Comment } from "@/app/components/Comment";
 import { Tag } from "@/app/components/Tag";
@@ -82,7 +83,7 @@ export default async function NewsPage({params}: DynamicEntityPageParams): Promi
 
     return (
         <div className="page_body">
-            <NavigationBar uid={413} name="Victor"/>
+            <NavigationBar user={ {uid: 413, name: "Victor"} }/>
             <main>
                 <article>
                     <header>
@@ -98,7 +99,7 @@ export default async function NewsPage({params}: DynamicEntityPageParams): Promi
                             ))}
                         </ul>
 
-                        <UserPreview uid={25} name="Autor" />
+                        <UserPreview user={ {uid: 25, name: "Autor"} } />
 
                         <img id="cover" src="https://image.api.playstation.com/vulcan/ap/rnd/202601/1505/91d47e238a9e2cb5f33e10e4b54c911b4beaafcad3e14a9e.png?w=440" alt="" />
                     </header>
@@ -129,6 +130,8 @@ export default async function NewsPage({params}: DynamicEntityPageParams): Promi
                     <h3> Leia Também </h3>
                 </aside>
             </main>
+
+            <FsuyFooter />
         </div>
     );
 }

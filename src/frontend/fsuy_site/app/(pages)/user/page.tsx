@@ -7,11 +7,20 @@
 
 import { type ReactElement } from "react";
 
+import { NavigationBar } from "@/app/components/NavigationBar";
+import { FsuyFooter } from "@/app/components/FsuyFooter";
+
 export default function UserHomePage(): ReactElement {
 
     return(
         <div className="page_body">
-            
+            <NavigationBar user={ {uid: 413, name: "Victor"} }/>
+
+            <main>
+
+            </main>
+
+            <FsuyFooter />
         </div>
     );
 }

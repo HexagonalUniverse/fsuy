@@ -6,37 +6,35 @@
 
 import { type ReactElement } from "react"
 
+import { EntityNewsPreview } from "@/app/entity_interfaces";
+
 import "@/app/styles/components/NewsPreview.css"
 
 interface NewsPreviewArguments {
-    pid: number,
-    title: string,
-    abstract: string,
-    date: string,
-    cover: string
+    news: EntityNewsPreview
 };
 
-export function NewsPreview({pid, title, abstract, date, cover}: NewsPreviewArguments): ReactElement {
+export function NewsPreview({news}: NewsPreviewArguments): ReactElement {
     return (
-        <a href={`/news/${pid}`}>
+        <a href={`/news/${news.pid}`}>
         <div className="news_preview"> 
-            <img src={cover} alt="" />
-            <h3> {title} </h3>
-            <p> {abstract} </p>
-            <span id="date"> {date} </span>
+            <img src={news.cover} alt="" />
+            <h3> {news.title} </h3>
+            <p> {news.content_preview} </p>
+            <span id="date"> {news.timestamp} </span>
         </div>
         </a> 
     );
 }
 
-export function NewsPreview2({title, abstract, date, cover}: NewsPreviewArguments): ReactElement {
+export function NewsPreview2({news}: NewsPreviewArguments): ReactElement {
     return (
         <div className="news_preview"> 
-        <a href="/news/45">
-            <img src={cover} alt="" />
-            <h3> {title} </h3>
-            <p> {abstract} </p>
-            <p id="date"> {date} </p>
+        <a href={`/news/${news.pid}`}>
+            <img src={news.cover} alt="" />
+            <h3> {news.title} </h3>
+            <p> {news.content_preview} </p>
+            <p id="date"> {news.timestamp} </p>
         </a> 
         </div>
     );

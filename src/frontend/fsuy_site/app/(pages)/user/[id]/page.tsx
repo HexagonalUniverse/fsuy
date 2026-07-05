@@ -10,37 +10,42 @@ import { type ReactElement } from "react";
 import { APIError, api_get_entity } from "@/app/commons";
 import { notFound } from "next/navigation";
 import { EntityUser } from "@/app/entity_interfaces";
+import { NavigationBar } from "@/app/components/NavigationBar";
+import { FsuyFooter } from "@/app/components/FsuyFooter";
 
 import "@/app/styles/pages/user.css"
 
 interface ProfileParams {
     params: Promise<{
-        uid: number;
-        name: string;
+        user: EntityUser;
     }>
 }
 
 export default async function ProfilePage({params}: ProfileParams): Promise<ReactElement> {
 
-    const {uid} = await params;
+    // const {uid} = await params;
 
-    let user: EntityUser;
+    let user: EntityUser = { uid: 413, name: "Victor" };
 
-    try {
-        user = await api_get_entity<EntityUser>("test_objects", uid.toString());
+    // try {
+    //     user = await api_get_entity<EntityUser>("test_objects", uid.toString());
 
-    } catch(error){
-        if(error instanceof APIError)
-            notFound();
+    // } catch(error){
+    //     if(error instanceof APIError)
+    //         notFound();
 
-        throw error;
-    }
+    //     throw error;
+    // }
 
     return(
         <div className="page_body">    
-            <div>
+            <NavigationBar user={ {uid: 413, name: "Victor"} }/>
+
+            <main>
                 <p>{user.uid} - {user.name}</p>
-            </div>
+            </main>
+
+            <FsuyFooter />
         </div>
     );
 }

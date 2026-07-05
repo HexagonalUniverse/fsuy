@@ -6,8 +6,8 @@
 
 import { type ReactElement } from "react";
 
-import { MarkdownInputField } from "@/app/components/MarkdownInputField";
 import { NavigationBar } from "@/app/components/NavigationBar";
+import { FsuyFooter } from "@/app/components/FsuyFooter";
 
 
 // import reactLogo from "./assets/react.svg"
@@ -22,22 +22,16 @@ export default async function Home(): Promise<ReactElement> {
 	// console.log(test_models);
 
 	return (
-	<main>
-		<NavigationBar uid={413} name="Victor" />
-
-		<p>
-		realmente
-		</p>
-
-		{/* <ul>
-		{test_models.map(p => (
-			<li key={p.tmid}>{p.name} — ${p.value}</li>
-		))}
-		</ul> */}
+	<div className="page_body">
+		<NavigationBar user={ {uid: 413, name: "Victor"} } />
 
 
-		<MarkdownInputField placeholder=""/>
+		<main>
+			<img src="https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyeDk2bnIxb3ZlZmh1Y3V0bmFqd2w0ZGRwcDJwbDVkNndiNDYxeWYzZSZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/4UCauYJ1hcZ357QFjs/source.gif" alt="" />
+			<p> realmente </p>
+		</main>
 
-	</main>
+		<FsuyFooter />
+	</div>
 	);
 }

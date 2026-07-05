@@ -19,6 +19,12 @@ export interface EntityGame {
 	steam_id: number;
 }
 
+export interface EntityGamePreview {
+	gid: number;
+	name: string;
+	portrait: string;
+}
+
 interface EntityGenre {
 	name: string;
 }

@@ -22,7 +22,7 @@
 	--tag-text: #D4E6F5;
 
 	--text-dark: #1A1A2E;
-	--text-light: #F0EFF4;
+	--text-light: #d7d6da;
 	--text-highlight: #FA4D4E;
 	
 	/*#eb4528*/
@@ -51,6 +51,12 @@
 body {
 	padding-top: var(--navbar-height);
 	margin: 0;
+}
+
+.page_body {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
 }
 
 
@@ -87,4 +93,5 @@ a:hover {
 main {
     display: flex;
     flex-direction: column;
+	flex: 1;
 }

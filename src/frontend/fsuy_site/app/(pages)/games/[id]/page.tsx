@@ -10,6 +10,7 @@ import { notFound } from "next/navigation";
 import { type DynamicEntityPageParams, APIError, api_get_entity } from "@/app/commons";
 import { type EntityGame } from "@/app/entity_interfaces";
 import { NavigationBar } from "@/app/components/NavigationBar";
+import { FsuyFooter } from "@/app/components/FsuyFooter";
 import { Review } from "@/app/components/Review";
 import { MarkdownInputField } from "@/app/components/MarkdownInputField";
 
@@ -105,7 +106,7 @@ export default async function GamePage({params}: DynamicEntityPageParams): Promi
 
     return (
         <div className="page_body">
-            <NavigationBar uid={413} name="Victor" />
+            <NavigationBar user={ {uid: 413, name: "Victor"} } />
             <main>
                 <aside>
                     <img id="game_portrait" src={game.portrait} alt="game_cover" />
@@ -153,6 +154,8 @@ export default async function GamePage({params}: DynamicEntityPageParams): Promi
 
                 </article>
             </main>
+
+            <FsuyFooter />
         </div>
     );
 }

@@ -27,7 +27,7 @@ export function Comment({comment, level}: CommentParams ): ReactElement {
     return (
         <div className="comment_thread">
             <div className="comment" style={ {"--level": level} as React.CSSProperties } data-level={level}>
-                <UserPreview uid={comment.author.uid} name={comment.author.name} />
+                <UserPreview user={comment.author} />
                 <div className="content" dangerouslySetInnerHTML={{ __html: parse_markdown(comment.content) }} />
                 <div className="interactions">
                     <div> <button id="like"> <img src="/assets/icon_thumb_up.svg" alt="" /> {comment.likes} </button> </div>

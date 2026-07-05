@@ -9,6 +9,7 @@
     
     color: var(--text-dark);
     background-color: var(--bg);
+    /* background: linear-gradient(0deg, var(--primary-light), var(--primary-dark)); */
 
     display: flex;
     flex-direction: row;

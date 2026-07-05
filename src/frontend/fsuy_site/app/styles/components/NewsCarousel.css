@@ -108,8 +108,29 @@
     border-radius: 25px;
 
     cursor: pointer;
+    position: relative;
 }
 
-.carousel_progress .tab.active {
+/* .carousel_progress .tab.active {
+} */
+
+.carousel_progress .tab.active::before {
+    content: "";
+    display: block;
+    height: 100%;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+    border-radius: 25px;
     background-color: var(--primary-light);
+
+    animation: fill_bar linear;
+    animation-duration: var(--frame-interval-ms);
+}
+
+@keyframes fill_bar {
+    from {width: 0%;}
+    to {width: 100%;}
 }

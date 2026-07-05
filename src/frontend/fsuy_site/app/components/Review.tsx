@@ -29,7 +29,7 @@ export function Review({review}: ReviewParams ): ReactElement {
     return (
         <>
         <div className="review">
-            <UserPreview uid={review.author.uid} name={review.author.name} />
+            <UserPreview user={review.author} />
             
             <div className="tags">
             {
