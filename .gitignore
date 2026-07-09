@@ -36,8 +36,12 @@ sketch/
 
 
 # Migrations
+src/backend/fsuy_site/migrations
 
+src/backend/staticfiles/
 
+scripts/env.ps1
+node_modules/
 
 # Others
 *.bkp
