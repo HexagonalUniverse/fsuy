@@ -28,6 +28,7 @@
 
 .navigation_bar h1 {
 	font-family: var(--font-title);
+    font-size: 3rem;
     margin: 0 5rem 0 1rem;
     height: 100%;
 }

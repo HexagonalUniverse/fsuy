@@ -18,7 +18,7 @@ interface NaviagtionBarParams {
 export function NavigationBar({user}: NaviagtionBarParams): ReactElement {
     return (
         <nav className="navigation_bar">
-            <a href="/"> <h1> FSUY </h1> </a>
+            <a href="/"> <h1 className="hebert_logo"> FSUY </h1> </a>
             <ul>
                 <li> <a href="/"> 
                     <div className="outer_circle"> <img src="/assets/icon_home.svg" alt="" /> </div>

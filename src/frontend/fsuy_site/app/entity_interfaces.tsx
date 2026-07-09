@@ -48,9 +48,12 @@ export interface EntityNews {
 export interface EntityNewsPreview {
 	pid: number;
 	title: string;
-	cover: string;
-	timestamp: string;
-	content_preview: string;
+	author: string;
+	tags: number[];
+	creation_date: string;
+	edit_date: string;
+	description: string;
+	picture: string;
 }
 
 
@@ -62,12 +65,14 @@ export interface EntityComment {
 	children: EntityComment[];
 }
 
-
 export interface EntityReview {
 	author: EntityUser;
 	content: string;
 	tags: EntityTag[];
 	children: EntityComment[];
+	creation_date: string;
+	edit_date: string;
+	rate: number;
 }
 
 
@@ -79,11 +84,12 @@ export interface EntityTag {
 
 export interface EntityUser {
 	uid: number;
-	name: string;
+	public_name: string;
+	picture: string;
 }
 
 interface UserPreview {
 	uid: number;
-	name: string;
+	public_name: string;
 }
 

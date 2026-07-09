@@ -15,6 +15,7 @@
 .user_preview img{
     height: 70%;
     aspect-ratio: 1 / 1;
+	border-radius: 50%;
 }
 
 .user_preview span{

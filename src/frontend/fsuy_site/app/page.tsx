@@ -23,11 +23,11 @@ export default async function Home(): Promise<ReactElement> {
 
 	return (
 	<div className="page_body">
-		<NavigationBar user={ {uid: 413, name: "Victor"} } />
+		<NavigationBar user={ {uid: 413, name: "Victor", picture: ""} } />
 
 
 		<main>
-			<img src="https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyeDk2bnIxb3ZlZmh1Y3V0bmFqd2w0ZGRwcDJwbDVkNndiNDYxeWYzZSZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/4UCauYJ1hcZ357QFjs/source.gif" alt="" />
+			<img src="https://media.tenor.com/wuyEcsxrvQwAAAAM/club-penguin-ghosthy.gif" alt="" />
 			<p> realmente </p>
 		</main>
 

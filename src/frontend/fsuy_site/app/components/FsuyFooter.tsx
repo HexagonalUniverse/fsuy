@@ -1,5 +1,5 @@
 /**            -----------------------------------
- * @file       frontend/fsuy_site/app/components/GamePreview.tsx
+ * @file       frontend/fsuy_site/app/components/FsuyFooter.tsx
  * @brief      A footer component for displaying fsuy's info.
  * @date       07-2026
  */
@@ -19,7 +19,12 @@ function GitHubIcon(): ReactElement {
 export function FsuyFooter(): ReactElement {
     return (
         <footer className="fsuy_footer">
-            <a href="/"> <h1> FSUY </h1> </a>
+            <div className="about">
+                <a href="/"> <h1> FSUY </h1> </a>
+                <a href="https://github.com/HexagonalUniverse/fsuy" target="_blank">
+                <div className="social_media_link"> <GitHubIcon /> </div>
+                </a>
+            </div>
 
             <div className="explore">
                 <h2> Explorar </h2>
@@ -35,14 +40,14 @@ export function FsuyFooter(): ReactElement {
                 <h2> Desenvolvido por: </h2>
 
                 <a href="https://github.com/HexagonalUniverse" target="_blank">
-                <div className="social_media_link_complete">
+                <div className="social_media_link complete">
                     <GitHubIcon />
                     HexagonalUniverse
                 </div>
                 </a>
 
                 <a href="https://github.com/victorxaviercosta" target="_blank">
-                <div className="social_media_link_complete">
+                <div className="social_media_link complete">
                     <GitHubIcon />
                     Victor Xavier Costa
                 </div>

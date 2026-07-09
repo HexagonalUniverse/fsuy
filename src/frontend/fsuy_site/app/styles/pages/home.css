@@ -3,3 +3,7 @@
 main {
     padding: 3rem;
 }
+
+main img {
+    width: 30vw;
+}

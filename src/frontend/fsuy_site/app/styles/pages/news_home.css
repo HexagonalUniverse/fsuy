@@ -16,4 +16,5 @@ main {
 #news_upper_title{
     align-self: center;
     color: var(--text-highlight);
+    font-size: 3rem;
 }

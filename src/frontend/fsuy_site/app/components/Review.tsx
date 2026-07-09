@@ -48,14 +48,14 @@ export function Review({review}: ReviewParams ): ReactElement {
                     {is_open ? "Esconder Comentários" : "Ver Comentários"} 
                 </button>
 
-                {is_open ? 
+                {/* {is_open ? 
                     (
                         review.children?.map((child: EntityComment, index) => (
                             <Comment key={index} comment={child} level={1} />
                         ))
                     )
                     : null
-                }
+                } */}
             </div>
         </div>
 

@@ -17,8 +17,8 @@ interface UserPreviewParams {
 export function UserPreview({user}: UserPreviewParams): ReactElement {
     return(
         <div className="user_preview"> <a href={`/user/${user.uid}`}>
-            <img src="/assets/default_user.png" alt=""/>
-            <span> {user.name} </span>
+            <img src={user.picture ? user.picture : "/assets/default_user.png"} alt=""/>
+            <span> {user.public_name} </span>
         </a> </div>
     );
 }
