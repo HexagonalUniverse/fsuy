@@ -4,9 +4,14 @@ from django.apps import AppConfig
 class FsuySiteConfig(AppConfig):
     name: str = "fsuy_site"
 
-    async def ready(self) -> None:
-        from .models.games import Game
+    def ready(self) -> None:
 
-        print("GAME:")
-        for game in Game.objects.all():
-            print(game.gid, game.name)
+        # BLANK~~
+
+        return None
+
+        #from .models.games import Game
+        #
+        #print("GAME:")
+        #for game in Game.objects.all():
+        #    print(game.gid, game.name)
