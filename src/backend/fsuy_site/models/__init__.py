@@ -6,5 +6,5 @@
 
 from .users import User, Reaction
 from .posts import Post, Review, News, Comment, Tag
-from .games import Game
+from .games import Game, Platform, GameGenre
 

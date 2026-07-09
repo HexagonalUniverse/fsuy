@@ -18,7 +18,11 @@ for model in [
     Comment,
     Reaction,
     Tag,
+
+    #
     Game,
+    GameGenre,
+    Platform,
 ]:
     admin.site.register(model)
 

@@ -20,9 +20,10 @@ router.register("games", GameModelViewSet)
 #   API URLs
 #
 
-from .models.viewsets import API_Viewset_User, API_Viewset_Game, API_Viewset_Review, API_Viewset_News, API_Viewset_Comment
-from .models.viewsets import API_Viewset_GameGlance, API_Viewset_ReviewGlance, API_Viewset_NewsGlance
+from .models.viewsets import API_Viewset_User, API_Viewset_Game, API_Viewset_Review, API_Viewset_News
+from .models.viewsets import API_Viewset_Comment
 from rest_framework.routers import DefaultRouter, BaseRouter
+
 
 api_router: BaseRouter = DefaultRouter()
 
@@ -34,11 +35,6 @@ for prefix, viewset in [
     ("review", API_Viewset_Review),
     ("news", API_Viewset_News),
     ("comments", API_Viewset_Comment),
-
-    #
-    ("game-glance", API_Viewset_GameGlance),
-    ("review-glance", API_Viewset_ReviewGlance),
-    ("news-glance", API_Viewset_NewsGlance),
 ]:
     prefix: str
 
@@ -47,15 +43,6 @@ for prefix, viewset in [
         viewset,
         basename=prefix,
     )
-
-
-# (JOGO)
-# 1 - NOME E CAPA E ID
-# 3 - Reviews --->
-# 2 - TUDO
-
-# (NOTÍCIA)
-# 1 - NOME, ID, IMAGEM, CONTEÚDO (CORTADO), TIMESTAMP, TAGS
 
 
 #
