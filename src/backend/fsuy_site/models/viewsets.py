@@ -272,6 +272,21 @@ class API_Viewset_Game(rest_framework.viewsets.ModelViewSet):
 
         return GameFullSerializer
 
+    @action(detail=True, methods=["get"])
+    def reviews(self, request, gid: str | None = None):
+        games = self.get_object()
+
+        queryset = games.reviews.order_by("-creation_date")
+        # .select_related("author")
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = ReviewSerializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = ReviewSerializer(queryset, many=True)
+        return Response(serializer.data)
+
 
 class API_Viewset_Review(rest_framework.viewsets.ModelViewSet):
     """..."""
@@ -287,6 +302,21 @@ class API_Viewset_Review(rest_framework.viewsets.ModelViewSet):
             return ReviewGlanceSerializer
 
         return ReviewSerializer
+
+    @action(detail=True, methods=["get"])
+    def comments(self, request, pid: str | None = None):
+        reviews = self.get_object()
+
+        queryset = reviews.comments.order_by("-creation_date")
+        # .select_related("author")
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = CommentSerializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = CommentSerializer(queryset, many=True)
+        return Response(serializer.data)
 
 
 class API_Viewset_News(rest_framework.viewsets.ModelViewSet):
@@ -310,9 +340,6 @@ class API_Viewset_News(rest_framework.viewsets.ModelViewSet):
 
         queryset = news.comments.order_by("-creation_date")
         # .select_related("author")
-
-        #serializer = CommentSerializer(queryset, many=True)
-        #return Response(serializer.data)
 
         page = self.paginate_queryset(queryset)
         if page is not None:
