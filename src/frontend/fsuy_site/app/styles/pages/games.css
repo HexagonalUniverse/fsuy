@@ -1,0 +1,74 @@
+main{
+    display: flex;
+    flex-direction: row;
+}
+
+aside {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    
+    padding: 1rem;
+    border-right: 3px solid var(--primary-dark);
+    
+    background-color: var(--primary);
+}
+
+article {
+    width: 80%;
+    margin: 1rem;
+    padding: 0 0 1rem 0;
+    /* padding: 0 1rem 0 1rem; */
+}
+
+aside #game_portrait {
+    width: 100%;
+    align-self: center;
+    border-radius: 25px 0 25px 0;
+    margin-bottom: 1rem;
+}
+
+aside #info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    background-color: var(--primary-light);
+    color: var(--text-light);
+    padding: 1rem;
+    border-radius: 25px 0 25px 0;
+}
+
+article .heading {
+    position: relative;
+    width: 100%;
+    aspect-ratio:  3 / 1;
+}
+
+article .heading #game_cover {
+    width: 100%;
+    object-fit: cover;
+    object-position: top;
+}
+
+article .heading #game_logo {
+    width: 35%;
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+}
+
+article .description {
+    margin-bottom: 1rem;
+}
+
+article .widget_steam {
+    align-self: center;
+}
+
+article .reviews{
+    display: flex;
+    flex-direction: column;
+}

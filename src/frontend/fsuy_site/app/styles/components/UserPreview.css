@@ -1,0 +1,24 @@
+.user_preview a{
+	height: 2.5rem;
+	
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.user_preview a:hover{
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+.user_preview img{
+    height: 70%;
+    aspect-ratio: 1 / 1;
+	border-radius: 50%;
+}
+
+.user_preview span{
+	font-size: 1rem;
+	font-weight: 500;
+}

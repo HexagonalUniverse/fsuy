@@ -1,16 +1,17 @@
-// import { useRouter } from 'next/navigation';
+/**            -----------------------------------
+ * @file       frontend/fsuy_site/app/components/GamePreview.tsx
+ * @brief      Game preview's components.
+ * @date       06-2026
+ */
 
-import { type ReactElement } from "react"
+import { type ReactElement } from "react";
 
-import { base_url } from "./commons"
-import { type TestModel } from "./types"
-
-import { MarkdownInputField } from "./components/MarkdownInputField"
-import { NavigationBar } from "./components/NavigationBar"
+import { NavigationBar } from "@/app/components/NavigationBar";
+import { FsuyFooter } from "@/app/components/FsuyFooter";
 
 
 // import reactLogo from "./assets/react.svg"
-import "./styles/App.css"
+import "@/app/styles/pages/home.css";
 
 
 export default async function Home(): Promise<ReactElement> {
@@ -21,22 +22,16 @@ export default async function Home(): Promise<ReactElement> {
 	// console.log(test_models);
 
 	return (
-	<main>
-		<NavigationBar />
-
-		<p>
-		realmente
-		</p>
-
-		{/* <ul>
-		{test_models.map(p => (
-			<li key={p.tmid}>{p.name} — ${p.value}</li>
-		))}
-		</ul> */}
+	<div className="page_body">
+		<NavigationBar user={ {uid: 413, name: "Victor", picture: ""} } />
 
 
-		<MarkdownInputField />
+		<main>
+			<img src="https://media.tenor.com/wuyEcsxrvQwAAAAM/club-penguin-ghosthy.gif" alt="" />
+			<p> realmente </p>
+		</main>
 
-	</main>
+		<FsuyFooter />
+	</div>
 	);
 }

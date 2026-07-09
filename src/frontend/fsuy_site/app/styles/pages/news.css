@@ -1,0 +1,86 @@
+main{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 1rem 0 0 0;
+}
+
+article {
+    width: 70%;
+    padding: 0 1.5rem 1rem 1.5rem;
+    color: var(--text-dark);
+}
+
+aside {
+    width: 30%;
+    padding: 0 3rem 0 3rem;
+    /* border-left: 3px solid var(--primary-dark); */
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+}
+
+header h1{
+    margin: 0;
+}
+
+header #cover{
+    width: 100%;
+    aspect-ratio: 2.5 / 1;
+    object-fit: cover;
+
+    align-self: center;
+    margin-top: 0.5rem;
+
+    border-radius: 2rem 0;
+}
+
+header #description {
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin: 0.5rem 0;
+}
+
+header #timestamp {
+    font-size: 0.8rem;
+    margin: 0.5rem 0 0.5rem;
+}
+
+.tags {
+    font-size: 0.8rem;
+    margin: 0.5rem 0 0.5rem;
+    padding: 0;
+    list-style: none;
+
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+
+    max-width: 100%;
+}
+
+/* .tags li {
+    width: fit-content;
+    padding: 2px 4px;
+
+    font-weight: bold;
+    text-transform: uppercase;
+
+    color: var(--bg);
+    border: 2px solid var(--primary);
+    border-radius: 1.25rem;
+    background-color: var(--primary);
+}
+
+.tags li:hover {
+    color: var(--primary);
+    background-color: var(--bg);
+    cursor: pointer;
+} */
+
+.comments {
+    display: flex;
+    flex-direction: column;
+}

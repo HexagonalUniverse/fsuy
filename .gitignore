@@ -45,3 +45,5 @@ node_modules/
 
 # Others
 *.bkp
+*.zip
+env.ps1
