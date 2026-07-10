@@ -88,6 +88,7 @@ INSTALLED_APPS: list[str] = [
     "django.contrib.staticfiles",
     "storages",
     "django_extensions",
+    "corsheaders",
 
     "fsuy_site"
 ]
@@ -155,8 +156,9 @@ WSGI_APPLICATION = "fsuy_django.wsgi.application"
 REST_FRAMEWORK: dict[str, list[str]] = {
     "DEFAULT_RENDERER_CLASSES": [
         "rest_framework.renderers.JSONRenderer",
-    ]
+    ],
 }
+
 
 
 #
@@ -268,12 +270,25 @@ STATICFILES_DIRS: list[Path] = [
 CSRF_COOKIE_SECURE: bool = True
 CSRF_COOKIE_SAMESITE: str = "Lax"
 
+
+#   Defines the session time.
+SESSION_COOKIE_AGE: int = 60 * 60 * 24 * 7
+
+#   Secure cookies.
 SESSION_COOKIE_SECURE: bool = True
+
+#   Session will expire upon closing the browser.
+SESSION_EXPIRE_AT_BROWSER_CLOSE: bool = True
+
+#   Every auth. request will renovate the session.
+SESSION_SAVE_EVERY_REQUEST: bool = False
+
+
 
 X_FRAME_OPTIONS: str = "DENY"
 
-
-STATIC_URL = 'static/'
+# don't know
+STATIC_URL: str = 'static/'
 
 
 #   Cross-Origin Resource Sharing
@@ -284,6 +299,16 @@ CORS_ALLOWED_ORIGINS: list[str] = [
     "http://localhost:5173", # vite's react server (for development)
     "http://localhost:3000", # next.js's react server (for development)
 ]
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000",
+]
+
+
+CORS_ALLOW_CREDENTIALS: bool = True
+
+
+
 
 # 'cause without the proxy may terminate the TLS and redirect http to django.
 # therefore it makes "request.is_secure()" assertable.
