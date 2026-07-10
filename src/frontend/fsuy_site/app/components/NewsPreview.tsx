@@ -18,10 +18,10 @@ export function NewsPreview({news}: NewsPreviewArguments): ReactElement {
     return (
         <a href={`/news/${news.pid}`}>
         <div className="news_preview"> 
-            <img src={news.cover} alt="" />
+            <img src={news.picture} alt="" />
             <h3> {news.title} </h3>
-            <p> {news.content_preview} </p>
-            <span id="date"> {news.timestamp} </span>
+            <p> {news.description} </p>
+            <span id="date"> {news.creation_date} </span>
         </div>
         </a> 
     );
@@ -31,10 +31,10 @@ export function NewsPreview2({news}: NewsPreviewArguments): ReactElement {
     return (
         <div className="news_preview"> 
         <a href={`/news/${news.pid}`}>
-            <img src={news.cover} alt="" />
+            <img src={news.picture} alt="" />
             <h3> {news.title} </h3>
-            <p> {news.content_preview} </p>
-            <p id="date"> {news.timestamp} </p>
+            <p> {news.description} </p>
+            <p id="date"> {news.creation_date} </p>
         </a> 
         </div>
     );

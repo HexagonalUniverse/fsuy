@@ -5,10 +5,11 @@
  */
 
 import { type ReactElement } from "react";
+import { notFound } from "next/navigation";
 
-import { APIError, api_get_entity, DynamicEntityPageParams } from "@/app/commons";
+import { APIError, api_get_entity, api_get_posts, DynamicEntityPageParams } from "@/app/commons";
 
-import { EntityTag } from "@/app/entity_interfaces";
+import { EntityComment, EntityNews, EntityTag } from "@/app/entity_interfaces";
 import { NavigationBar } from "@/app/components/NavigationBar";
 import { FsuyFooter } from "@/app/components/FsuyFooter";
 import { UserPreview } from "@/app/components/UserPreview";
@@ -20,97 +21,46 @@ import "@/app/styles/pages/news.css"
 
 export default async function NewsPage({params}: DynamicEntityPageParams): Promise<ReactElement> {
     
-    // const {id} = await params;
+    const {id} = await params;
     
-    // api_get_entity<News>("news", pid);
+    let news: EntityNews;
+    let comments: EntityComment[];
+    
+    try {
+        news = await api_get_entity<EntityNews>("news", id);
+        comments = await api_get_posts<EntityComment>("news", "comments", id);
 
+    } catch(error){
+        if(error instanceof APIError)
+            notFound();
 
-    const news_tags: EntityTag[] = [
-        { tid: 11, title: "Notícia" },
-        { tid: 12, title: "Bacana" }
-    ]
-
-    const comments = [
-        {   author: { uid: 413, name: "Victor" },
-            content: "Eu gosto de jogar minecraft e o HexagonDark é muito ruim. Olha como eu escrevo textos e como o négócio fica maior conforme o mundão gira.",
-            tags: [],
-            likes: 25, dislikes: 2,
-            children: [
-                {   author: { uid: 413, name: "Camilo Borges" },
-                    content: "Negócios legais, mas nem tanto.",
-                    tags: [],
-                    likes: 25, dislikes: 2,
-                    children: [
-                        {   author: { uid: 413, name: "Doido" },
-                            content: "Negócios legais, mas nem tanto.",
-                            tags: [],
-                            likes: 25, dislikes: 2,
-                            children: []
-                        }
-                    ]
-                },
-
-                {   author: { uid: 413, name: "Camilo Borges" },
-                    content: "Negócios legais, mas nem tanto.",
-                    tags: [],
-                    likes: 25, dislikes: 2,
-                    children: [
-                        {   author: { uid: 413, name: "AAAAAAAA" },
-                            content: "# Negócios legais \n mas nem tanto.",
-                            tags: [],
-                            likes: 25, dislikes: 2,
-                            children: []
-                        }
-                    ]
-                },
-            ]
-        },
-        
-        {   author: { uid: 413, name: "HollowKnight" },
-            content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis temporibus aliquam dolor minus dolore, perspiciatis ipsum odit expedita qui, delectus aperiam alias commodi. Eos, quis temporibus porro iusto facilis molestiae? Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis temporibus aliquam dolor minus dolore, perspiciatis ipsum odit expedita qui, delectus aperiam alias commodi. Eos, quis temporibus porro iusto facilis molestiae? Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis temporibus aliquam dolor minus dolore, perspiciatis ipsum odit expedita qui, delectus aperiam alias commodi. Eos, quis temporibus porro iusto facilis molestiae? Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis temporibus aliquam dolor minus dolore, perspiciatis ipsum odit expedita qui, delectus aperiam alias commodi. Eos, quis temporibus porro iusto facilis molestiae?",
-            tags: [],
-            likes: 25, dislikes: 2,
-            children: []
-        },
-        
-        {   author: { uid: 413, name: "Camilo Borges" },
-            content: "Negócios legais, mas nem tanto.",
-            tags: [],
-            likes: 25, dislikes: 2,
-            children: []
-        },
-    ];
+        throw error;
+    }
 
     return (
         <div className="page_body">
-            <NavigationBar user={ {uid: 413, name: "Victor"} }/>
+            <NavigationBar user={ {uid: 413, public_name: "Victor", picture: ""} }/>
             <main>
                 <article>
                     <header>
-                        <div id="timestamp"> <span> Publicado: 18 de jun. de 2026, 13:13 BRT </span> </div>
+                        <div id="timestamp"> <span> Publicado: {news.creation_date} </span> </div>
 
-                        <h1> Um Título Muito Chamativo!!! </h1>
+                        <h1> {news.title} </h1>
 
-                        <h2 id="description"> Uma Descrisão melhor ainda. </h2>
+                        <h2 id="description"> {news.description} </h2>
                         
                         <ul className="tags"> 
-                            {news_tags.map( (tag) => (
-                                <li key={tag.tid}> <Tag tag={tag} /> </li>
+                            {news.tags?.map( (tag, index) => (
+                                <li key={index}> <Tag tag={tag} /> </li>
                             ))}
                         </ul>
 
-                        <UserPreview user={ {uid: 25, name: "Autor"} } />
+                        <UserPreview user={news.author} />
 
-                        <img id="cover" src="https://image.api.playstation.com/vulcan/ap/rnd/202601/1505/91d47e238a9e2cb5f33e10e4b54c911b4beaafcad3e14a9e.png?w=440" alt="" />
+                        <img id="cover" src={news.picture} alt={`news picture for ${news.pid}`} />
                     </header>
 
-                    <div id="content">
-                        <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint minima delectus natus voluptatem rerum illo facere enim sapiente nesciunt? Beatae enim fuga accusamus doloremque exercitationem a rerum, quae qui debitis. </p>
-
-                        <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint minima delectus natus voluptatem rerum illo facere enim sapiente nesciunt? Beatae enim fuga accusamus doloremque exercitationem a rerum, quae qui debitis. </p>
-
-                        <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint minima delectus natus voluptatem rerum illo facere enim sapiente nesciunt? Beatae enim fuga accusamus doloremque exercitationem a rerum, quae qui debitis. </p>
-                    </div>
+                    <div id="content"> { news.content } </div>
 
                     <hr />
 

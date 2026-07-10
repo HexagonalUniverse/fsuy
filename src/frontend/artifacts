@@ -1,0 +1,226 @@
+
+const placeholder_text: string = "\tLorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc porta mauris sed dolor scelerisque, a fermentum metus auctor. Aenean vulputate pharetra nibh. Duis ut semper justo. Nullam massa ex, vulputate id bibendum eget, elementum non nunc. Vestibulum id finibus leo. Proin rhoncus, nisl id commodo porttitor, mi nisi efficitur lorem, vitae lacinia dolor magna id metus. Suspendisse lacinia finibus velit, at luctus quam. Sed magna ligula, tincidunt id aliquam at, ultricies commodo justo. Morbi scelerisque nisi non tellus dapibus, sed venenatis libero fermentum. Vivamus vitae sapien odio. Donec eu sem dapibus, feugiat mi non, vehicula dolor. Curabitur vulputate turpis purus, at imperdiet purus semper sed. Vivamus sollicitudin lectus vel lacus auctor varius. Morbi eu ultrices erat, ac sagittis magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vivamus sit amet libero luctus, ultricies mauris ullamcorper, interdum odio. Pellentesque ac lectus ullamcorper, aliquam nisi auctor, facilisis enim. Pellentesque elit risus, congue nec aliquam vehicula, iaculis nec leo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse potenti. Aliquam a diam tortor. Ut tempus urna vitae aliquet tincidunt."
+
+const mocked_news: EntityNewsPreview[] = [
+    {
+        pid: 1,
+        title: "Minecraft é muito Bom!!!",
+        content: placeholder_text,
+        creation_date: "01/03/2026",
+        picture: "https://www.minecraft.net/content/dam/minecraftnet/games/minecraft/key-art/Homepage_Dispicture-our-games_MC-Vanilla-KeyArt_864x864.jpg",
+    },
+    {
+        pid: 2,
+        title: "Simón Bolívar",
+        content: placeholder_text,
+        creation_date: "08/06/2026",
+        picture: "https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/store/software/switch/70010000013704/918c0badde3aeba760e2185f382a2402248a1292322cf540fd8d098eeb292e1e",
+    },
+    {
+        pid: 3,
+        title: "Hey, Listen!",
+        content: placeholder_text,
+        creation_date: "15/08/2026",
+        picture: "https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1240/b_white/f_auto/q_auto/store/software/switch2/70010000096817/cfe9f8d674be958326d3ba11fc7598a4383e5c5d7809b6239ccac0783aac6cd8",
+    },
+    {
+        pid: 4,
+        title: "Absolute Greedy",
+        content: placeholder_text,
+        creation_date: "25/12/2026",
+        picture: "https://image.api.playstation.com/vulcan/ap/rnd/202601/1505/91d47e238a9e2cb5f33e10e4b54c911b4beaafcad3e14a9e.png?w=440",
+    },
+    {
+        pid: 5,
+        title: "Jogar videojogos afeta sua cognição?",
+        content: placeholder_text,
+        creation_date: "31/12/2026",
+        picture: "https://ichef.bbci.co.uk/ace/ws/640/cpsprodpb/46db/live/38b551a0-eee2-11ed-a142-ab0e42bfd9c3.jpg.webp",
+    },
+    {
+        pid: 6,
+        title: "Notícia Notícia Notícia Notícia Notícia",
+        picture: "https://gifdb.com/images/branded/high/club-penguin-breakdance-pyg7t6tydmr0105b.gif",
+        creation_date: "26/04/2026",
+        content: "UAAAAAAAAAAAAAAAAAAAAAAAUUUUUUU!!!!",
+    },
+]
+
+
+const news_tags: EntityTag[] = [
+    { tid: 11, name: "Notícia", color: "#123456"},
+    { tid: 12, name: "Bacana", color: "#123456" }
+]
+
+
+const comments = [
+    {   author: { uid: 413, public_name: "Victor", picutre: "" },
+        content: "Eu gosto de jogar minecraft e o HexagonDark é muito ruim. Olha como eu escrevo textos e como o négócio fica maior conforme o mundão gira.",
+        tags: [],
+        likes: 25, dislikes: 2,
+        children: [
+            {   author: { uid: 413, public_name: "Camilo Borges", picutre: "" },
+                content: "Negócios legais, mas nem tanto.",
+                tags: [],
+                likes: 25, dislikes: 2,
+                children: [
+                    {   author: { uid: 413, public_name: "Doido", picutre: "" },
+                        content: "Negócios legais, mas nem tanto.",
+                        tags: [],
+                        likes: 25, dislikes: 2,
+                        children: []
+                    }
+                ]
+            },
+
+            {   author: { uid: 413, public_name: "Camilo Borges", picutre: "" },
+                content: "Negócios legais, mas nem tanto.",
+                tags: [],
+                likes: 25, dislikes: 2,
+                children: [
+                    {   author: { uid: 413, public_name: "AAAAAAAA", picutre: "" },
+                        content: "# Negócios legais \n mas nem tanto.",
+                        tags: [],
+                        likes: 25, dislikes: 2,
+                        children: []
+                    }
+                ]
+            },
+        ]
+    },
+    
+    {   author: { uid: 413, public_name: "HollowKnight", picutre: "" },
+        content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis temporibus aliquam dolor minus dolore, perspiciatis ipsum odit expedita qui, delectus aperiam alias commodi. Eos, quis temporibus porro iusto facilis molestiae? Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis temporibus aliquam dolor minus dolore, perspiciatis ipsum odit expedita qui, delectus aperiam alias commodi. Eos, quis temporibus porro iusto facilis molestiae? Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis temporibus aliquam dolor minus dolore, perspiciatis ipsum odit expedita qui, delectus aperiam alias commodi. Eos, quis temporibus porro iusto facilis molestiae? Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis temporibus aliquam dolor minus dolore, perspiciatis ipsum odit expedita qui, delectus aperiam alias commodi. Eos, quis temporibus porro iusto facilis molestiae?",
+        tags: [],
+        likes: 25, dislikes: 2,
+        children: []
+    },
+    
+    {   author: { uid: 413, public_name: "Camilo Borges", picutre: "" },
+        content: "Negócios legais, mas nem tanto.",
+        tags: [],
+        likes: 25, dislikes: 2,
+        children: []
+    },
+];
+
+const reviews_mock = [
+    {   author: { uid: 413, name: "Victor" },
+        content: "# Muito bom!!!\n\nMuito bom mesmo",
+        tags: [ {tid: 23, title: "Legal"}, {tid: 24, title: "Jogo"} ],
+        children: [
+            {   author: { uid: 413, name: "Camilo Borges" },
+                content: "Negócios legais, mas nem tanto.",
+                tags: [],
+                likes: 25, dislikes: 2,
+                children: [
+                    {   author: { uid: 413, name: "Doido" },
+                        content: "Negócios legais, mas nem tanto.",
+                        tags: [],
+                        likes: 25, dislikes: 2,
+                        children: []
+                    }
+                ]
+            },
+
+            {   author: { uid: 413, name: "Camilo Borges" },
+                content: "|Jogo|Legal|Minecraft|\n|---|---|---|\n|Não sei o que | Não Sei o quê lá | Bla Bla Bla |",
+                tags: [],
+                likes: 25, dislikes: 2,
+                children: [
+                    {   author: { uid: 413, name: "AAAAAAAA" },
+                        content: "# Negócios legais \n mas nem tanto.",
+                        tags: [],
+                        likes: 25, dislikes: 2,
+                        children: []
+                    }
+                ]
+            },
+        ]
+    },
+
+    {   author: { uid: 413, name: "Hebert" },
+        content: "UAU!",
+        tags: [ {tid: 23, title: "Legal"} ],
+        children: [
+            {   author: { uid: 413, name: "Camilo Borges" },
+                content: "Uau",
+                tags: [],
+                likes: 25, dislikes: 2,
+                children: [
+                    {   author: { uid: 413, name: "Doido" },
+                        content: "# AAAAAAAAAAAAAAAA",
+                        tags: [],
+                        likes: 25, dislikes: 2,
+                        children: []
+                    }
+                ]
+            }
+        ]
+    }
+]
+
+const game_mock = {
+    gid: 413,
+    name: "Hollow Knight",
+    description: "Forje seu caminho em Hollow Knight! Uma aventura de ação épica em um vasto reino arruinado de insetos e heróis. Explore cavernas serpenteantes, lute contra criaturas malignas e alie-se a insetos bizarros num estilo clássico 2D desenhado à mão.",
+    genres: "Sandbox",
+    developer: "Team Cherry",
+    publisher: "Team Cherry",
+    plataforms: "Linux, Mac, Nintendo Switch, Nintendo Switch 2, PC, PlayStation 4, Xbox One",
+    launch_date: "24 de Fevereiro de 2017",
+    steam_id: 367520
+};
+
+const games_mock: EntityGamePreview[] = [
+{
+    gid: 0,
+    name: "Minecraft",
+    portrait: "https://cdn2.steamgriddb.com/grid/d69e0961e0596b45c15879c29cf84096.png"
+},
+{
+    gid: 1,
+    name: "Hollow Knight",
+    portrait: "https://cdn.cloudflare.steamstatic.com/steam/apps/367520/library_600x900_2x.jpg"
+},
+{
+    gid: 2,
+    name: "Hollow Knight: SilkSong",
+    portrait: "https://cdn.cloudflare.steamstatic.com/steam/apps/1030300/library_600x900_2x.jpg"
+},
+{
+    gid: 3,
+    name: "Sid Meier's Civilization VI",
+    portrait: "https://cdn.cloudflare.steamstatic.com/steam/apps/289070/library_600x900_2x.jpg"
+},
+{
+    gid: 4,
+    name: "BloonsTD 6",
+    portrait: "https://cdn.cloudflare.steamstatic.com/steam/apps/960090/library_600x900_2x.jpg"
+},
+{
+    gid: 5,
+    name: "The Legend of Zelda: Breath of the Wild",
+    portrait: "https://m.media-amazon.com/images/M/MV5BY2QwOGJlZDQtMDhhNi00M2YwLWFiNzctZGI3NDc4ZGY0OGZjXkEyXkFqcGc@._V1_.jpg"
+},
+{
+    gid: 6,
+    name: "Terraria",
+    portrait: "https://cdn.cloudflare.steamstatic.com/steam/apps/105600/library_600x900_2x.jpg"
+},
+{
+    gid: 7,
+    name: "Pokémon Emerald",
+    portrait: "https://cdn2.steamgriddb.com/thumb/052938e7b425df3acdd9dc4be44404ef.jpg"
+},
+{
+    gid: 8,
+    name: "Marvel's Spider-Man",
+    portrait: "https://cdn.cloudflare.steamstatic.com/steam/apps/1817070/library_600x900_2x.jpg"
+},
+{
+    gid: 9,
+    name: "Geometry Dash",
+    portrait: "https://cdn.cloudflare.steamstatic.com/steam/apps/322170/library_600x900_2x.jpg"
+}
+];

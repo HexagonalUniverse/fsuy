@@ -35,7 +35,7 @@ export function Comment({comment, level}: CommentParams ): ReactElement {
                     <div> <button id="reply"> Responder </button> </div>
                 </div>
 
-                <div className="children">
+                {/* <div className="children">
                     { (comment.children.length > 0) ?
                         <button id="display_comments" onClick={() => set_is_open(!is_open)}> 
                             {is_open ? "Esconder Respostas" : "Ver Respostas"} 
@@ -51,7 +51,7 @@ export function Comment({comment, level}: CommentParams ): ReactElement {
                         )
                         : null
                     }
-                </div>
+                </div> */}
             </div>
 
         </div>

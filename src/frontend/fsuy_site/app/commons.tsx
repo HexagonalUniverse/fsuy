@@ -7,8 +7,6 @@
 import DOMPurify from "dompurify";
 import { marked } from "marked";
 
-import { EntityReview } from "@/app/entity_interfaces";
-
 // The site's base url defined on the next's enviroment.
 export const base_url = process.env.NEXT_PUBLIC_SITE_URL;
 
@@ -43,6 +41,7 @@ export class ParsingError extends Error {
 
 export async function api_get_entity<Entity>(entity_endponit: string, id:string): Promise<Entity> {
     const api_url: string = `https://fsuy-server-u68qf.ondigitalocean.app/api/${entity_endponit}/${id}/`
+
     const res: Response = await fetch(api_url);
     
     if (!res.ok) 
@@ -65,8 +64,17 @@ interface Page {
     results: []
 }
 
-export async function api_get_page<Entity>(entity_endponit: string, page: string) : Promise<Entity[]> {
-    const api_url: string = `https://fsuy-server-u68qf.ondigitalocean.app/api/${entity_endponit}/?page=${page}`;
+export async function api_get_page<Entity>(entity_endponit: string, page: string, preview: boolean = false) : Promise<Entity[]> {
+    let api_url: string = `https://fsuy-server-u68qf.ondigitalocean.app/api/${entity_endponit}/?`
+
+    if(page !== "all") {
+        api_url = `https://fsuy-server-u68qf.ondigitalocean.app/api/${entity_endponit}/?page=${page}`;
+    }
+    
+    if(preview){
+        api_url += `&preview=true`
+    }
+
     const res: Response = await fetch(api_url);
 
     if (!res.ok) 
@@ -82,15 +90,15 @@ export async function api_get_page<Entity>(entity_endponit: string, page: string
 }
 
 
-export async function api_get_reviews(gid: string) : Promise<EntityReview[]> {
-    const api_url: string = `https://fsuy-server-u68qf.ondigitalocean.app/api/game/${gid}/reviews`;
+export async function api_get_posts<Entity>(entity_endpoint: string, post_endpoint: string, gid: string) : Promise<Entity[]> {
+    const api_url: string = `https://fsuy-server-u68qf.ondigitalocean.app/api/${entity_endpoint}/${gid}/${post_endpoint}`;
     const res: Response = await fetch(api_url);
 
     if (!res.ok) 
         throw new APIError(`Couldn't fetch reviews for ${gid}'s page.`);
     
     const res_page: Page = await res.json();
-    const reviews: EntityReview[] = res_page.results;
+    const reviews: Entity[] = res_page.results;
     
     if (!reviews)
         throw new ParsingError(`response: ${res}`);

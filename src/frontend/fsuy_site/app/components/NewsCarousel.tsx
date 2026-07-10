@@ -42,9 +42,9 @@ export function NewsCarousel({carousel_news, frame_interval} : NewsCarouselParam
                 carousel_news.map((news, i) => (
                     <a href={`/news/${news.pid}`} key={i}>
                     <div className="frame" key={i}>
-                        <img src={news.cover} alt={`news_${news.pid}_cover`} />
+                        <img src={news.picture} alt={`news_${news.pid}_cover`} />
                         <h3> {news.title} </h3>
-                        <span> {news.timestamp} </span>
+                        <span> {news.creation_date} </span>
                     </div>
                     </a>
                 ))

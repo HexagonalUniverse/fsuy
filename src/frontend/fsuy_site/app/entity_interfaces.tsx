@@ -37,21 +37,22 @@ interface EntityPlataform {
 export interface EntityNews {
 	pid: number;
 	title: string;
-	subtitle: string;
-	cover: string;
-	timestamp: string;
-	author: UserPreview;
+	author: EntityUser;
 	content: string;
+	creation_date: string;
+	edit_date: string;
 	tags: EntityTag[];
+	description: string;
+	picture: string;
 }
 
 export interface EntityNewsPreview {
 	pid: number;
 	title: string;
-	author: string;
-	tags: number[];
+	author: EntityUser;
 	creation_date: string;
 	edit_date: string;
+	tags: EntityTag[];
 	description: string;
 	picture: string;
 }
@@ -78,7 +79,8 @@ export interface EntityReview {
 
 export interface EntityTag {
 	tid: number;
-	title: string;
+	name: string;
+	color: string;
 }
 
 
