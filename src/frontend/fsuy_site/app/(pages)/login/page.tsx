@@ -14,52 +14,17 @@ import { FsuyFooter } from "@/app/components/FsuyFooter";
 import "@/app/styles/pages/home.css";
 import "@/app/styles/pages/login.css";
 
-function getCookie(name: string): string | null {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
+import {
+    login,
+    } from "@/app/commons";
 
-    if (parts.length === 2) {
-        return parts.pop()?.split(";").shift() ?? null;
-    }
 
-    return null;
-}
 
-// IA GENERATED
 export default function LoginPage(): ReactElement {
     const [username, setUsername]   = useState("");
     const [password, setPassword]   = useState("");
     const [loading, setLoading]     = useState(false);
     const [error, setError]         = useState("");
-
-    async function login(username: string, password: string): Promise<void> {
-        const response = await fetch(
-            "http://localhost:4817/login/",
-            {
-                method: "POST",
-                credentials: "include",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRFToken": getCookie("csrftoken"),
-                },
-
-                body: JSON.stringify({
-                    username,
-                    password,
-                }),
-            },
-        );
-
-        if (! response.ok) {
-            throw new Error("Login failed");
-            return;
-        }
-
-        const data = await response.json();
-        console.log(data);
-
-        return;
-    }
 
     async function handleSubmit(
         event: React.FormEvent<HTMLFormElement>,
@@ -77,9 +42,9 @@ export default function LoginPage(): ReactElement {
             // redirect
             window.location.href = "/";
         }
-        catch {
-            console.log("ERROR 2");
-            setError("Usuário ou senha inválidos.");
+        catch (error) {
+            //setError("Usuário ou senha inválidos.");
+            setError(error.message);
 
         }
         finally {
@@ -134,6 +99,16 @@ export default function LoginPage(): ReactElement {
                     >
                         {loading ? "Entrando..." : "Entrar"}
                     </button>
+
+
+                    <p className="auth_switch">
+                        Não possui uma conta?
+
+                        <a href="/register">
+                            Cadastrar
+                        </a>
+                    </p>
+
                 </form>
             </main>
 

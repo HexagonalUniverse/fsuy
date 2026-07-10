@@ -4,6 +4,8 @@
  * @date       06-2026
  */
 
+"use client";
+
 import DOMPurify from "dompurify";
 import { marked } from "marked";
 
@@ -115,3 +117,173 @@ export function parse_markdown(md_string: string): string {
         }
     );
 }
+
+
+/*
+ *
+ *  COISA DE AUTENTICAÇÃO (de API e os krl)
+ *  @TODO @victorxavier faz a boa aí depois pra nós
+ *
+ */
+
+const API_ROOT: string = "http://localhost:4817/";
+//const API_ROOT: string = "https://fsuy-server-u68qf.ondigitalocean.app/";
+
+
+/**
+ *  Gets the given cookie in the document~
+ */
+function get_cookie(name: string): string | null {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+
+    if (parts.length === 2) {
+        return parts.pop()?.split(";").shift() ?? null;
+    }
+
+    return null;
+}
+
+/**
+ *  Requests logout.
+ *  Throws an error upon not ok response. (That may be caused on not authenticated users.)
+ */
+export async function logout() {
+    const response = await fetch(
+        API_ROOT + "logout/",
+        {
+            method:         "POST",
+            credentials:    "include",
+            headers: {
+                "Content-Type":     "application/json",
+                "X-CSRFToken":      get_cookie("csrftoken"),
+            },
+        },
+    );
+
+
+    if (! response.ok) {
+        const data = await response.json();
+        throw new Error(data.error);
+        return;
+    }
+
+
+    console.log("Deslogado");
+}
+
+
+/**
+ *  Requests login.
+ *  Throws an error upon not ok response.
+ *  The cause may be various; check `error` field for details.
+ */
+ export async function login(username: string, password: string): Promise<void> {
+    const response = await fetch(
+        API_ROOT + "login/",
+        {
+            method:         "POST",
+            credentials:    "include",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken":  get_cookie("csrftoken"),
+            },
+
+            body: JSON.stringify({
+                username,
+                password,
+            }),
+        },
+    );
+
+
+    if (! response.ok) {
+        const data = await response.json();
+        throw new Error(data.error);
+    }
+}
+
+
+export interface RegisterResult {
+    pass_req: string[];
+};
+
+
+/**
+ *  Requests to register (the user).
+ *  Throws an error upon not ok response.
+ *  The cause may be various; check `error` field for details.
+ */
+export async function register(
+        username:       string,
+        email:          string,
+        password:       string,
+        public_name:    string,
+    ) : Promise<RegisterResult> {
+     const response = await fetch(
+         API_ROOT + "register/",
+         {
+            method:         "POST",
+            credentials:    "include",
+            headers: {
+                "Content-Type":     "application/json",
+                "X-CSRFToken":      get_cookie("csrftoken"),
+            },
+
+            body: JSON.stringify({
+                "username": username,
+                "email": email,
+                "password": password,
+                "public_name": public_name,
+            }),
+    });
+
+    const data = await response.json();
+    console.log("REGISTER DATA:", data);
+
+
+    const result: RegisterResult = {
+        "pass_req": [],
+    };
+
+    if (data.password_errors) {
+        result.pass_req = data.password_errors;
+    }
+
+
+    if (! response.ok) {
+        const error = Error(data.error);
+        error.status = response.status;
+        error.result = result;
+
+        throw error;
+    }
+
+    return result;
+}
+
+
+export async function api_me() {
+    const response = await fetch(
+        API_ROOT + "api/me/",
+        {
+            method:         "POST",
+            credentials:    "include",
+            headers: {
+                "Content-Type":     "application/json",
+                "X-CSRFToken":      get_cookie("csrftoken"),
+            },
+        },
+    );
+
+
+    if (! response.ok) {
+        throw new Error("Fetch failed");
+    }
+
+
+    const data = await response.json();
+    return data;
+}
+
+

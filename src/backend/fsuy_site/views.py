@@ -71,7 +71,12 @@ class FrontendView(object):
 
     @staticmethod
     @require_POST
-    def unsafe_request(request: http.HttpRequest) -> http.HttpResponse:
+    def unsafe_register(request: http.HttpRequest) -> http.HttpResponse:
+        """
+        Implements what is behind `register` method. "Unsafe" in terms of server exceptions...
+        :param request:
+        :return:
+        """
 
         if request.user.is_authenticated:
             return http.JsonResponse(
@@ -84,7 +89,6 @@ class FrontendView(object):
             )
 
         body: Any = json.loads(request.body)
-        print(body)
 
         # getting the POST attributes.
         username: str       = body["username"].strip()
@@ -172,7 +176,7 @@ class FrontendView(object):
         """
 
         try:
-            return FrontendView.unsafe_request(request)
+            return FrontendView.unsafe_register(request)
 
         except KeyError as e:
             return http.JsonResponse(
@@ -218,22 +222,34 @@ class FrontendView(object):
                     "error": "Erro interno do servidor.",
                 },
 
-                # HTTP: internal servidor error
+                # HTTP: internal server error
                 status=500,
             )
 
     @staticmethod
     @require_POST
-    def login(request: http.HttpRequest) -> http.HttpResponse:
+    def unsafe_login(request: http.HttpRequest) -> http.HttpResponse:
         """
-        Login view.
+        Implements what is behind `request` method. "Unsafe" in terms of server exceptions...
+        :param request:
         :return:
         """
+
+        if request.user.is_authenticated:
+            return http.JsonResponse(
+                {
+                    "error": "Usuário já autenticado!"
+                },
+
+                # HTTP: forbidden
+                status=403,
+            )
 
         body = json.loads(request.body)
 
         username = body["username"]
         password = body["password"]
+
 
         # getting the POST attributes.
         # username = request.POST["username"]
@@ -247,8 +263,10 @@ class FrontendView(object):
         )
 
         if user is None:
-            return http.HttpResponse(
-                "Invalid credentials.",
+            return http.JsonResponse(
+                {
+                    "error": "Usuário ou senha inválidos.",
+                },
 
                 # HTTP: unauthorized
                 status=401,
@@ -273,27 +291,81 @@ class FrontendView(object):
         )
 
     @staticmethod
+    @require_POST
+    def login(request: http.HttpRequest) -> http.HttpResponse:
+        try:
+            return FrontendView.unsafe_login(request)
+
+        except KeyError as e:
+            return http.JsonResponse(
+                {
+                    "error": f"Campo obrigatório na requisição não informado: {e.args[0]}",
+                },
+
+                # HTTP: bad request
+                status=400,
+            )
+
+
+    @staticmethod
+    @require_POST
     def logout(request: http.HttpRequest) -> http.HttpResponse:
+        """
+        Logout view.
+        :return:
+        """
+
+        if not request.user.is_authenticated:
+            return http.JsonResponse(
+                {
+                    "error": "Nem sequer está logado...",
+                },
+
+                # HTTP: bad request
+                status=400,
+            )
+
+        # not used for instance...
+        # body = json.loads(request.body)
 
         # logging-out.
         auth.logout(request)
 
+        # return redirect("/")
         # Ok.
-        return redirect("/")
+        return http.JsonResponse(
+            {
+                "success": True,
+            },
+
+            # HTTP: ok
+            status=200,
+        )
 
     @staticmethod
+    @require_POST
     def me(request):
         if not request.user.is_authenticated:
             return http.JsonResponse(
-                {"authenticated": False},
+                {
+                    "authenticated": False,
+                },
+
+                # HTTP: unauthorized
                 status=401,
             )
 
-        return http.JsonResponse({
-            "authenticated": request.user.is_authenticated,
+        return http.JsonResponse(
+            {
+                "authenticated":    request.user.is_authenticated,
 
-            "uid": request.user.uid,
-            "username": request.user.username if request.user.is_authenticated else None,
-            "public_name": request.user.public_name,
-            "email": request.user.email,
-        })
+                "uid":              request.user.uid,
+                "username":         request.user.username,
+                "public_name":      request.user.public_name,
+                "email":            request.user.email,
+                "picture":          request.user.picture.url,
+            },
+
+            # HTTP: ok
+            status=200,
+        )
