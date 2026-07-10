@@ -55,7 +55,7 @@ article .heading #game_logo {
     width: 35%;
 
     position: absolute;
-    bottom: 0;
+    bottom: 10%;
     left: 0;
     z-index: 1;
 }

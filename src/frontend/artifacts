@@ -224,3 +224,5 @@ const games_mock: EntityGamePreview[] = [
     portrait: "https://cdn.cloudflare.steamstatic.com/steam/apps/322170/library_600x900_2x.jpg"
 }
 ];
+
+"https://media.tenor.com/wuyEcsxrvQwAAAAM/club-penguin-ghosthy.gif"

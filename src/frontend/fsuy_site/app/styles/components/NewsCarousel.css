@@ -13,6 +13,7 @@
     flex-direction: column;
 
     overflow: hidden;
+    /* background: linear-gradient(0deg, transparent, var(--primary-light), transparent); */
 }
 
 .carousel_slider_wrapper {

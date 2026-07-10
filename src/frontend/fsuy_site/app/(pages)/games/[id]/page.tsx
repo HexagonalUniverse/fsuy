@@ -39,7 +39,7 @@ export default async function GamePage({params}: DynamicEntityPageParams): Promi
 
     return (
         <div className="page_body">
-            <NavigationBar user={ {uid: 413, public_name: "Victor", picture: ""} } />
+            <NavigationBar user={ {uid: 413, public_name: "Victor", picture: "", creation_date: "", last_login: ""} } />
             <main>
                 <aside>
                     <img id="game_portrait" src={game.portrait} alt="game_cover" />
@@ -55,8 +55,8 @@ export default async function GamePage({params}: DynamicEntityPageParams): Promi
 
                 <article>
                     <div className="heading">
-                        <img id="game_cover" src="https://cdn.cloudflare.steamstatic.com/steam/apps/367520/library_hero.jpg" alt="horizontal_cover" />
-                        <img id="game_logo" src="https://cdn.cloudflare.steamstatic.com/steam/apps/367520/logo.png" alt="game_logo" />
+                        <img id="game_cover" src={ game.cover } alt="horizontal_cover" />
+                        <img id="game_logo" src={ game.logo } alt="game_logo" />
                     </div>
 
                     <h1>{game.name}</h1>
@@ -64,7 +64,7 @@ export default async function GamePage({params}: DynamicEntityPageParams): Promi
                     <div className="description"> {game.description} </div>
 
                     {
-                    game.steam_id !== undefined?
+                    (game.steam_id)?
                         <div className="steam_widget">
                             <iframe src={`https://store.steampowered.com/widget/${game.steam_id}/`}
                                     width="100%" height="190px">

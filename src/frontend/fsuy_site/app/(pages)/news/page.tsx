@@ -8,7 +8,7 @@
 import { type ReactElement } from "react";
 import { notFound } from "next/navigation";
 
-import { APIError } from "@/app/commons"
+import { APIError } from "@/app/commons";
 import { NavigationBar } from "@/app/components/NavigationBar";
 import { FsuyFooter } from "@/app/components/FsuyFooter";
 import { NewsPreview } from "@/app/components/NewsPreview";
@@ -34,7 +34,7 @@ export default async function NewsHomePage(): Promise<ReactElement> {
 
     return (
         <div className="page_body">
-            <NavigationBar user={ {uid: 413, public_name: "Victor", picture: ""} }/>
+            <NavigationBar user={ {uid: 3, public_name: "Victor", picture: ""} }/>
             
             <main>
                 <h2 id="news_upper_title"> Destaques </h2>
@@ -54,6 +54,8 @@ export default async function NewsHomePage(): Promise<ReactElement> {
                 </div>
 
                 <h2 id="news_upper_title"> Veja também </h2>
+
+                <h3 style={{ alignSelf: 'center' }}> . . . </h3>
 
             </main>
 

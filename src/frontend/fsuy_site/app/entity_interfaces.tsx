@@ -88,6 +88,11 @@ export interface EntityUser {
 	uid: number;
 	public_name: string;
 	picture: string;
+	creation_date: string;
+	last_login: string;
+	socials: string;
+	steam: string;
+	discord: string;
 }
 
 interface UserPreview {

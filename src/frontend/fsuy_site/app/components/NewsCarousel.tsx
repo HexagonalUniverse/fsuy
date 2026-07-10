@@ -8,6 +8,7 @@
 
 import { useEffect, useState, type ReactElement } from "react";
 
+import { format_date_time } from "@/app/commons";
 import { EntityNewsPreview } from "@/app/entity_interfaces";
 
 import "@/app/styles/components/NewsCarousel.css";
@@ -44,7 +45,7 @@ export function NewsCarousel({carousel_news, frame_interval} : NewsCarouselParam
                     <div className="frame" key={i}>
                         <img src={news.picture} alt={`news_${news.pid}_cover`} />
                         <h3> {news.title} </h3>
-                        <span> {news.creation_date} </span>
+                        <span> {format_date_time(news.creation_date)} </span>
                     </div>
                     </a>
                 ))

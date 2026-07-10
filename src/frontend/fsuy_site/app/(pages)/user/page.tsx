@@ -6,18 +6,37 @@
 
 
 import { type ReactElement } from "react";
+import { notFound } from "next/navigation";
 
+import { APIError, api_get_page } from "@/app/commons";
+import { EntityUser } from "@/app/entity_interfaces";
 import { NavigationBar } from "@/app/components/NavigationBar";
 import { FsuyFooter } from "@/app/components/FsuyFooter";
+import { UserPreview } from "@/app/components/UserPreview";
 
-export default function UserHomePage(): ReactElement {
+export default async function UserHomePage(): Promise<ReactElement> {
+
+    let users: EntityUser[];
+
+    try {
+        users = await api_get_page<EntityUser>("user", "all");
+
+    } catch(error){
+        if(error instanceof APIError)
+            notFound();
+
+        throw error;
+    }
 
     return(
         <div className="page_body">
-            <NavigationBar user={ {uid: 413, name: "Victor"} }/>
+            <NavigationBar user={ {uid: 413, public_name: "Victor", picture: ""} }/>
 
             <main>
-
+                {users?.map((user, key) => (
+                    <UserPreview user={user} key={key}/>
+                ))
+                }
             </main>
 
             <FsuyFooter />

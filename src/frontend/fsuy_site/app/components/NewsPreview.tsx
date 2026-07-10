@@ -6,6 +6,7 @@
 
 import { type ReactElement } from "react"
 
+import { format_date_time } from "@/app/commons";
 import { EntityNewsPreview } from "@/app/entity_interfaces";
 
 import "@/app/styles/components/NewsPreview.css"
@@ -21,7 +22,7 @@ export function NewsPreview({news}: NewsPreviewArguments): ReactElement {
             <img src={news.picture} alt="" />
             <h3> {news.title} </h3>
             <p> {news.description} </p>
-            <span id="date"> {news.creation_date} </span>
+            <span id="date"> {format_date_time(news.creation_date)} </span>
         </div>
         </a> 
     );

@@ -39,6 +39,11 @@ export class ParsingError extends Error {
 /*  Utilities
     ========= */
 
+export function format_date_time(dat_time_str: string): string {
+    const date = new Date(dat_time_str);
+    return date.toLocaleDateString("pt-BR", {hour: "2-digit", minute: "2-digit"});
+}
+
 export async function api_get_entity<Entity>(entity_endponit: string, id:string): Promise<Entity> {
     const api_url: string = `https://fsuy-server-u68qf.ondigitalocean.app/api/${entity_endponit}/${id}/`
 

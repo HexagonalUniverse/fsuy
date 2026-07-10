@@ -35,17 +35,13 @@ export function NavigationBar({user}: NaviagtionBarParams): ReactElement {
                     <span> Notícias </span>
                 </a> </li>
 
-                <li> <a href={`/user/${user.uid}`}> 
+                <li> <a href={`/user/`}> 
                     <div className="outer_circle"> <img src="/assets/icon_profile_circle.svg" alt="" /> </div>
                     <span> Perfil </span>
                 </a> </li>
             </ul>
 
             <UserPreview user={user}/>
-
-            {/* <div id="profile"> 
-                <div id="picture">  </div>
-            </div> */}
         </nav>
     );
 }

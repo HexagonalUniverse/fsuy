@@ -7,7 +7,7 @@
 import { type ReactElement } from "react";
 import { notFound } from "next/navigation";
 
-import { APIError, api_get_entity, api_get_posts, DynamicEntityPageParams } from "@/app/commons";
+import { DynamicEntityPageParams, APIError, api_get_entity, api_get_posts, format_date_time } from "@/app/commons";
 
 import { EntityComment, EntityNews, EntityTag } from "@/app/entity_interfaces";
 import { NavigationBar } from "@/app/components/NavigationBar";
@@ -43,7 +43,7 @@ export default async function NewsPage({params}: DynamicEntityPageParams): Promi
             <main>
                 <article>
                     <header>
-                        <div id="timestamp"> <span> Publicado: {news.creation_date} </span> </div>
+                        <div id="timestamp"> <span> Publicado: {format_date_time(news.creation_date)} BTR </span> </div>
 
                         <h1> {news.title} </h1>
 
