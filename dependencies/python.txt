@@ -2,6 +2,7 @@ uvicorn
 django
 django-extensions
 djangorestframework
+django-cors-headers
 django-storages
 fastapi
 whitenoise
