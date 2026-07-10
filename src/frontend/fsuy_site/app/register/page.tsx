@@ -11,7 +11,6 @@ import { FsuyFooter } from "@/app/components/FsuyFooter";
 
 import "@/app/styles/pages/home.css";
 import "@/app/styles/pages/login.css";
-import "@/app/styles/pages/register.css";
 
 import {
     RegisterResult,
@@ -88,8 +87,10 @@ export default function RegisterPage(): JSX.Element {
             );
 
         } catch (error) {
-            console.log("ERROR ", error.status, error);
-            setPassReq(error.pass_req);
+            if (error.pass_req) {
+                setPassReq(error.pass_req);
+            }
+
             throw new Error(error.message);
         }
     }

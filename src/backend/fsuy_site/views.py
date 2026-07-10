@@ -276,8 +276,8 @@ class FrontendView(object):
         auth.login(request, user)
 
         # for instance, 30 [s] of session...
-        session_in_seconds: int = 30
-        request.session.set_expiry(session_in_seconds)
+        # session_in_seconds: int = 30
+        # request.session.set_expiry(session_in_seconds)
 
         # Ok.
         # return redirect("/")
