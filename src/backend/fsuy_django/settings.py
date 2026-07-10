@@ -270,16 +270,25 @@ STATICFILES_DIRS: list[Path] = [
 CSRF_COOKIE_SECURE: bool = True
 CSRF_COOKIE_SAMESITE: str = "Lax"
 
+
+#   Defines the session time.
+SESSION_COOKIE_AGE: int = 60 * 60 * 24 * 7
+
+#   Secure cookies.
 SESSION_COOKIE_SECURE: bool = True
 
-# o cara fecha o navegador aí a sessão morre.
+#   Session will expire upon closing the browser.
 SESSION_EXPIRE_AT_BROWSER_CLOSE: bool = True
-# SESSION_SAVE_EVERY_REQUEST: bool = True
+
+#   Every auth. request will renovate the session.
+SESSION_SAVE_EVERY_REQUEST: bool = False
+
+
 
 X_FRAME_OPTIONS: str = "DENY"
 
-
-STATIC_URL = 'static/'
+# don't know
+STATIC_URL: str = 'static/'
 
 
 #   Cross-Origin Resource Sharing

@@ -1,6 +1,6 @@
-/**            -----------------------------------
+/**            ---------------------------------------------
  * @file       frontend/fsuy_site/app/(pages)/login/page.tsx
- * @brief      The Login page.
+ * @brief      The logins page.
  * @date       07-2026
  */
 
@@ -27,11 +27,10 @@ function getCookie(name: string): string | null {
 
 // IA GENERATED
 export default function LoginPage(): ReactElement {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
-
+    const [username, setUsername]   = useState("");
+    const [password, setPassword]   = useState("");
+    const [loading, setLoading]     = useState(false);
+    const [error, setError]         = useState("");
 
     async function login(username: string, password: string): Promise<void> {
         const response = await fetch(

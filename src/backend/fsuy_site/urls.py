@@ -52,7 +52,7 @@ urlpatterns: list[URLPattern | URLResolver] = [
     path("register/", views.FrontendView.register, name="register"),
     path("login/", views.FrontendView.login, name="login"),
     path("logout/", views.FrontendView.logout, name="logout"),
-    path("me/", views.FrontendView.me, name="me"),
+    path("api/me/", views.FrontendView.me, name="me"),
 
     #   Admin
     path("admin/", admin.site.urls),
