@@ -88,6 +88,7 @@ INSTALLED_APPS: list[str] = [
     "django.contrib.staticfiles",
     "storages",
     "django_extensions",
+    "corsheaders",
 
     "fsuy_site"
 ]
@@ -155,8 +156,9 @@ WSGI_APPLICATION = "fsuy_django.wsgi.application"
 REST_FRAMEWORK: dict[str, list[str]] = {
     "DEFAULT_RENDERER_CLASSES": [
         "rest_framework.renderers.JSONRenderer",
-    ]
+    ],
 }
+
 
 
 #
@@ -270,6 +272,10 @@ CSRF_COOKIE_SAMESITE: str = "Lax"
 
 SESSION_COOKIE_SECURE: bool = True
 
+# o cara fecha o navegador aí a sessão morre.
+SESSION_EXPIRE_AT_BROWSER_CLOSE: bool = True
+# SESSION_SAVE_EVERY_REQUEST: bool = True
+
 X_FRAME_OPTIONS: str = "DENY"
 
 
@@ -284,6 +290,16 @@ CORS_ALLOWED_ORIGINS: list[str] = [
     "http://localhost:5173", # vite's react server (for development)
     "http://localhost:3000", # next.js's react server (for development)
 ]
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000",
+]
+
+
+CORS_ALLOW_CREDENTIALS: bool = True
+
+
+
 
 # 'cause without the proxy may terminate the TLS and redirect http to django.
 # therefore it makes "request.is_secure()" assertable.

@@ -10,11 +10,7 @@ from django.contrib import admin
 from . import views
 
 from rest_framework.routers import DefaultRouter
-from .views import TestModelViewSet, GameModelViewSet
 
-router: DefaultRouter = DefaultRouter()
-router.register("test_objects", TestModelViewSet)
-router.register("games", GameModelViewSet)
 
 #
 #   API URLs
@@ -23,7 +19,6 @@ router.register("games", GameModelViewSet)
 from .models.viewsets import API_Viewset_User, API_Viewset_Game, API_Viewset_Review, API_Viewset_News
 from .models.viewsets import API_Viewset_Comment
 from rest_framework.routers import DefaultRouter, BaseRouter
-
 
 api_router: BaseRouter = DefaultRouter()
 
@@ -51,12 +46,13 @@ for prefix, viewset in [
 
 urlpatterns: list[URLPattern | URLResolver] = [
     #   Frontend
-    path("", views.FrontendView.serve_frontend, name="main"),
+    # path("", views.FrontendView.serve_frontend, name="main"),
 
     #   Login
     path("register/", views.FrontendView.register, name="register"),
     path("login/", views.FrontendView.login, name="login"),
     path("logout/", views.FrontendView.logout, name="logout"),
+    path("me/", views.FrontendView.me, name="me"),
 
     #   Admin
     path("admin/", admin.site.urls),

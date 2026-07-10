@@ -19,12 +19,22 @@ class User(AbstractUser):
         primary_key=True,
     )
 
+    @staticmethod
+    def generate_random_public_name() -> str:
+        import secrets
+
+        while True:
+            value = secrets.token_urlsafe(20)
+            if not User.objects.filter(public_name=value).exists():
+                return value
+
     #
     public_name: Field = models.CharField(
         max_length=255,
         unique=True,
         null=True,
         blank=False,
+        default=generate_random_public_name,
     )
 
     #

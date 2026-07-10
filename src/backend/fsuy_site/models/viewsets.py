@@ -205,7 +205,7 @@ class GameGlanceSerializer(rest_framework.serializers.ModelSerializer):
         fields: list[str] = [
             "gid",
             "name",
-            "picture",
+            "portrait",
         ]
 
 

@@ -11,7 +11,15 @@ from django.shortcuts import render, redirect
 from django.core.handlers.asgi import ASGIRequest
 from django.views.decorators.csrf import csrf_exempt
 
+from django.views.decorators.http import require_POST
+
 User = auth.get_user_model()
+
+
+# SLA CRSF
+# from django.views.decorators.csrf import ensure_csrf_cookie
+# @ensure_csrf_cookie
+# def csrf(request): return http.JsonResponse({"ok": True})
 
 
 class FrontendView(object):
@@ -28,6 +36,7 @@ class FrontendView(object):
         """
 
         if request.user.is_authenticated:
+            print("auth:", request.user.is_authenticated)
             ...
 
         # assert request.is_secure(), "N'é seguro coisa nenhuma!"
@@ -35,6 +44,7 @@ class FrontendView(object):
         return render(request, "index.html")
 
     @staticmethod
+    @require_POST
     def register(request: http.HttpRequest) -> http.HttpResponse:
         """
         Register view.
@@ -66,27 +76,28 @@ class FrontendView(object):
         return redirect("/")
 
     @staticmethod
+    @require_POST
     def login(request: http.HttpRequest) -> http.HttpResponse:
         """
         Login view.
         :return:
         """
+        import json
 
-        if request.method != "POST":
-            return render(
-                request,
-                "login.html",
-            )
+        body = json.loads(request.body)
+
+        username = body["username"]
+        password = body["password"]
 
         # getting the POST attributes.
-        username = request.POST["username"]
-        password = request.POST["password"]
+        #username = request.POST["username"]
+        #password = request.POST["password"]
 
         # attempting to authenticate the user...
         user: None | User = auth.authenticate(
             request,
             username=username,
-            password=password
+            password=password,
         )
 
         if user is None:
@@ -98,8 +109,15 @@ class FrontendView(object):
         # logging-in.
         auth.login(request, user)
 
+        # for instance, 30 [s] of session...
+        session_in_seconds: int = 30
+        request.session.set_expiry(session_in_seconds)
+
         # Ok.
-        return redirect("/")
+        # return redirect("/")
+        return http.JsonResponse({
+            "success": True,
+        },)
 
     @staticmethod
     def logout(request: http.HttpRequest) -> http.HttpResponse:
@@ -109,3 +127,10 @@ class FrontendView(object):
 
         # Ok.
         return redirect("/")
+
+    @staticmethod
+    def me(request):
+        return http.JsonResponse({
+            "authenticated": request.user.is_authenticated,
+            "username": request.user.username if request.user.is_authenticated else None,
+        })
