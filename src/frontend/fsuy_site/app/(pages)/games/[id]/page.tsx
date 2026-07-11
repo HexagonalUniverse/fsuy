@@ -16,6 +16,7 @@ import { MarkdownInputField } from "@/app/components/MarkdownInputField";
 
 import "@/app/styles/pages/games.css";
 
+
 export default async function GamePage({params}: DynamicEntityPageParams): Promise<ReactElement> {
 
     const {id} = await params;
@@ -80,7 +81,7 @@ export default async function GamePage({params}: DynamicEntityPageParams): Promi
                     <div className="reviews">
                         <h2> Reviews </h2>
 
-                        <MarkdownInputField placeholder="Escreva uma review..." />
+                        <MarkdownInputField placeholder="Escreva uma review..." action_type="review" gid={game.gid}/>
 
                         {reviews_with_gid?.map( (review, index) => (
                             <Review key={index} review={review} />

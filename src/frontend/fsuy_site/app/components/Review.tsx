@@ -17,6 +17,11 @@ import { api_get_posts, format_date_time, parse_markdown } from "@/app/commons"
 import "@/app/styles/components/Review.css";
 import "@/app/styles/components/Comment.css";
 
+import { useToast } from "@/app/ToastProvider";
+
+import { delete_post } from "@/app/commons";
+import { useRouter } from "next/navigation";
+
 
 interface ReviewParams {
     review: EntityReview;
@@ -25,6 +30,8 @@ interface ReviewParams {
 export function Review({review}: ReviewParams ): Promise<ReactElement> {
     const [is_open, set_is_open] = useState<boolean>(false);
     const [review_state, set_review] = useState<EntityReview>(review);
+
+    const { showToast } = useToast();
 
     async function view_comments() {
         let children: EntityComment[];
@@ -44,6 +51,20 @@ export function Review({review}: ReviewParams ): Promise<ReactElement> {
         }));
     }
 
+    
+
+    const router = useRouter();
+    async function DELETE_DELETE(pid: number) {
+        try {
+            await delete_post(pid);
+            router.refresh();
+
+        } catch (error) {
+            showToast(error.message);
+        }
+    }
+
+
     return (
         <>
         <div className="review">
@@ -51,8 +72,11 @@ export function Review({review}: ReviewParams ): Promise<ReactElement> {
                 <UserPreview user={review_state.author} />
                 <span className="rate"> <b>Nota:</b> {review_state.rate} </span>
                 <span className="edit_date"> {format_date_time(review_state.edit_date)} </span>
+                <button className="delete" onClick={() => DELETE_DELETE(review.pid) }>
+                    BAGAÇAR
+                </button>
             </div>
-
+            
             <div className="tags">
             {
                 review_state.tags?.map((tag: EntityTag, index) => (

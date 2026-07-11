@@ -8,10 +8,25 @@
 
 import { type ReactElement } from "react";
 
-import { login, logout } from "@/app/commons";
-import { get_user_state } from "@/app/UserProvider";
-
 import "@/app/styles/components/NavigationBar.css";
+import {
+    login,
+    logout,
+    write_post_comment,
+    write_review,
+    } from "@/app/commons";
+
+import { type EntityUser } from "@/app/entity_interfaces";
+import { UserPreview } from "./UserPreview";
+
+import {
+    get_user_state,
+    } from "@/app/UserProvider";
+
+
+interface NavigationBarParams {
+    user: EntityUser;
+}
 
 
 
@@ -88,6 +103,20 @@ export function NavigationBar(): ReactElement {
                 }
             </div>
 
+            <button onClick={
+                () => { 
+                    //write_post_comment(
+                    //    2,
+                    //    "CONTEÚDO CONTEÚDO",
+                    //);
+                    write_review(
+                        1,
+                        "UMA DAS MELHORAS E MAIS AUTOMÁTICAS REVIEWS QUE ESSE MUNDO JÁ VIU!",
+                    );
+                }
+            }>
+                BOTÃO
+            </button>
 
         </nav>
     );

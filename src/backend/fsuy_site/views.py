@@ -216,7 +216,6 @@ class FrontendView(object):
             #
             print("Error não resolvido:", e)
 
-
             return http.JsonResponse(
                 {
                     "error": "Erro interno do servidor.",
@@ -306,7 +305,6 @@ class FrontendView(object):
                 status=400,
             )
 
-
     @staticmethod
     @require_POST
     def logout(request: http.HttpRequest) -> http.HttpResponse:
@@ -369,3 +367,4 @@ class FrontendView(object):
             # HTTP: ok
             status=200,
         )
+

@@ -8,6 +8,7 @@ import "./styles/index.css";
 import { type ReactElement } from "react";
 
 import { UserProvider } from "./UserProvider";
+import { ToastProvider } from "./ToastProvider";
 
 
 export default function RootLayout({
@@ -31,9 +32,11 @@ export default function RootLayout({
 
 
         <body suppressHydrationWarning>
+            <ToastProvider>
             <UserProvider>
                 {children}
             </UserProvider>
+            </ToastProvider>
         </body>
         </html>
     );
