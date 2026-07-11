@@ -304,10 +304,6 @@ class API_Viewset_Game(rest_framework.viewsets.ModelViewSet):
         :return:
         """
 
-        print(gid)
-        print(request.data)
-        print(request.user.uid)
-
         try:
             corresponding_game: Game = Game.objects.get(gid=gid)
 

@@ -12,6 +12,7 @@ import { parse_markdown } from "@/app/commons";
 import "@/app/styles/components/MarkdownInputField.css"
 import { write_review } from "@/app/commons";
 import { useRouter } from "next/navigation";
+import { useToast } from "../ToastProvider";
 
 // const DOMPurify = createDOMPurify(window);
 
@@ -48,9 +49,8 @@ interface MarkdownInputFieldParams {
 
 
 export function MarkdownInputField({ placeholder, action_type, gid }: MarkdownInputFieldParams): ReactElement {
+    const { showToast } = useToast();
     
-
-
     const [md_content, set_md_content]      = useState<string>("");
     const [preview_mode, set_preview_mode]  = useState<boolean>(false);
     const [is_writing, set_is_writing]      = useState<boolean>(false);
@@ -98,7 +98,12 @@ export function MarkdownInputField({ placeholder, action_type, gid }: MarkdownIn
         content:        string,
     ) {
         if (action_type === "review") {
-            await write_review(gid, content);
+            try {
+                await write_review(gid, content);    
+            } catch (error) {
+                showToast(error.message);
+            }
+            
 
         } else if (action_type === "news") {
             //await write_news(id, content);
@@ -110,12 +115,6 @@ export function MarkdownInputField({ placeholder, action_type, gid }: MarkdownIn
         cancel_writing();
         //window.location.reload();
     }   
-    
-
-
-
-
-
 
 
     return (

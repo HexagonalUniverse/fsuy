@@ -18,6 +18,7 @@ import { parse_markdown } from "@/app/commons"
 import "@/app/styles/components/Review.css";
 import "@/app/styles/components/Comment.css";
 
+import { useToast } from "@/app/ToastProvider";
 
 import { delete_post } from "@/app/commons";
 import { useRouter } from "next/navigation";
@@ -30,13 +31,20 @@ interface ReviewParams {
 
 export function Review({review}: ReviewParams ): ReactElement {
     const [is_open, set_is_open] = useState<boolean>(false);
+    const { showToast } = useToast();
+
 
     const router = useRouter();
     async function DELETE_DELETE(pid: number) {
-        delete_post(pid);
+        try {
+            await delete_post(pid);
+            router.refresh();
 
-        router.refresh();
+        } catch (error) {
+            showToast(error.message);
+        }
     }
+
 
     return (
         <>

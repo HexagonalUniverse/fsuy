@@ -118,6 +118,7 @@ export function NavigationBar({user}: NavigationBarParams): ReactElement {
             }>
                 BOTÃO
             </button>
+
         </nav>
     );
 }
