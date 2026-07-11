@@ -37,7 +37,7 @@ export default async function ProfilePage({params}: DynamicEntityPageParams): Pr
 
     return(
         <div className="page_body">
-            <NavigationBar user={ user }/>
+            <NavigationBar />
 
             <main>
                 <div className="main_info">
@@ -52,7 +52,7 @@ export default async function ProfilePage({params}: DynamicEntityPageParams): Pr
 
                     <div className="socials">
                         { user.steam?
-                        <a href={`https://steamcommunity.com/id/${user.steam}`} >
+                        <a href={`https://steamcommunity.com/id/${user.steam}`} target="_blank" >
                         <div className="social_link"> 
                             <SteamIcon />
                             <span> { user.steam } </span>

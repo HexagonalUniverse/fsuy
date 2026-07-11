@@ -15,6 +15,18 @@
     flex-direction: column;
 }
 
+.review .header {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.review > .header > .edit_date {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
 .review .tags {
     display: flex;
     flex-direction: row;

@@ -7,7 +7,7 @@
 import { type ReactElement } from "react";
 import { notFound } from "next/navigation";
 
-import { type DynamicEntityPageParams, APIError, api_get_entity, api_get_posts } from "@/app/commons";
+import { type DynamicEntityPageParams, APIError, api_get_entity, api_get_posts, parse_markdown } from "@/app/commons";
 import { EntityComment, EntityReview, type EntityGame } from "@/app/entity_interfaces";
 import { NavigationBar } from "@/app/components/NavigationBar";
 import { FsuyFooter } from "@/app/components/FsuyFooter";
@@ -35,11 +35,13 @@ export default async function GamePage({params}: DynamicEntityPageParams): Promi
         throw error;
     }
 
+    const reviews_with_gid: EntityReview[] = reviews.map(review => ({ ...review, gid: game.gid }));
+
     console.log(`Review: ${reviews}`);
 
     return (
         <div className="page_body">
-            <NavigationBar user={ {uid: 413, public_name: "Victor", picture: "", creation_date: "", last_login: ""} } />
+            <NavigationBar />
             <main>
                 <aside>
                     <img id="game_portrait" src={game.portrait} alt="game_cover" />
@@ -61,7 +63,7 @@ export default async function GamePage({params}: DynamicEntityPageParams): Promi
 
                     <h1>{game.name}</h1>
 
-                    <div className="description"> {game.description} </div>
+                    <div className="description" dangerouslySetInnerHTML={{ __html: parse_markdown(game.description) }} />
 
                     {
                     (game.steam_id)?
@@ -80,7 +82,7 @@ export default async function GamePage({params}: DynamicEntityPageParams): Promi
 
                         <MarkdownInputField placeholder="Escreva uma review..." />
 
-                        {reviews.map( (review, index) => (
+                        {reviews_with_gid?.map( (review, index) => (
                             <Review key={index} review={review} />
                         ))}
                     </div>

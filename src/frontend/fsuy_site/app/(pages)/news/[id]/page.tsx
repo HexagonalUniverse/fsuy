@@ -7,17 +7,18 @@
 import { type ReactElement } from "react";
 import { notFound } from "next/navigation";
 
-import { DynamicEntityPageParams, APIError, api_get_entity, api_get_posts, format_date_time } from "@/app/commons";
+import { DynamicEntityPageParams, APIError, api_get_entity, api_get_posts, format_date_time, parse_markdown } from "@/app/commons";
 
-import { EntityComment, EntityNews, EntityTag } from "@/app/entity_interfaces";
+import { EntityComment, EntityNews, EntityNewsPreview, EntityTag } from "@/app/entity_interfaces";
 import { NavigationBar } from "@/app/components/NavigationBar";
 import { FsuyFooter } from "@/app/components/FsuyFooter";
 import { UserPreview } from "@/app/components/UserPreview";
+import { NewsPreview, NewsPreview2 } from "@/app/components/NewsPreview";
 import { Comment } from "@/app/components/Comment";
 import { Tag } from "@/app/components/Tag";
 import { MarkdownInputField } from "@/app/components/MarkdownInputField";
 
-import "@/app/styles/pages/news.css"
+import "@/app/styles/pages/news.css";
 
 export default async function NewsPage({params}: DynamicEntityPageParams): Promise<ReactElement> {
     
@@ -29,6 +30,7 @@ export default async function NewsPage({params}: DynamicEntityPageParams): Promi
     try {
         news = await api_get_entity<EntityNews>("news", id);
         comments = await api_get_posts<EntityComment>("news", "comments", id);
+        // news = await api_get_page<EntityNewsPreview>("news", "all", true);
 
     } catch(error){
         if(error instanceof APIError)
@@ -39,7 +41,7 @@ export default async function NewsPage({params}: DynamicEntityPageParams): Promi
 
     return (
         <div className="page_body">
-            <NavigationBar user={ {uid: 413, public_name: "Victor", picture: ""} }/>
+            <NavigationBar />
             <main>
                 <article>
                     <header>
@@ -60,7 +62,7 @@ export default async function NewsPage({params}: DynamicEntityPageParams): Promi
                         <img id="cover" src={news.picture} alt={`news picture for ${news.pid}`} />
                     </header>
 
-                    <div id="content"> { news.content } </div>
+                    <div id="content" dangerouslySetInnerHTML={{ __html: parse_markdown(news.content) }} />
 
                     <hr />
 
@@ -78,6 +80,10 @@ export default async function NewsPage({params}: DynamicEntityPageParams): Promi
 
                 <aside>
                     <h3> Leia Também </h3>
+
+                    {/* {related_news?.map( (rnews, index) => (
+                        <NewsPreview2 key={index} news={rnews} />
+                    ))} */}
                 </aside>
             </main>
 

@@ -48,7 +48,8 @@
     list-style: none;
 }
 
-.navigation_bar li a {
+.navigation_bar li a,
+.login_logout a {
     height: 100%;
     width: 100%;
 
@@ -68,6 +69,7 @@
 .navigation_bar .outer_circle {
     height: 100%;
     aspect-ratio: 1 / 1;
+    overflow: hidden;
 
     border-radius: 50%;
     background-color: var(--primary-light);
@@ -84,9 +86,13 @@
 }
 
 .navigation_bar .outer_circle img {
+    height: 70%;
     width: 70%;
-    aspect-ratio: 1 / 1;
     object-fit: contain;
+}
+
+.navigation_bar .outer_circle .profile_picture {
+    border-radius: 50%;
 }
 
 /* Pseudo-element for separtion bars */
@@ -105,7 +111,41 @@
   display: none;
 }
 
-.navigation_bar .user_preview {
+.login_logout a {
+    width: auto;
+}
+
+.navigation_bar .login_logout {
+    height: 80%;
+    width: fit-content;
     margin-right: 1rem;
     margin-left: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+.navigation_bar .login_logout button {
+    height: 60%;
+    width: 120px;
+    padding: 0.5rem 1rem;
+
+    border-radius: 25px;
+    border: none;
+
+    background-color: var(--primary-light);
+
+    color: var(--text-light);
+    font-family: var(--font-text);
+    font-size: 1rem;
+    text-align: center;
+    justify-content: center;
+
+    cursor: pointer;
+}
+
+.navigation_bar .login_logout button:hover {
+    outline: 3px solid var(--outline);
+    outline-offset: 3px;
 }

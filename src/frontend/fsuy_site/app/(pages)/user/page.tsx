@@ -14,6 +14,8 @@ import { NavigationBar } from "@/app/components/NavigationBar";
 import { FsuyFooter } from "@/app/components/FsuyFooter";
 import { UserPreview } from "@/app/components/UserPreview";
 
+import "@/app/styles/pages/user_home.css";
+
 export default async function UserHomePage(): Promise<ReactElement> {
 
     let users: EntityUser[];
@@ -30,13 +32,16 @@ export default async function UserHomePage(): Promise<ReactElement> {
 
     return(
         <div className="page_body">
-            <NavigationBar user={ {uid: 413, public_name: "Victor", picture: ""} }/>
+            <NavigationBar />
 
             <main>
-                {users?.map((user, key) => (
-                    <UserPreview user={user} key={key}/>
-                ))
-                }
+                <h1> Usuários </h1>
+
+                <div className="user_list">
+                    {users?.map((user, key) => (
+                        <UserPreview user={user} key={key}/>
+                    ))}
+                </div>
             </main>
 
             <FsuyFooter />

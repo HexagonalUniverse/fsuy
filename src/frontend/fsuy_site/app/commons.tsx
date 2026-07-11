@@ -97,12 +97,13 @@ export async function api_get_page<Entity>(entity_endponit: string, page: string
 }
 
 
-export async function api_get_posts<Entity>(entity_endpoint: string, post_endpoint: string, gid: string) : Promise<Entity[]> {
-    const api_url: string = `https://fsuy-server-u68qf.ondigitalocean.app/api/${entity_endpoint}/${gid}/${post_endpoint}`;
+export async function api_get_posts<Entity>(entity_endpoint: string, post_endpoint: string, pid: string) : Promise<Entity[]> {
+    const api_url: string = `https://fsuy-server-u68qf.ondigitalocean.app/api/${entity_endpoint}/${pid}/${post_endpoint}/`;
+    console.log(api_url);
     const res: Response = await fetch(api_url);
 
     if (!res.ok) 
-        throw new APIError(`Couldn't fetch reviews for ${gid}'s page.`);
+        throw new APIError(`Couldn't fetch reviews for ${pid}'s page.`);
     
     const res_page: Page = await res.json();
     const reviews: Entity[] = res_page.results;
@@ -191,7 +192,7 @@ export async function logout() {
  *  Throws an error upon not ok response.
  *  The cause may be various; check `error` field for details.
  */
- export async function login(username: string, password: string): Promise<void> {
+export async function login(username: string, password: string): Promise<void> {
     const response = await fetch(
         API_ROOT + "login/",
         {
@@ -253,13 +254,13 @@ export async function register(
 
     const data = await response.json();
     console.log("REGISTER DATA:", data);
-
-
+    
+    
     const result: RegisterResult = {
         "pass_req": [],
     };
-
-    if (data.password_errors) {
+    
+    if (data.password_errors?.length > 0) {
         result.pass_req = data.password_errors;
     }
 

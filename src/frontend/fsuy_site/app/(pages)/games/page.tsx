@@ -33,7 +33,7 @@ export default async function GameHomePage(): Promise<ReactElement> {
 
     return (
         <div className="page_body">
-            <NavigationBar user={ {uid: 413, public_name: "Victor", picture: ""} } />
+            <NavigationBar />
 
             <main>
 

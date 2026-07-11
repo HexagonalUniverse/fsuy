@@ -103,6 +103,7 @@ class AuthorSerializer(rest_framework.serializers.ModelSerializer):
     class Meta:
         model: models.Model = User
         fields = [
+            "uid",
             "public_name",
             "picture",
         ]
@@ -163,18 +164,24 @@ class CommentSerializer(rest_framework.serializers.ModelSerializer):
     """..."""
 
     author = AuthorSerializer(read_only=True)
+    children_count = rest_framework.serializers.SerializerMethodField()
 
     class Meta:
         model: models.Model = Comment
 
         fields: list[str] = [
+            "cid",
             "author",
             "content",
             "creation_date",
             "edit_date",
             "post",
             "parent",
+            "children_count"
         ]
+
+    def get_children_count(self, obj: Comment) -> int:
+        return obj.children.count()
 
 
 class UserSerializer(rest_framework.serializers.ModelSerializer):
@@ -367,6 +374,21 @@ class API_Viewset_Comment(rest_framework.viewsets.ModelViewSet):
     queryset = Comment.objects.order_by("-creation_date")
     serializer_class: rest_framework.serializers.ModelSerializer = CommentSerializer
     pagination_class = GlancePagination     # @TODO
+
+    @action(detail=True, methods=["get"])
+    def children(self, request, cid: str | None = None):
+        comments = self.get_object()
+
+        queryset = comments.filter(parent=cid).order_by("-creation_date")
+        # .select_related("author")
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = CommentSerializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = CommentSerializer(queryset, many=True)
+        return Response(serializer.data)
 
 
 class API_Viewset_User(rest_framework.viewsets.ModelViewSet):

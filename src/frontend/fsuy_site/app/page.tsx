@@ -38,7 +38,7 @@ export default async function Home(): Promise<ReactElement> {
 
 	return (
 	<div className="page_body">
-		<NavigationBar user={ {uid: 3, public_name: "Victor", picture: "", creation_date: "", last_login: ""} } />
+		<NavigationBar />
 
 		<main>
 			<div className="presentation">

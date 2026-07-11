@@ -59,14 +59,19 @@ export interface EntityNewsPreview {
 
 
 export interface EntityComment {
+	cid: number;
 	author: EntityUser;
 	content: string;
+	creation_date: string;
+	edit_date: string;
 	likes: number;
 	dislikes: number;
+	children_count: number;
 	children: EntityComment[];
 }
 
 export interface EntityReview {
+	pid: number;
 	author: EntityUser;
 	content: string;
 	tags: EntityTag[];
@@ -74,6 +79,9 @@ export interface EntityReview {
 	creation_date: string;
 	edit_date: string;
 	rate: number;
+
+	/** internal state */
+	gid: number;
 }
 
 

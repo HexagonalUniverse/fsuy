@@ -34,7 +34,7 @@ export default async function NewsHomePage(): Promise<ReactElement> {
 
     return (
         <div className="page_body">
-            <NavigationBar user={ {uid: 3, public_name: "Victor", picture: ""} }/>
+            <NavigationBar />
             
             <main>
                 <h2 id="news_upper_title"> Destaques </h2>

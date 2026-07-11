@@ -87,10 +87,10 @@ export default function RegisterPage(): JSX.Element {
             );
 
         } catch (error) {
-            if (error.pass_req) {
-                setPassReq(error.pass_req);
+            if (error.result.pass_req) {
+                setPassReq(error.result.pass_req);
             }
-
+            
             throw new Error(error.message);
         }
     }
