@@ -67,6 +67,7 @@ export interface EntityComment {
 }
 
 export interface EntityReview {
+	pid: number;
 	author: EntityUser;
 	content: string;
 	tags: EntityTag[];
@@ -74,6 +75,7 @@ export interface EntityReview {
 	creation_date: string;
 	edit_date: string;
 	rate: number;
+	gid: number;
 }
 
 

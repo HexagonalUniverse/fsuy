@@ -19,18 +19,34 @@ import "@/app/styles/components/Review.css";
 import "@/app/styles/components/Comment.css";
 
 
+import { delete_post } from "@/app/commons";
+import { useRouter } from "next/navigation";
+
+
 interface ReviewParams {
     review: EntityReview;
 }
 
+
 export function Review({review}: ReviewParams ): ReactElement {
     const [is_open, set_is_open] = useState<boolean>(false);
+
+    const router = useRouter();
+    async function DELETE_DELETE(pid: number) {
+        delete_post(pid);
+
+        router.refresh();
+    }
 
     return (
         <>
         <div className="review">
             <UserPreview user={review.author} />
             
+            <button className="delete" onClick={() => DELETE_DELETE(review.pid) }>
+                BAGAÇAR
+            </button>
+
             <div className="tags">
             {
                 review.tags?.map((tag: EntityTag, index) => (

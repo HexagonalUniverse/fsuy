@@ -12,6 +12,8 @@ import "@/app/styles/components/NavigationBar.css";
 import {
     login,
     logout,
+    write_post_comment,
+    write_review,
     } from "@/app/commons";
 
 import { type EntityUser } from "@/app/entity_interfaces";
@@ -102,6 +104,20 @@ export function NavigationBar({user}: NavigationBarParams): ReactElement {
                 </button>
             }
 
+            <button onClick={
+                () => { 
+                    //write_post_comment(
+                    //    2,
+                    //    "CONTEÚDO CONTEÚDO",
+                    //);
+                    write_review(
+                        1,
+                        "UMA DAS MELHORAS E MAIS AUTOMÁTICAS REVIEWS QUE ESSE MUNDO JÁ VIU!",
+                    );
+                }
+            }>
+                BOTÃO
+            </button>
         </nav>
     );
 }

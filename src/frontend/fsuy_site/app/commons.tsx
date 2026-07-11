@@ -276,6 +276,9 @@ export async function register(
 }
 
 
+/**
+ *  ...
+ */
 export async function api_me() {
     const response = await fetch(
         API_ROOT + "api/me/",
@@ -299,4 +302,99 @@ export async function api_me() {
     return data;
 }
 
+
+/**
+ *  ...
+ */
+export async function write_post_comment(
+    post_id:    number,
+    content:    string,
+    parent?:    number | undefined,
+) : Promise<void>
+{       
+    const data: {
+        content: string;
+        parent?: number;
+    } = {
+        "content":  content,
+    };
+
+    if (parent !== undefined) {
+        data.parent = parent;
+    }
+
+    const response = await fetch(
+        API_ROOT + `api/post/${post_id}/comment/`,
+        {
+            method:         "POST",
+            credentials:    "include",
+            headers: {
+                "Content-Type":     "application/json",
+                "X-CSRFToken":      get_cookie("csrftoken"),
+            },
+                
+            body: JSON.stringify(data),
+        },
+    );
+
+
+    if (! response.ok) {
+        const data = await response.json();
+        throw Error(data.error);
+    }
+}
+
+
+/**
+ *  ...
+ */
+export async function write_review(
+    game_id:    number,
+    content:    string,
+) : Promise<void>
+{       
+    const response = await fetch(
+        API_ROOT + `api/game/${game_id}/review/`,
+        {
+            method:         "POST",
+            credentials:    "include",
+            headers: {
+                "Content-Type":     "application/json",
+                "X-CSRFToken":      get_cookie("csrftoken"),
+            },
+                
+            body: JSON.stringify({
+                "gid":      game_id,
+                "content":  content,
+            }),
+        },
+    );
+
+
+    if (! response.ok) {
+        const data = await response.json();
+        throw Error(data.error);
+    }
+}
+
+
+export async function delete_post(pid: number) : Promise<void> {
+    const response = await fetch(
+        API_ROOT + `api/review/${pid}/delete/`,
+        {
+            method:         "POST",
+            credentials:    "include",
+            headers: {
+                "Content-Type":     "application/json",
+                "X-CSRFToken":      get_cookie("csrftoken"),
+            },
+        },
+    );
+
+
+    if (! response.ok) {
+        const data = await response.json();
+        throw Error(data.error);
+    }
+}
 

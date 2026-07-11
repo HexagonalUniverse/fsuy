@@ -10,6 +10,8 @@ import React, { useState, useRef, type ReactElement, useEffect } from "react";
 import { parse_markdown } from "@/app/commons";
 
 import "@/app/styles/components/MarkdownInputField.css"
+import { write_review } from "@/app/commons";
+import { useRouter } from "next/navigation";
 
 // const DOMPurify = createDOMPurify(window);
 
@@ -38,9 +40,17 @@ alert("hack");
 
 interface MarkdownInputFieldParams {
     placeholder: string;
+    action_type: string;
+    gid: number;
 }
 
-export function MarkdownInputField({placeholder}: MarkdownInputFieldParams): ReactElement {
+
+
+
+export function MarkdownInputField({ placeholder, action_type, gid }: MarkdownInputFieldParams): ReactElement {
+    
+
+
     const [md_content, set_md_content]      = useState<string>("");
     const [preview_mode, set_preview_mode]  = useState<boolean>(false);
     const [is_writing, set_is_writing]      = useState<boolean>(false);
@@ -55,7 +65,7 @@ export function MarkdownInputField({placeholder}: MarkdownInputFieldParams): Rea
     };
     
     function handle_edit_preview(): void {
-        if(!preview_mode){
+        if (! preview_mode){
             set_safe_html(parse_markdown(md_content));
         }
         
@@ -78,6 +88,34 @@ export function MarkdownInputField({placeholder}: MarkdownInputFieldParams): Rea
         if(!preview_mode) 
             adjust_textarea_height();
     }, [preview_mode]);
+
+
+
+    const router = useRouter();
+    async function send_action(
+        action_type:    string,
+        gid:            number, 
+        content:        string,
+    ) {
+        if (action_type === "review") {
+            await write_review(gid, content);
+
+        } else if (action_type === "news") {
+            //await write_news(id, content);
+
+        }
+
+
+        router.refresh();
+        cancel_writing();
+        //window.location.reload();
+    }   
+    
+
+
+
+
+
 
 
     return (
@@ -111,7 +149,11 @@ export function MarkdownInputField({placeholder}: MarkdownInputFieldParams): Rea
             { is_writing?
                 <div className="send_cancel">
                     <button id="cancel" onMouseDown={cancel_writing}> Cancelar </button>
-                    <button id="send"> Enviar </button>
+                    <button id="send" onClick={() => send_action(
+                        action_type,
+                        gid,
+                        md_content,
+                    )}> Enviar </button>
                 </div>
                 : null
             }
