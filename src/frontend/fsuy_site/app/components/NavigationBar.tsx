@@ -102,22 +102,6 @@ export function NavigationBar(): ReactElement {
                     </button>
                 }
             </div>
-
-            <button onClick={
-                () => { 
-                    //write_post_comment(
-                    //    2,
-                    //    "CONTEÚDO CONTEÚDO",
-                    //);
-                    write_review(
-                        1,
-                        "UMA DAS MELHORAS E MAIS AUTOMÁTICAS REVIEWS QUE ESSE MUNDO JÁ VIU!",
-                    );
-                }
-            }>
-                BOTÃO
-            </button>
-
         </nav>
     );
 }

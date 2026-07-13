@@ -30,12 +30,13 @@ export function NewsPreview({news}: NewsPreviewArguments): ReactElement {
 
 export function NewsPreview2({news}: NewsPreviewArguments): ReactElement {
     return (
-        <div className="news_preview"> 
+        <div className="news_preview2"> 
         <a href={`/news/${news.pid}`}>
-            <img src={news.picture} alt="" />
-            <h3> {news.title} </h3>
-            <p> {news.description} </p>
-            <p id="date"> {news.creation_date} </p>
+            <img src={news.picture} alt={`news_${news.pid}_picture`} />
+            <div className="info">
+                <h3> {news.title} </h3>
+                <p id="date"> {format_date_time(news.creation_date)} </p>
+            </div>
         </a> 
         </div>
     );

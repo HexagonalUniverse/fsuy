@@ -13,8 +13,14 @@ article {
 
 aside {
     width: 30%;
-    padding: 0 3rem 0 3rem;
+    padding: 0 2rem;
     /* border-left: 3px solid var(--primary-dark); */
+}
+
+aside .related_news {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 header {

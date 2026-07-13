@@ -119,6 +119,24 @@ export function MarkdownInputField({ placeholder, action_type, gid }: MarkdownIn
 
     return (
         <div className="md_input_field">
+            
+            <button onClick={
+                () => { 
+                    //write_post_comment(
+                    //    2,
+                    //    "CONTEÚDO CONTEÚDO",
+                    //);
+                    send_action(
+                        "review", 
+                        gid,
+                        "# Jogo Ruim\n\nUMA DAS **MELHORES** E MAIS AUTOMÁTICAS **REVIEWS** QUE ESSE MUNDO JÁ VIU!"
+                    )
+                }
+            }
+            style={{width: "6rem", margin: "1rem"}}
+            >
+                BOTÃO
+            </button>
 
             <div className="edit_box">
             {

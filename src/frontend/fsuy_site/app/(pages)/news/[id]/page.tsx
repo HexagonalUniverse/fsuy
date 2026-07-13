@@ -7,7 +7,7 @@
 import { type ReactElement } from "react";
 import { notFound } from "next/navigation";
 
-import { DynamicEntityPageParams, APIError, api_get_entity, api_get_posts, format_date_time, parse_markdown } from "@/app/commons";
+import { DynamicEntityPageParams, APIError, api_get_entity, api_get_posts, api_get_page, format_date_time, parse_markdown } from "@/app/commons";
 
 import { EntityComment, EntityNews, EntityNewsPreview, EntityTag } from "@/app/entity_interfaces";
 import { NavigationBar } from "@/app/components/NavigationBar";
@@ -26,11 +26,12 @@ export default async function NewsPage({params}: DynamicEntityPageParams): Promi
     
     let news: EntityNews;
     let comments: EntityComment[];
+    let related_news: EntityNewsPreview[];
     
     try {
         news = await api_get_entity<EntityNews>("news", id);
         comments = await api_get_posts<EntityComment>("news", "comments", id);
-        // news = await api_get_page<EntityNewsPreview>("news", "all", true);
+        related_news = await api_get_page<EntityNewsPreview>("news", "all", true);
 
     } catch(error){
         if(error instanceof APIError)
@@ -81,9 +82,11 @@ export default async function NewsPage({params}: DynamicEntityPageParams): Promi
                 <aside>
                     <h3> Leia Também </h3>
 
-                    {/* {related_news?.map( (rnews, index) => (
-                        <NewsPreview2 key={index} news={rnews} />
-                    ))} */}
+                    <div className="related_news">
+                        {related_news?.map( (rnews, index) => (
+                            <NewsPreview2 key={index} news={rnews} />
+                        ))}
+                    </div>
                 </aside>
             </main>
 
