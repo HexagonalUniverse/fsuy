@@ -22,7 +22,7 @@ import {
 export interface UserState {
     authenticated:  boolean;
 
-    uid:            string;
+    uid:            number;
     username:       string;
     public_name:    string;
     picture:        string;

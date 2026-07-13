@@ -8,6 +8,7 @@
 
 import { useState, type ReactElement } from "react";
 
+import { get_user_state } from "@/app/UserProvider";
 import { EntityReview, EntityComment, EntityTag } from "@/app/entity_interfaces";
 import { UserPreview } from "@/app/components/UserPreview";
 import { Comment } from "@/app/components/Comment";
@@ -28,6 +29,8 @@ interface ReviewParams {
 }
 
 export function Review({review}: ReviewParams ): Promise<ReactElement> {
+    const user_state = get_user_state();
+
     const [is_open, set_is_open] = useState<boolean>(false);
     const [review_state, set_review] = useState<EntityReview>(review);
 
@@ -72,9 +75,14 @@ export function Review({review}: ReviewParams ): Promise<ReactElement> {
                 <UserPreview user={review_state.author} />
                 <span className="rate"> <b>Nota:</b> {review_state.rate} </span>
                 <span className="edit_date"> {format_date_time(review_state.edit_date)} </span>
+                {
+                (review_state.author.uid === user_state.uid)?
                 <button className="delete" onClick={() => DELETE_DELETE(review.pid) }>
                     BAGAÇAR
                 </button>
+                :
+                null
+                }
             </div>
             
             <div className="tags">
