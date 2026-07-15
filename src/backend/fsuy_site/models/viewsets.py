@@ -121,6 +121,8 @@ class ReviewSerializer(rest_framework.serializers.ModelSerializer):
     #   return obj.public_id
 
     # tags = TagSerializer(many=True, read_only=True)
+    comment_count = rest_framework.serializers.SerializerMethodField()
+
     author = AuthorSerializer(read_only=True)
     game = GameRefSerializer(read_only=True)
 
@@ -135,7 +137,11 @@ class ReviewSerializer(rest_framework.serializers.ModelSerializer):
             "edit_date",
             "game",
             "rate",
+            "comment_count"
         ]
+
+    def get_comment_count(self, obj: Review) -> int:
+        return obj.comments.count()
 
 
 class NewsSerializer(rest_framework.serializers.ModelSerializer):
@@ -183,7 +189,7 @@ class CommentSerializer(rest_framework.serializers.ModelSerializer):
         ]
 
     def get_children_count(self, obj: Comment) -> int:
-        return obj.children.count()
+        return Comment.objects.filter(parent=obj.cid).count()
 
 
 class UserSerializer(rest_framework.serializers.ModelSerializer):
@@ -648,10 +654,11 @@ class API_Viewset_Comment(rest_framework.viewsets.ModelViewSet):
     pagination_class = GlancePagination     # @TODO
 
     @action(detail=True, methods=["get"])
-    def children(self, request, cid: str | None = None):
-        comments = self.get_object()
+    def children(self, request, pk: str | None = None):
+        print(f"ssssss: {pk}")
 
-        queryset = comments.filter(parent=cid).order_by("-creation_date")
+        queryset = Comment.objects.filter(parent=pk).order_by("-creation_date")
+        print(f"aaaa: {queryset}")
         # .select_related("author")
 
         page = self.paginate_queryset(queryset)

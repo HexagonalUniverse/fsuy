@@ -39,19 +39,21 @@ export function Review({review}: ReviewParams ): Promise<ReactElement> {
     async function view_comments() {
         let children: EntityComment[];
 
-        try {
-           children = await api_get_posts<EntityComment>("review", "comments", `${review.pid}`);
-            
-        } catch (error) {
-            console.error(error);
-        }
-
         set_is_open(!is_open);
+        
+        if (!is_open){
+            try {
+                children = await api_get_posts<EntityComment>("review", "comments", `${review.pid}`);
+                
+                set_review((prev: EntityReview) => ({
+                    ...prev,
+                    children: children,
+                }));
 
-        set_review((prev: EntityReview) => ({
-            ...prev,
-            children: children,
-        }));
+            } catch (error) {
+                console.error(error);
+            }
+        }
     }
 
     
@@ -73,7 +75,7 @@ export function Review({review}: ReviewParams ): Promise<ReactElement> {
         <div className="review">
             <div className="header">
                 <UserPreview user={review_state.author} />
-                <span className="rate"> <b>Nota:</b> {review_state.rate} </span>
+                <span className="rate"> <b>Nota:</b> {review_state.rate} / 10 </span>
                 <span className="edit_date"> {format_date_time(review_state.edit_date)} </span>
                 {
                 (review_state.author.uid === user_state.uid)?
@@ -98,9 +100,13 @@ export function Review({review}: ReviewParams ): Promise<ReactElement> {
             <hr />
 
             <div className="children">
-                <button id="display_comments" onClick={view_comments}> 
-                    {(is_open) ? "Esconder Comentários" : "Ver Comentários"} 
-                </button>
+                {
+                    (review_state.comment_count > 0) ?
+                    <button id="display_comments" onClick={view_comments}> 
+                        {(is_open) ? "Esconder Comentários" : `Ver Comentários (${review_state.comment_count})`} 
+                    </button>
+                    : null
+                }
 
                 {is_open ? 
                     (

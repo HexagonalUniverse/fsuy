@@ -31,7 +31,7 @@ export interface UserState {
 
 const default_user_state: UserState = {
     authenticated:  false,
-    uid:            "",
+    uid:            0,
     username:       "",
     public_name:    "",
     picture:        "",

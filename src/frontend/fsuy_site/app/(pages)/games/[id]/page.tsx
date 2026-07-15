@@ -38,7 +38,7 @@ export default async function GamePage({params}: DynamicEntityPageParams): Promi
 
     const reviews_with_gid: EntityReview[] = reviews.map(review => ({ ...review, gid: game.gid }));
 
-    console.log(`Review: ${reviews}`);
+    // console.log(`Review: ${reviews}`);
 
     return (
         <div className="page_body">
@@ -81,7 +81,12 @@ export default async function GamePage({params}: DynamicEntityPageParams): Promi
                     <div className="reviews">
                         <h2> Reviews </h2>
 
-                        <MarkdownInputField placeholder="Escreva uma review..." action_type="review" gid={game.gid}/>
+                        {/* <div className="rate_selector">
+                            <span> Nota: </span>
+                            <input type="number" id="rate_input" value="1" min="0" max="10"/>
+                        </div> */}
+
+                        <MarkdownInputField placeholder="Escreva uma review..." action_type="review" gid={game.gid} />
 
                         {reviews_with_gid?.map( (review, index) => (
                             <Review key={index} review={review} />

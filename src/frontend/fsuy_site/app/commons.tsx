@@ -98,8 +98,9 @@ export async function api_get_page<Entity>(entity_endponit: string, page: string
 
 
 export async function api_get_posts<Entity>(entity_endpoint: string, post_endpoint: string, pid: string) : Promise<Entity[]> {
-    const api_url: string = `https://fsuy-server-u68qf.ondigitalocean.app/api/${entity_endpoint}/${pid}/${post_endpoint}/`;
-    console.log(api_url);
+    // const api_url: string = `https://fsuy-server-u68qf.ondigitalocean.app/api/${entity_endpoint}/${pid}/${post_endpoint}/`;
+    const api_url: string = `http://localhost:4817/api/${entity_endpoint}/${pid}/${post_endpoint}/`;
+    // console.log(api_url);
     const res: Response = await fetch(api_url);
 
     if (!res.ok) 
@@ -363,7 +364,7 @@ export async function write_review(
                 "Content-Type":     "application/json",
                 "X-CSRFToken":      get_cookie("csrftoken"),
             },
-                
+            
             body: JSON.stringify({
                 "gid":      game_id,
                 "content":  content,

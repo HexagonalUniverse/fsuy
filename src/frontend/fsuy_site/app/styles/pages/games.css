@@ -72,3 +72,25 @@ article .reviews{
     display: flex;
     flex-direction: column;
 }
+
+.rate_selector {
+    width: 15%;
+    margin-bottom: 1rem;
+
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.rate_selector input {
+    width: 100%;
+    height: 1.5rem;
+    text-align: center;
+    border: 1px solid var(--primary-dark);
+    border-radius: 25px;
+    padding: 0.5rem;
+    background-color: var(--primary-light);
+    color: var(--text-light);
+    font-size: 1rem;
+    -moz-appearance: textfield;
+}

@@ -79,6 +79,7 @@ export interface EntityReview {
 	creation_date: string;
 	edit_date: string;
 	rate: number;
+	comment_count: number;
 
 	/** internal state */
 	gid: number;
