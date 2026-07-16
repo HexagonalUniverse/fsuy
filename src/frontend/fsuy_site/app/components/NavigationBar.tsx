@@ -70,7 +70,7 @@ export function NavigationBar(): ReactElement {
 
 
             <div className="login_logout">
-                <a href={`/user/${user_state.uid}`}> 
+                <a href={`/user/${user_state.uid !== 0 ? user_state.uid : ""}`}> 
                     <div className="outer_circle"> 
                         { user_state.authenticated?
                         <img className="profile_picture" src={`${user_state.picture}`} alt={`${user_state.public_name}'s profile picture`} /> 

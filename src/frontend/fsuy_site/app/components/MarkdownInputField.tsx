@@ -179,7 +179,7 @@ export function MarkdownInputField({ placeholder, action_type, gid }: MarkdownIn
                 : null
             }
 
-            <button onClick={
+            {/* <button onClick={
                 () => { 
                     //write_post_comment(
                     //    2,
@@ -195,7 +195,7 @@ export function MarkdownInputField({ placeholder, action_type, gid }: MarkdownIn
             style={{width: "6rem", margin: "1rem"}}
             >
                 BOTÃO
-            </button>
+            </button> */}
 
         </div>
     );

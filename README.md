@@ -215,6 +215,51 @@ npm --prefix src/frontend/fsuy_site run dev
 
 ---
 
+# Sistema em Execução
+
+<figure>
+    <img src=".docs/screencaptures/screencapture-home.png" width="500">
+    <figcaption> <strong>Figura 3:</strong> Página inicial. </figcaption>
+</figure>
+
+<figure>
+    <img src=".docs/screencaptures/screencapture-games_home.png" width="500">
+    <figcaption> <strong>Figura 4:</strong> Página de jogos. </figcaption>
+</figure>
+
+<figure>
+    <img src=".docs/screencaptures/screencapture-game_page.png" width="500">
+    <figcaption> <strong>Figura 5:</strong> Página de um jogo. </figcaption>
+</figure>
+
+<figure>
+    <img src=".docs/screencaptures/screencapture-news_home.png" width="500">
+    <figcaption> <strong>Figura 6:</strong> Página de notícias. </figcaption>
+</figure>
+
+<figure>
+    <img src=".docs/screencaptures/screencapture-news_page.png" width="500">
+    <figcaption> <strong>Figura 7:</strong> Página de uma notícia. </figcaption>
+</figure>
+
+<figure>
+    <img src=".docs/screencaptures/screencapture-profile_page.png" width="500">
+    <figcaption> <strong>Figura 8:</strong> Página de perfil. </figcaption>
+</figure>
+
+<figure>
+    <img src=".docs/screencaptures/screencapture-login.png" width="500">
+    <figcaption> <strong>Figura 9:</strong> Página de login. </figcaption>
+</figure>
+
+<figure>
+    <img src=".docs/screencaptures/screencapture-register.png" width="500">
+    <figcaption> <strong>Figura 10:</strong> Página de cadastro de usuário. </figcaption>
+</figure>
+
+
+---
+
 ## Licença
 
 Este projeto está licenciado sob a licença presente no arquivo `LICENSE`.
