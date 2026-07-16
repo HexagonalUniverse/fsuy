@@ -15,6 +15,7 @@ import { EntityComment } from "@/app/entity_interfaces";
 import { UserPreview } from "@/app/components/UserPreview";
 
 import "@/app/styles/components/Comment.css";
+import { MarkdownInputField } from "./MarkdownInputField";
 
 interface CommentParams {
     comment: EntityComment;
@@ -24,14 +25,15 @@ interface CommentParams {
 export function Comment({comment, level}: CommentParams ): ReactElement {
     const [comment_state, set_comment] = useState<EntityComment>(comment);
     const [is_open, set_is_open] = useState<boolean>(false);
+    const [replying, set_replying] = useState<boolean>(false);
 
     
     async function view_comments() {
         let c_children: EntityComment[];
 
-        set_is_open(!is_open);
+        set_is_open(! is_open);
 
-        if (!is_open){
+        if (! is_open){
 
             try {
                 c_children = await api_get_posts<EntityComment>("comments", "children", `${comment_state.cid}`);
@@ -48,6 +50,7 @@ export function Comment({comment, level}: CommentParams ): ReactElement {
         }
     }
 
+
     return (
         <div className="comment_thread">
             <div className="comment" style={ {"--level": level} as React.CSSProperties } data-level={level}>
@@ -61,8 +64,13 @@ export function Comment({comment, level}: CommentParams ): ReactElement {
                 <div className="interactions">
                     <div> <button id="like"> <img src="/assets/icon_thumb_up.svg" alt="" /> {comment_state.likes} </button> </div>
                     <div> <button id="dislike"> <img src="/assets/icon_thumb_down.svg" alt="" /> {comment_state.dislikes} </button> </div>
-                    <div> <button id="reply"> Responder </button> </div>
+                    <div> <button id="reply" onClick={() => set_replying(!replying)}> {!replying ? "Responder": "Cancelar"} </button> </div>
                 </div>
+
+                { replying ?
+                    <MarkdownInputField placeholder="Escreva um comentário..." action_type="comment_comment" gid={comment_state.cid} />
+                : null
+                }
 
                 <div className="children">
                     { (comment_state.children_count > 0) ?
@@ -72,7 +80,7 @@ export function Comment({comment, level}: CommentParams ): ReactElement {
                         : null
                     }
 
-                    {is_open ? 
+                    {   is_open ? 
                         (
                             console.log(`children: ${comment_state.children}`),
                             comment_state.children?.map((child: EntityComment, index) => (

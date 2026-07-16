@@ -7,7 +7,7 @@
 "use client";
 
 import React, { useState, useRef, type ReactElement, useEffect } from "react";
-import { parse_markdown } from "@/app/commons";
+import { parse_markdown, write_post_comment, write_comment_comment } from "@/app/commons";
 
 import "@/app/styles/components/MarkdownInputField.css"
 import { write_review } from "@/app/commons";
@@ -44,8 +44,6 @@ interface MarkdownInputFieldParams {
     action_type: string;
     gid: number;
 }
-
-
 
 
 export function MarkdownInputField({ placeholder, action_type, gid }: MarkdownInputFieldParams): ReactElement {
@@ -99,11 +97,32 @@ export function MarkdownInputField({ placeholder, action_type, gid }: MarkdownIn
     ) {
         if (action_type === "review") {
             try {
-                await write_review(gid, content);    
+                await write_review(gid, content);
+
             } catch (error) {
                 showToast(error.message);
             }
             
+        } else if (action_type === "comment") {
+            try {
+                await write_post_comment(gid, content);
+                // window.location.reload();
+
+                
+            } catch (error) {
+                showToast(error.message);
+            }
+            
+
+        } else if (action_type === "comment_comment") {
+            try {
+                await write_comment_comment(gid, content);
+                // window.location.reload();
+
+                
+            } catch (error) {
+                showToast(error.message);
+            }
 
         } else if (action_type === "news") {
             //await write_news(id, content);
@@ -113,7 +132,10 @@ export function MarkdownInputField({ placeholder, action_type, gid }: MarkdownIn
 
         router.refresh();
         cancel_writing();
-        //window.location.reload();
+
+        // if (on_reload){
+        //     on_reload(gid);
+        // }
     }   
 
 

@@ -44,7 +44,7 @@ function logout_and_refresh() {
 
 export function NavigationBar(): ReactElement {
     const user_state = get_user_state();
-    console.log(user_state.authenticated);
+    // console.log(user_state.authenticated);
 
     return (
         <nav className="navigation_bar">

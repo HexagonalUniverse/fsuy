@@ -13,7 +13,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from django.db import models, IntegrityError
-from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_401_UNAUTHORIZED, HTTP_409_CONFLICT
+from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_401_UNAUTHORIZED, HTTP_409_CONFLICT, HTTP_500_INTERNAL_SERVER_ERROR
 
 from .users import User
 from .games import Game
@@ -438,7 +438,6 @@ class API_Viewset_Review(rest_framework.viewsets.ModelViewSet):
 
         print(pid)
         print(request.data)
-        print(request.user.uid)
 
         try:
             corresponding_post: Post = Post.objects.get(pid=pid)
@@ -655,8 +654,6 @@ class API_Viewset_Comment(rest_framework.viewsets.ModelViewSet):
 
     @action(detail=True, methods=["get"])
     def children(self, request, pk: str | None = None):
-        print(f"ssssss: {pk}")
-
         queryset = Comment.objects.filter(parent=pk).order_by("-creation_date")
         print(f"aaaa: {queryset}")
         # .select_related("author")
@@ -668,6 +665,85 @@ class API_Viewset_Comment(rest_framework.viewsets.ModelViewSet):
 
         serializer = CommentSerializer(queryset, many=True)
         return Response(serializer.data)
+    
+    @action(detail=True, methods=["post"])
+    def comment(self, request, pk: str | None = None) -> Response:
+
+        print(pk)
+        print(request.data)
+
+        try:
+            corresponding_comment: Comment = Comment.objects.get(cid=pk)
+        except Exception:
+            return Response(
+                {
+                    "error": "Qualquer coisa!",
+                },
+
+                status=HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+
+        if not request.user.is_authenticated:
+            return Response(
+                {
+                    "error": "Impossível escrever comentário sem uma sessão!",
+                },
+
+                status=HTTP_401_UNAUTHORIZED,
+            )
+
+        #
+        try:
+            content: str = request.data["content"]
+            API_Viewset_Review.validate_comment_content(content)
+
+            ...
+
+        except KeyError:
+            return Response(
+                {
+                    "error": "Conteúdo do comentário não especificado.",
+                },
+
+                status=HTTP_400_BAD_REQUEST,
+            )
+
+        except ValidationError as e:
+            return Response(
+                {
+                    "error": "O conteúdo do comentário é inválido.",
+                    "details": e.messages,
+                },
+
+                status=HTTP_400_BAD_REQUEST,
+            )
+
+        #
+        try:
+
+            comment: Comment = Comment.objects.create(  # noqa
+                author=request.user,
+                post=None,
+                content=content,
+                parent=corresponding_comment,
+                edit_date=None,
+            )
+
+        except IntegrityError as e:
+            print(e)
+
+            return Response(
+                {
+                    "error": "Erro de integridade~",
+                },
+
+                status=HTTP_409_CONFLICT,
+            )
+
+        return Response(
+            {},
+            status=HTTP_200_OK,
+        )
 
 
 class API_Viewset_User(rest_framework.viewsets.ModelViewSet):

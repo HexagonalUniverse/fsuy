@@ -10,6 +10,7 @@ import { useState, type ReactElement } from "react";
 
 import { get_user_state } from "@/app/UserProvider";
 import { EntityReview, EntityComment, EntityTag } from "@/app/entity_interfaces";
+import { MarkdownInputField } from "@/app/components/MarkdownInputField";
 import { UserPreview } from "@/app/components/UserPreview";
 import { Comment } from "@/app/components/Comment";
 import { Tag } from "@/app/components/Tag";
@@ -32,6 +33,7 @@ export function Review({review}: ReviewParams ): Promise<ReactElement> {
     const user_state = get_user_state();
 
     const [is_open, set_is_open] = useState<boolean>(false);
+    const [replying, set_replying] = useState<boolean>(false);
     const [review_state, set_review] = useState<EntityReview>(review);
 
     const { showToast } = useToast();
@@ -71,7 +73,6 @@ export function Review({review}: ReviewParams ): Promise<ReactElement> {
 
 
     return (
-        <>
         <div className="review">
             <div className="header">
                 <UserPreview user={review_state.author} />
@@ -80,7 +81,7 @@ export function Review({review}: ReviewParams ): Promise<ReactElement> {
                 {
                 (review_state.author.uid === user_state.uid)?
                 <button className="delete" onClick={() => DELETE_DELETE(review.pid) }>
-                    BAGAÇAR
+                    EXCLUIR
                 </button>
                 :
                 null
@@ -96,6 +97,13 @@ export function Review({review}: ReviewParams ): Promise<ReactElement> {
             </div>
 
             <div className="content" dangerouslySetInnerHTML={{ __html: parse_markdown(review_state.content) }} />
+
+            <div> <button id="reply" onClick={() => set_replying(!replying)}> {!replying ? "Responder": "Cancelar"} </button> </div>
+
+            { replying?
+                <MarkdownInputField placeholder="Escreva um comentário..." action_type="comment" gid={review_state.pid} />
+            : null
+            }
 
             <hr />
 
@@ -118,7 +126,5 @@ export function Review({review}: ReviewParams ): Promise<ReactElement> {
                 }
             </div>
         </div>
-
-        </>
     );
 }

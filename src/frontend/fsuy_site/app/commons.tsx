@@ -194,6 +194,10 @@ export async function logout() {
  *  The cause may be various; check `error` field for details.
  */
 export async function login(username: string, password: string): Promise<void> {
+    // await fetch("https://localhost:4817/csrf/", {
+    //     credentials: "include",
+    // });
+
     const response = await fetch(
         API_ROOT + "login/",
         {
@@ -326,7 +330,45 @@ export async function write_post_comment(
     }
 
     const response = await fetch(
-        API_ROOT + `api/post/${post_id}/comment/`,
+        API_ROOT + `api/review/${post_id}/comment/`,
+        {
+            method:         "POST",
+            credentials:    "include",
+            headers: {
+                "Content-Type":     "application/json",
+                "X-CSRFToken":      get_cookie("csrftoken"),
+            },
+                
+            body: JSON.stringify(data),
+        },
+    );
+
+
+    if (! response.ok) {
+        const data = await response.json();
+        throw Error(data.error);
+    }
+}
+
+export async function write_comment_comment(
+    cid:    number,
+    content:    string,
+    parent?:    number | undefined,
+) : Promise<void>
+{       
+    const data: {
+        content: string;
+        parent?: number;
+    } = {
+        "content":  content,
+    };
+
+    if (parent !== undefined) {
+        data.parent = parent;
+    }
+
+    const response = await fetch(
+        API_ROOT + `api/comments/${cid}/comment/`,
         {
             method:         "POST",
             credentials:    "include",

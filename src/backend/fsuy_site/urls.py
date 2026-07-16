@@ -47,6 +47,7 @@ for prefix, viewset in [
 urlpatterns: list[URLPattern | URLResolver] = [
     #   Frontend
     # path("", views.FrontendView.serve_frontend, name="main"),
+    path("csrf/", views.csrf, name="csrf"),
 
     #   Login
     path("register/", views.FrontendView.register, name="register"),

@@ -39,9 +39,10 @@ password_criteria: list[str] = [
 
 
 # SLA CRSF
-# from django.views.decorators.csrf import ensure_csrf_cookie
-# @ensure_csrf_cookie
-# def csrf(request): return http.JsonResponse({"ok": True})
+from django.views.decorators.csrf import ensure_csrf_cookie
+@ensure_csrf_cookie
+def csrf(request): 
+    return http.JsonResponse({"ok": True})
 
 
 class FrontendView(object):

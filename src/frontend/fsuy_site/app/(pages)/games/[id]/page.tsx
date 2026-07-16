@@ -88,8 +88,8 @@ export default async function GamePage({params}: DynamicEntityPageParams): Promi
 
                         <MarkdownInputField placeholder="Escreva uma review..." action_type="review" gid={game.gid} />
 
-                        {reviews_with_gid?.map( (review, index) => (
-                            <Review key={index} review={review} />
+                        {reviews_with_gid?.map( (review) => (
+                            <Review key={review.pid} review={review} />
                         ))}
                     </div>
 
